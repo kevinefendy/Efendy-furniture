@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Product } from "@/types";
 import { formatIDR } from "@/lib/utils";
-import { addToCart as addToCartStore } from "@/lib/store";
+import { addToCart as addToCartStore, openCartDrawer } from "@/lib/store";
 import { X, Star, Check, ShoppingBag, ArrowRight } from "lucide-react";
 
 interface QuickViewModalProps {
@@ -54,6 +54,7 @@ export default function QuickViewModal({
       onAddToCart(product, color, selectedSize, quantity);
     } else {
       addToCartStore(product, color, selectedSize, quantity);
+      openCartDrawer();
     }
     setAddedNotice(true);
     setTimeout(() => setAddedNotice(false), 2000);
@@ -68,7 +69,7 @@ export default function QuickViewModal({
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-3xl bg-[#F7F5F0] border border-[#E5E1DB] rounded-sm shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200"
+        className="relative w-full max-w-3xl max-h-[90dvh] overflow-y-auto md:overflow-hidden bg-[#F7F5F0] border border-[#E5E1DB] rounded-sm shadow-2xl animate-in zoom-in-95 duration-200"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}

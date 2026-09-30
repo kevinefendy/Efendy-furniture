@@ -18,7 +18,7 @@ export default function NewArrivals({
   wishlistIds = [],
   onToggleWishlist,
 }: NewArrivalsProps) {
-  const newArrivals = products.filter((p) => p.isNewArrival || p.featured).slice(0, 4);
+  const newArrivals = products.filter((p) => p.isNewArrival || p.featured).slice(0, 8);
 
   return (
     <section className="py-20 bg-white border-y border-[#E5E1DB]">

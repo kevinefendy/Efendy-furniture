@@ -12,6 +12,7 @@ import {
   addToCart as addToCartStore,
   getWishlistIds,
   toggleWishlistId,
+  openCartDrawer,
   WISHLIST_EVENT,
 } from "@/lib/store";
 import type { Product } from "@/types";
@@ -87,12 +88,14 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
     addToCartStore(product, selectedColor || product.colors[0]?.name, selectedSize, quantity);
     setAddedToast(true);
     setTimeout(() => setAddedToast(false), 3000);
+    openCartDrawer();
   };
 
   const handleQuickAdd = (p: Product, color: string, size?: string, qty = 1) => {
     addToCartStore(p, color, size, qty);
     setAddedToast(true);
     setTimeout(() => setAddedToast(false), 3000);
+    openCartDrawer();
   };
 
   const toggleWishlist = (id: string) => {
@@ -358,12 +361,19 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
                 <button
                   onClick={handleAddToCart}
                   disabled={outOfStock}
-                  className="flex-1 h-12 bg-[#20201E] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#A88968] transition-all flex items-center justify-center gap-2 shadow-md disabled:bg-stone-400 disabled:cursor-not-allowed"
+                  className="flex-1 min-w-0 h-12 bg-[#20201E] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#A88968] transition-all flex items-center justify-center gap-2 shadow-md disabled:bg-stone-400 disabled:cursor-not-allowed px-2"
                 >
-                  <ShoppingBag size={16} aria-hidden />
-                  {outOfStock
-                    ? "Out of Stock"
-                    : `Add To Cart • ${formatIDR(product.price * quantity)}`}
+                  <ShoppingBag size={16} className="shrink-0" aria-hidden />
+                  {outOfStock ? (
+                    "Out of Stock"
+                  ) : (
+                    <span className="truncate">
+                      Add To Cart
+                      <span className="hidden min-[420px]:inline">
+                        {" "}• {formatIDR(product.price * quantity)}
+                      </span>
+                    </span>
+                  )}
                 </button>
 
                 {/* Wishlist toggle */}

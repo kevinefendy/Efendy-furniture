@@ -49,10 +49,11 @@ export default function ShopTheRoom() {
                 {/* Hotspot Pin */}
                 <button
                   onClick={() => setActiveHotspot(isActive ? null : spot.id)}
-                  className={`group relative flex items-center justify-center w-8 h-8 rounded-full transition-transform ${
+                  className={`group relative flex items-center justify-center w-11 h-11 rounded-full transition-transform ${
                     isActive ? "scale-110" : "hover:scale-110"
                   }`}
                   aria-label={`View ${spot.name}`}
+                  aria-expanded={isActive}
                 >
                   <span className="absolute w-full h-full rounded-full bg-white/40 animate-ping opacity-75" />
                   <span
@@ -68,7 +69,7 @@ export default function ShopTheRoom() {
 
                 {/* Popover Card */}
                 {isActive && (
-                  <div className="absolute left-1/2 bottom-full mb-3 -translate-x-1/2 w-56 sm:w-64 bg-white/95 backdrop-blur-md p-4 rounded-sm shadow-2xl border border-[#E5E1DB] animate-in fade-in zoom-in-95 duration-200">
+                  <div className="absolute left-1/2 bottom-full mb-3 -translate-x-1/2 w-56 sm:w-64 max-w-[calc(100vw-3rem)] bg-white/95 backdrop-blur-md p-4 rounded-sm shadow-2xl border border-[#E5E1DB] animate-in fade-in zoom-in-95 duration-200">
                     <div className="flex items-start justify-between">
                       <div>
                         <span className="text-[10px] uppercase tracking-wider text-[#A88968] font-bold">

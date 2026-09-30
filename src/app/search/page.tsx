@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { PRODUCTS } from "@/data/products";
 import ProductGrid from "@/components/product/ProductGrid";
 import QuickViewModal from "@/components/product/QuickViewModal";
-import { addToCart as addToCartStore, useWishlistIds } from "@/lib/store";
+import { addToCart as addToCartStore, useWishlistIds, openCartDrawer } from "@/lib/store";
 import type { Product } from "@/types";
 import { Search, X } from "lucide-react";
 import Link from "next/link";
@@ -122,7 +122,10 @@ function SearchPageContent() {
       <QuickViewModal
         product={quickViewProduct}
         onClose={() => setQuickViewProduct(null)}
-        onAddToCart={(p, color, size, qty) => addToCartStore(p, color, size, qty || 1)}
+        onAddToCart={(p, color, size, qty) => {
+          addToCartStore(p, color, size, qty || 1);
+          openCartDrawer();
+        }}
       />
     </div>
   );

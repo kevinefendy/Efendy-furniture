@@ -10,7 +10,7 @@ import InspirationSection from "@/components/home/InspirationSection";
 import HomeCta from "@/components/home/HomeCta";
 import QuickViewModal from "@/components/product/QuickViewModal";
 import { PRODUCTS } from "@/data/products";
-import { addToCart as addToCartStore, useWishlistIds } from "@/lib/store";
+import { addToCart as addToCartStore, useWishlistIds, openCartDrawer } from "@/lib/store";
 import type { Product } from "@/types";
 
 export default function HomePage() {
@@ -34,7 +34,10 @@ export default function HomePage() {
       <QuickViewModal
         product={quickViewProduct}
         onClose={() => setQuickViewProduct(null)}
-        onAddToCart={(p, color, size, qty) => addToCartStore(p, color, size, qty || 1)}
+        onAddToCart={(p, color, size, qty) => {
+          addToCartStore(p, color, size, qty || 1);
+          openCartDrawer();
+        }}
       />
     </div>
   );

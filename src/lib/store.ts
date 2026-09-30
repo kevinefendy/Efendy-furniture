@@ -1,12 +1,27 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import type { CartItem, Product } from "@/types";
+import type {
+  CartItem,
+  Customer,
+  Order,
+  OrderStatus,
+  PaymentMethodOption,
+  PaymentMethodType,
+  Product,
+  ShippingMethod,
+  ShippingTier,
+} from "@/types";
 
 export const CART_KEY = "efendy_cart";
 export const WISHLIST_KEY = "efendy_wishlist";
+export const CHECKOUT_DRAFT_KEY = "efendy_checkout_draft";
+export const ORDERS_KEY = "efendy_orders";
 export const CART_EVENT = "efendy:cart-updated";
 export const WISHLIST_EVENT = "efendy:wishlist-updated";
+export const CHECKOUT_EVENT = "efendy:checkout-updated";
+export const ORDERS_EVENT = "efendy:orders-updated";
+export const CART_OPEN_EVENT = "efendy:open-cart";
 
 function readJSON<T>(key: string, fallback: T): T {
   if (typeof window === "undefined") return fallback;
@@ -73,6 +88,67 @@ export function getCartCount(): number {
   return getCart().reduce((sum, i) => sum + i.quantity, 0);
 }
 
+export function getCartSubtotal(): number {
+  return getCart().reduce((sum, i) => sum + i.price * i.quantity, 0);
+}
+
+export function updateCartQuantity(id: string, quantity: number): CartItem[] {
+  const cart = getCart();
+  const next = cart
+    .map((i) =>
+      i.id === id ? { ...i, quantity: Math.max(1, Math.min(i.stock, quantity)) } : i
+    )
+    .filter((i) => i.quantity > 0);
+  writeJSON(CART_KEY, next, CART_EVENT);
+  return next;
+}
+
+export function removeFromCart(id: string): CartItem[] {
+  const next = getCart().filter((i) => i.id !== id);
+  writeJSON(CART_KEY, next, CART_EVENT);
+  return next;
+}
+
+export function clearCart(): CartItem[] {
+  writeJSON(CART_KEY, [], CART_EVENT);
+  return [];
+}
+
+export function openCartDrawer() {
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new Event(CART_OPEN_EVENT));
+  }
+}
+
+export function useCart(): {
+  items: CartItem[];
+  count: number;
+  subtotal: number;
+  updateQuantity: (id: string, qty: number) => void;
+  removeItem: (id: string) => void;
+  clear: () => void;
+} {
+  const [items, setItems] = useState<CartItem[]>([]);
+  useEffect(() => {
+    const sync = () => setItems(getCart());
+    sync();
+    window.addEventListener(CART_EVENT, sync);
+    window.addEventListener("storage", sync);
+    return () => {
+      window.removeEventListener(CART_EVENT, sync);
+      window.removeEventListener("storage", sync);
+    };
+  }, []);
+  return {
+    items,
+    count: items.reduce((s, i) => s + i.quantity, 0),
+    subtotal: items.reduce((s, i) => s + i.price * i.quantity, 0),
+    updateQuantity: (id, qty) => setItems(updateCartQuantity(id, qty)),
+    removeItem: (id) => setItems(removeFromCart(id)),
+    clear: () => setItems(clearCart()),
+  };
+}
+
 export function useCartCount(): number {
   const [count, setCount] = useState(0);
   useEffect(() => {
@@ -126,4 +202,125 @@ export function useWishlistIds(): {
     setIds(toggleWishlistId(productId));
   }, []);
   return { ids, toggle };
+}
+
+// ---------- Checkout draft ----------
+
+export interface CheckoutDraft {
+  customer: Customer;
+  shippingId: ShippingTier;
+  paymentId: PaymentMethodType | null;
+}
+
+export const EMPTY_CUSTOMER: Customer = {
+  fullName: "",
+  phone: "",
+  address: "",
+  city: "",
+  postalCode: "",
+  notes: "",
+};
+
+export function getCheckoutDraft(): CheckoutDraft {
+  return readJSON<CheckoutDraft>(CHECKOUT_DRAFT_KEY, {
+    customer: EMPTY_CUSTOMER,
+    shippingId: "regular",
+    paymentId: null,
+  });
+}
+
+export function saveCheckoutDraft(draft: CheckoutDraft): CheckoutDraft {
+  writeJSON(CHECKOUT_DRAFT_KEY, draft, CHECKOUT_EVENT);
+  return draft;
+}
+
+export function useCheckoutDraft(): {
+  draft: CheckoutDraft;
+  save: (patch: Partial<CheckoutDraft>) => void;
+} {
+  const [draft, setDraft] = useState<CheckoutDraft>({
+    customer: EMPTY_CUSTOMER,
+    shippingId: "regular",
+    paymentId: null,
+  });
+  useEffect(() => {
+    const sync = () => setDraft(getCheckoutDraft());
+    sync();
+    window.addEventListener(CHECKOUT_EVENT, sync);
+    window.addEventListener("storage", sync);
+    return () => {
+      window.removeEventListener(CHECKOUT_EVENT, sync);
+      window.removeEventListener("storage", sync);
+    };
+  }, []);
+  const save = useCallback((patch: Partial<CheckoutDraft>) => {
+    setDraft((prev) => {
+      const next = { ...prev, ...patch };
+      saveCheckoutDraft(next);
+      return next;
+    });
+  }, []);
+  return { draft, save };
+}
+
+// ---------- Orders ----------
+
+export function getOrders(): Order[] {
+  return readJSON<Order[]>(ORDERS_KEY, []);
+}
+
+export function getOrderById(id: string): Order | undefined {
+  const normalized = id.startsWith("#") ? id : `#${id}`;
+  return getOrders().find((o) => o.id === id || o.id === normalized);
+}
+
+function generateOrderId(): string {
+  const now = new Date();
+  const y = now.getFullYear();
+  const m = String(now.getMonth() + 1).padStart(2, "0");
+  const d = String(now.getDate()).padStart(2, "0");
+  const prefix = `#ORD-${y}${m}${d}`;
+  const todayCount = getOrders().filter((o) => o.id.startsWith(prefix)).length;
+  return `${prefix}-${String(todayCount + 1).padStart(3, "0")}`;
+}
+
+export interface CreateOrderInput {
+  items: CartItem[];
+  customer: Customer;
+  shipping: ShippingMethod;
+  payment: PaymentMethodOption;
+  subtotal: number;
+  shippingCost: number;
+  total: number;
+  estimatedDeliveryDate: string;
+}
+
+export function createOrder(input: CreateOrderInput): Order {
+  const id = generateOrderId();
+  const order: Order = {
+    id,
+    createdAt: new Date().toISOString(),
+    items: input.items,
+    customer: input.customer,
+    shipping: input.shipping,
+    payment: input.payment,
+    subtotal: input.subtotal,
+    shippingCost: input.shippingCost,
+    total: input.total,
+    status: "paid",
+    trackingNumber: `EFY-${id.replace("#ORD-", "")}`,
+    estimatedDeliveryDate: input.estimatedDeliveryDate,
+  };
+  writeJSON(ORDERS_KEY, [order, ...getOrders()], ORDERS_EVENT);
+  return order;
+}
+
+export function updateOrderStatus(id: string, status: OrderStatus): Order | undefined {
+  const orders = getOrders();
+  const idx = orders.findIndex((o) => o.id === id);
+  if (idx === -1) return undefined;
+  const next = [...orders];
+  next[idx] = { ...next[idx], status };
+  writeJSON(ORDERS_KEY, next, ORDERS_EVENT);
+  return next[idx];
 }
