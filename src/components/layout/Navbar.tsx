@@ -2,8 +2,16 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Search, Heart, ShoppingBag, Menu, X, ChevronDown } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
+import {
+  Search,
+  Heart,
+  ShoppingBag,
+  Menu,
+  X,
+  ChevronDown,
+  CircleHelp,
+} from "lucide-react";
 import SearchModal from "@/components/search/SearchModal";
 import { useCartCount, useWishlistIds, openCartDrawer } from "@/lib/store";
 
@@ -14,6 +22,23 @@ interface NavbarProps {
   cartCount?: number;
 }
 
+const ROOM_LINKS = [
+  { name: "Living Room", href: "/rooms/living-room" },
+  { name: "Bedroom", href: "/rooms/bedroom" },
+  { name: "Dining Room", href: "/rooms/dining-room" },
+  { name: "Workspace", href: "/rooms/workspace" },
+];
+
+const PRODUCT_LINKS = [
+  { name: "Sofas", href: "/shop?category=Sofa" },
+  { name: "Chairs", href: "/shop?category=Chair" },
+  { name: "Tables", href: "/shop?category=Table" },
+  { name: "Beds", href: "/shop?category=Bed" },
+  { name: "Storage", href: "/shop?category=Storage" },
+  { name: "Lighting", href: "/shop?category=Lighting" },
+  { name: "Decor", href: "/shop?category=Decor" },
+];
+
 export default function Navbar({
   onOpenSearch,
   onOpenCart,
@@ -22,9 +47,11 @@ export default function Navbar({
 }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [shopMenuOpen, setShopMenuOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<"rooms" | "products" | null>(null);
   const [searchModalOpen, setSearchModalOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
   const pathname = usePathname();
+  const router = useRouter();
   const liveCartCount = useCartCount();
   const { ids: liveWishlistIds } = useWishlistIds();
   const effectiveCartCount = cartCount > 0 ? cartCount : liveCartCount;
@@ -33,7 +60,7 @@ export default function Navbar({
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 8);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -42,240 +69,277 @@ export default function Navbar({
   // Close menus on route change
   useEffect(() => {
     setMobileMenuOpen(false);
-    setShopMenuOpen(false);
+    setOpenDropdown(null);
   }, [pathname]);
 
-  const navLinks = [
-    { name: "Shop", href: "/shop", hasMega: true },
-    { name: "Collections", href: "/collections" },
-    { name: "Rooms", href: "/rooms/living-room" },
-    { name: "Inspiration", href: "/inspiration" },
+  const submitSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!searchTerm.trim()) return;
+    router.push(`/search?q=${encodeURIComponent(searchTerm.trim())}`);
+  };
+
+  const secondaryLinks = [
+    { name: "Decor", href: "/shop?category=Decor" },
+    { name: "Furniture Collections", href: "/collections" },
+    { name: "Best Sellers", href: "/shop?sort=rating" },
+    { name: "New Arrivals", href: "/shop?sort=newest" },
+    { name: "Ideas & Inspiration", href: "/inspiration" },
+    { name: "Sale", href: "/shop?deal=sale", highlight: true },
   ];
 
   return (
     <header
-      className={`sticky top-0 z-40 w-full transition-all duration-300 ${
-        isScrolled
-          ? "bg-[#F7F5F0]/95 backdrop-blur-md shadow-sm border-b border-[#E5E1DB]"
-          : "bg-[#F7F5F0] border-b border-[#E5E1DB]/60"
+      className={`sticky top-0 z-40 w-full bg-white transition-shadow duration-300 ${
+        isScrolled ? "shadow-[0_1px_12px_rgba(0,0,0,0.08)]" : "border-b border-[#E5E1DB]/70"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
-          {/* Mobile menu trigger */}
-          <div className="flex items-center lg:hidden">
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 -ml-2 text-[#20201E] hover:text-[#A88968] transition"
-              aria-label="Toggle navigation menu"
-            >
-              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
+        {/* ── Row 1: logo / search / icons ─────────────────────────── */}
+        <div className="flex items-center gap-3 sm:gap-6 h-16 lg:h-[76px]">
+          {/* Mobile hamburger */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="lg:hidden p-2 -ml-2 text-[#20201E] hover:text-[#A88968] transition"
+            aria-label="Toggle navigation menu"
+            aria-expanded={mobileMenuOpen}
+          >
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
 
-          {/* Desktop Left Nav Links */}
-          <nav className="hidden lg:flex items-center space-x-8">
-            {navLinks.map((link) => (
-              <div
-                key={link.name}
-                className="relative"
-                onMouseEnter={() => link.hasMega && setShopMenuOpen(true)}
-                onMouseLeave={() => link.hasMega && setShopMenuOpen(false)}
+          {/* Logo */}
+          <Link href="/" className="shrink-0 select-none" aria-label="Efendy Furniture home">
+            <span className="font-logo text-[26px] lg:text-[32px] font-medium tracking-[0.18em] text-[#6B6B6B] leading-none">
+              EFENDY<span className="text-[#A88968]">.</span>
+            </span>
+          </Link>
+
+          {/* Search bar (desktop) */}
+          <form
+            onSubmit={submitSearch}
+            role="search"
+            className="hidden md:flex flex-1 max-w-3xl"
+          >
+            <div className="relative w-full">
+              <input
+                type="search"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder="Search products & help ..."
+                aria-label="Search products"
+                className="w-full border border-stone-300 rounded-sm py-2.5 pl-4 pr-11 text-sm text-[#20201E] placeholder:text-stone-400 focus:outline-none focus:border-[#A88968] transition-colors"
+              />
+              <button
+                type="submit"
+                className="absolute right-1 top-1/2 -translate-y-1/2 p-2 text-stone-500 hover:text-[#20201E] transition"
+                aria-label="Submit search"
               >
-                <Link
-                  href={link.href}
-                  className={`text-sm tracking-widest uppercase transition-colors flex items-center gap-1 py-2 font-medium ${
-                    pathname.startsWith(link.href)
-                      ? "text-[#A88968] border-b border-[#A88968]"
-                      : "text-[#20201E] hover:text-[#A88968]"
-                  }`}
-                >
-                  {link.name}
-                  {link.hasMega && <ChevronDown size={14} className="opacity-70" />}
-                </Link>
+                <Search size={19} strokeWidth={1.8} />
+              </button>
+            </div>
+          </form>
 
-                {/* Shop Mega Menu */}
-                {link.hasMega && shopMenuOpen && (
-                  <div className="absolute top-full left-0 w-80 bg-white border border-[#E5E1DB] shadow-lg rounded-sm py-4 px-6 grid grid-cols-2 gap-4 animate-in fade-in slide-in-from-top-2 duration-200">
-                    <div>
-                      <h4 className="text-xs font-semibold uppercase tracking-wider text-[#817A71] mb-2">
-                        Categories
-                      </h4>
-                      <ul className="space-y-1.5 text-sm">
-                        <li>
-                          <Link href="/shop?category=Sofa" className="hover:text-[#A88968]">
-                            Sofas
-                          </Link>
-                        </li>
-                        <li>
-                          <Link href="/shop?category=Chair" className="hover:text-[#A88968]">
-                            Chairs
-                          </Link>
-                        </li>
-                        <li>
-                          <Link href="/shop?category=Table" className="hover:text-[#A88968]">
-                            Tables
-                          </Link>
-                        </li>
-                        <li>
-                          <Link href="/shop?category=Bed" className="hover:text-[#A88968]">
-                            Beds
-                          </Link>
-                        </li>
-                        <li>
-                          <Link href="/shop?category=Storage" className="hover:text-[#A88968]">
-                            Storage
-                          </Link>
-                        </li>
-                        <li>
-                          <Link href="/shop?category=Lighting" className="hover:text-[#A88968]">
-                            Lighting
-                          </Link>
-                        </li>
-                      </ul>
-                    </div>
-                    <div>
-                      <h4 className="text-xs font-semibold uppercase tracking-wider text-[#817A71] mb-2">
-                        Shop By Room
-                      </h4>
-                      <ul className="space-y-1.5 text-sm">
-                        <li>
-                          <Link href="/rooms/living-room" className="hover:text-[#A88968]">
-                            Living Room
-                          </Link>
-                        </li>
-                        <li>
-                          <Link href="/rooms/bedroom" className="hover:text-[#A88968]">
-                            Bedroom
-                          </Link>
-                        </li>
-                        <li>
-                          <Link href="/rooms/dining-room" className="hover:text-[#A88968]">
-                            Dining Room
-                          </Link>
-                        </li>
-                        <li>
-                          <Link href="/rooms/workspace" className="hover:text-[#A88968]">
-                            Workspace
-                          </Link>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                )}
-              </div>
-            ))}
-          </nav>
-
-          {/* Brand Logo - Centered */}
-          <div className="flex-1 lg:flex-initial text-center lg:text-center">
-            <Link href="/" className="inline-block group">
-              <span className="font-serif text-2xl sm:text-3xl tracking-wider uppercase text-[#20201E] group-hover:text-[#A88968] transition-colors">
-                Efendy Furniture
-              </span>
-              <span className="block text-[9px] tracking-[0.3em] uppercase text-[#817A71] -mt-1">
-                Modern Living • Jakarta
-              </span>
+          {/* Icons */}
+          <div className="flex items-center gap-0.5 sm:gap-2 ml-auto">
+            <span
+              className="hidden xl:inline-flex items-center text-[11px] font-semibold tracking-wider text-stone-500 border border-stone-300 rounded-sm px-2 py-1 mr-1"
+              title="Region: Indonesia"
+            >
+              ID
+            </span>
+            <Link
+              href="/inspiration"
+              className="hidden sm:block p-2 text-stone-600 hover:text-[#A88968] transition"
+              aria-label="Help and inspiration"
+            >
+              <CircleHelp size={22} strokeWidth={1.5} />
             </Link>
-          </div>
-
-          {/* Action Icons Right */}
-          <div className="flex items-center space-x-3 sm:space-x-5">
-            {/* Search */}
             <button
               onClick={onOpenSearch || (() => setSearchModalOpen(true))}
-              className="p-2 text-[#20201E] hover:text-[#A88968] transition relative"
+              className="md:hidden p-2 text-stone-600 hover:text-[#A88968] transition"
               aria-label="Search furniture catalog"
             >
-              <Search size={20} />
+              <Search size={22} strokeWidth={1.5} />
             </button>
-
-            {/* Wishlist */}
             <Link
               href="/wishlist"
-              className="p-2 text-[#20201E] hover:text-[#A88968] transition relative"
+              className="p-2 text-stone-600 hover:text-[#A88968] transition relative"
               aria-label="View Wishlist"
             >
-              <Heart size={20} />
+              <Heart size={22} strokeWidth={1.5} />
               {effectiveWishlistCount > 0 && (
-                <span className="absolute top-1 right-1 w-4 h-4 bg-[#A88968] text-white text-[10px] font-bold rounded-full flex items-center justify-center animate-in zoom-in">
+                <span className="absolute top-0.5 right-0.5 min-w-4 h-4 px-0.5 bg-[#A88968] text-white text-[10px] font-bold rounded-full flex items-center justify-center">
                   {effectiveWishlistCount}
                 </span>
               )}
             </Link>
-
-            {/* Cart Trigger */}
             <button
               onClick={() => onOpenCart?.() ?? openCartDrawer()}
-              className="p-2 text-[#20201E] hover:text-[#A88968] transition relative flex items-center"
+              className="p-2 text-stone-600 hover:text-[#A88968] transition relative"
               aria-label="Open Cart"
             >
-              <ShoppingBag size={20} />
+              <ShoppingBag size={22} strokeWidth={1.5} />
               {effectiveCartCount > 0 && (
-                <span className="absolute top-1 right-1 w-4 h-4 bg-[#20201E] text-white text-[10px] font-bold rounded-full flex items-center justify-center">
+                <span className="absolute top-0.5 right-0.5 min-w-4 h-4 px-0.5 bg-[#20201E] text-white text-[10px] font-bold rounded-full flex items-center justify-center">
                   {effectiveCartCount}
                 </span>
               )}
             </button>
           </div>
         </div>
+
+        {/* Mobile search row */}
+        <form onSubmit={submitSearch} role="search" className="md:hidden pb-3">
+          <div className="relative w-full">
+            <input
+              type="search"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="Search products & help ..."
+              aria-label="Search products"
+              className="w-full border border-stone-300 rounded-sm py-2 pl-4 pr-11 text-sm text-[#20201E] placeholder:text-stone-400 focus:outline-none focus:border-[#A88968] transition-colors"
+            />
+            <button
+              type="submit"
+              className="absolute right-1 top-1/2 -translate-y-1/2 p-2 text-stone-500 hover:text-[#20201E] transition"
+              aria-label="Submit search"
+            >
+              <Search size={18} strokeWidth={1.8} />
+            </button>
+          </div>
+        </form>
+
+        {/* ── Row 2: category nav (desktop) ────────────────────────── */}
+        <nav className="hidden lg:block border-t border-[#E5E1DB]/60" aria-label="Categories">
+          <ul className="flex items-center gap-7 h-12 text-[13.5px] text-[#333330]">
+            {/* Rooms dropdown */}
+            <li
+              className="relative h-full flex items-center"
+              onMouseEnter={() => setOpenDropdown("rooms")}
+              onMouseLeave={() => setOpenDropdown(null)}
+            >
+              <Link
+                href="/rooms/living-room"
+                className="flex items-center gap-1 hover:text-[#A88968] transition-colors py-3"
+              >
+                Rooms <ChevronDown size={13} className="opacity-60" />
+              </Link>
+              {openDropdown === "rooms" && (
+                <div className="absolute top-full left-0 w-52 bg-white border border-[#E5E1DB] shadow-lg rounded-sm py-2 animate-in fade-in slide-in-from-top-1 duration-150">
+                  {ROOM_LINKS.map((l) => (
+                    <Link
+                      key={l.name}
+                      href={l.href}
+                      className="block px-5 py-2.5 text-sm hover:bg-[#F7F5F0] hover:text-[#A88968] transition-colors"
+                    >
+                      {l.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </li>
+
+            {/* Products mega dropdown */}
+            <li
+              className="relative h-full flex items-center"
+              onMouseEnter={() => setOpenDropdown("products")}
+              onMouseLeave={() => setOpenDropdown(null)}
+            >
+              <Link
+                href="/shop"
+                className={`flex items-center gap-1 hover:text-[#A88968] transition-colors py-3 ${
+                  pathname === "/shop" ? "text-[#A88968]" : ""
+                }`}
+              >
+                Products <ChevronDown size={13} className="opacity-60" />
+              </Link>
+              {openDropdown === "products" && (
+                <div className="absolute top-full left-0 w-56 bg-white border border-[#E5E1DB] shadow-lg rounded-sm py-2 animate-in fade-in slide-in-from-top-1 duration-150">
+                  <Link
+                    href="/shop"
+                    className="block px-5 py-2.5 text-sm font-medium hover:bg-[#F7F5F0] hover:text-[#A88968] transition-colors"
+                  >
+                    Shop All Furniture
+                  </Link>
+                  <div className="my-1.5 border-t border-[#E5E1DB]/70" />
+                  {PRODUCT_LINKS.map((l) => (
+                    <Link
+                      key={l.name}
+                      href={l.href}
+                      className="block px-5 py-2 text-sm hover:bg-[#F7F5F0] hover:text-[#A88968] transition-colors"
+                    >
+                      {l.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </li>
+
+            {secondaryLinks.map((link) => (
+              <li key={link.name} className="h-full flex items-center">
+                <Link
+                  href={link.href}
+                  className={`py-3 transition-colors whitespace-nowrap ${
+                    link.highlight
+                      ? "text-[#A88968] font-semibold hover:text-[#8E7253]"
+                      : "hover:text-[#A88968]"
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </div>
 
-      {/* Mobile Drawer Menu */}
+      {/* Mobile drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden absolute inset-x-0 top-full bg-[#F7F5F0] z-50 max-h-[calc(100dvh-5rem)] overflow-y-auto border-t border-[#E5E1DB] shadow-xl p-6 space-y-6 animate-in slide-in-from-top-2 duration-200">
-          <div className="space-y-4">
-            <Link
-              href="/shop"
-              className="block text-xl font-serif text-[#20201E] hover:text-[#A88968]"
-            >
-              Shop All Products
-            </Link>
-            <div className="pl-4 space-y-2 border-l border-[#E5E1DB]">
-              <Link href="/shop?category=Sofa" className="block text-sm text-[#817A71]">
-                Sofas & Couches
+        <div className="lg:hidden absolute inset-x-0 top-full bg-white z-50 max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-[#E5E1DB] shadow-xl p-6 space-y-6 animate-in slide-in-from-top-2 duration-200">
+          <div className="space-y-1">
+            <p className="text-[11px] font-semibold uppercase tracking-widest text-[#817A71] mb-2">
+              Shop by Room
+            </p>
+            {ROOM_LINKS.map((l) => (
+              <Link
+                key={l.name}
+                href={l.href}
+                className="block py-2 font-logo text-lg tracking-wide text-[#20201E] hover:text-[#A88968]"
+              >
+                {l.name}
               </Link>
-              <Link href="/shop?category=Chair" className="block text-sm text-[#817A71]">
-                Lounge Chairs & Dining
+            ))}
+          </div>
+          <div className="space-y-1 border-t border-[#E5E1DB] pt-5">
+            <p className="text-[11px] font-semibold uppercase tracking-widest text-[#817A71] mb-2">
+              Shop by Category
+            </p>
+            {PRODUCT_LINKS.map((l) => (
+              <Link
+                key={l.name}
+                href={l.href}
+                className="block py-1.5 text-[15px] text-[#333330] hover:text-[#A88968]"
+              >
+                {l.name}
               </Link>
-              <Link href="/shop?category=Table" className="block text-sm text-[#817A71]">
-                Tables & Desks
-              </Link>
-              <Link href="/shop?category=Bed" className="block text-sm text-[#817A71]">
-                Beds & Nightstands
-              </Link>
-              <Link href="/shop?category=Storage" className="block text-sm text-[#817A71]">
-                Storage & Credenzas
-              </Link>
-              <Link href="/shop?category=Lighting" className="block text-sm text-[#817A71]">
-                Pendants & Lamps
-              </Link>
-            </div>
-
-            <Link
-              href="/collections"
-              className="block text-xl font-serif text-[#20201E] hover:text-[#A88968]"
-            >
-              Collections (The Nara)
-            </Link>
-
-            <Link
-              href="/rooms/living-room"
-              className="block text-xl font-serif text-[#20201E] hover:text-[#A88968]"
-            >
-              Shop By Room
-            </Link>
-
-            <Link
-              href="/inspiration"
-              className="block text-xl font-serif text-[#20201E] hover:text-[#A88968]"
-            >
-              Interior Inspiration
-            </Link>
-
+            ))}
+          </div>
+          <div className="space-y-1 border-t border-[#E5E1DB] pt-5">
+            {secondaryLinks
+              .filter((l) => l.name !== "Decor")
+              .map((l) => (
+                <Link
+                  key={l.name}
+                  href={l.href}
+                  className={`block py-1.5 text-[15px] ${
+                    l.highlight ? "text-[#A88968] font-semibold" : "text-[#333330]"
+                  } hover:text-[#A88968]`}
+                >
+                  {l.name}
+                </Link>
+              ))}
             <Link
               href="/wishlist"
-              className="block text-xl font-serif text-[#20201E] hover:text-[#A88968] flex items-center justify-between"
+              className="flex items-center justify-between py-1.5 text-[15px] text-[#333330] hover:text-[#A88968]"
             >
               <span>My Wishlist</span>
               {effectiveWishlistCount > 0 && (
@@ -285,19 +349,15 @@ export default function Navbar({
               )}
             </Link>
           </div>
-
-          <div className="pt-6 border-t border-[#E5E1DB] text-xs text-[#817A71] space-y-2">
+          <div className="pt-4 border-t border-[#E5E1DB] text-xs text-[#817A71] space-y-1.5">
             <p>Customer Care: hello@efendy-furniture.com</p>
             <p>Showroom: Senopati, South Jakarta</p>
           </div>
         </div>
       )}
 
-      {/* Search Modal */}
-      <SearchModal
-        isOpen={searchModalOpen}
-        onClose={() => setSearchModalOpen(false)}
-      />
+      {/* Search Modal (instant results) */}
+      <SearchModal isOpen={searchModalOpen} onClose={() => setSearchModalOpen(false)} />
     </header>
   );
 }

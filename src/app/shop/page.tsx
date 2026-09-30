@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useMemo, Suspense } from "react";
-import { useSearchParams } from "next/navigation";
+import { useState, useMemo, useEffect, Suspense } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import { PRODUCTS } from "@/data/products";
 import ProductGrid from "@/components/product/ProductGrid";
 import QuickViewModal from "@/components/product/QuickViewModal";
@@ -14,9 +14,21 @@ import ProductFilter, {
 import { SlidersHorizontal, ChevronDown, X } from "lucide-react";
 import { ProductCategory, ProductStyle } from "@/types";
 
+function isSortOption(value: string | null): value is SortOption {
+  return (
+    value === "featured" ||
+    value === "newest" ||
+    value === "price-asc" ||
+    value === "price-desc" ||
+    value === "rating"
+  );
+}
+
 function ShopContent() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const initialCategory = searchParams.get("category") as ProductCategory | null;
+  const dealSale = searchParams.get("deal") === "sale";
 
   const [filters, setFilters] = useState<FilterState>({
     categories: initialCategory ? [initialCategory] : [],
@@ -25,10 +37,27 @@ function ShopContent() {
     styles: [],
   });
 
-  const [sortOption, setSortOption] = useState<SortOption>("featured");
+  const [sortOption, setSortOption] = useState<SortOption>(() => {
+    const s = searchParams.get("sort");
+    return isSortOption(s) ? s : "featured";
+  });
   const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
   const { ids: wishlistIds, toggle: toggleWishlist } = useWishlistIds();
+
+  // Re-sync when navigating between URLs like /shop?sort=rating or /shop?deal=sale
+  useEffect(() => {
+    const cat = searchParams.get("category") as ProductCategory | null;
+    setFilters({
+      categories: cat ? [cat] : [],
+      priceRange: [],
+      colors: [],
+      styles: [],
+    });
+    const s = searchParams.get("sort");
+    setSortOption(isSortOption(s) ? s : "featured");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams]);
 
   const resetFilters = () => {
     setFilters({
@@ -42,6 +71,11 @@ function ShopContent() {
   // Filter and Sort Pipeline
   const filteredAndSortedProducts = useMemo(() => {
     let result = [...PRODUCTS];
+
+    // 0. Sale deals
+    if (dealSale) {
+      result = result.filter((p) => p.originalPrice && p.originalPrice > p.price);
+    }
 
     // 1. Categories
     if (filters.categories.length > 0) {
@@ -98,9 +132,18 @@ function ShopContent() {
     }
 
     return result;
-  }, [filters, sortOption]);
+  }, [filters, sortOption, dealSale]);
 
   const activePills = [
+    ...(dealSale
+      ? [
+          {
+            key: "deal-sale",
+            label: "On Sale",
+            remove: () => router.push("/shop"),
+          },
+        ]
+      : []),
     ...filters.categories.map((c) => ({
       key: `cat-${c}`,
       label: c,
@@ -151,11 +194,11 @@ function ShopContent() {
       {/* Header */}
       <div className="border-b border-[#E5E1DB] pb-8 mb-8">
         <span className="text-xs uppercase tracking-widest text-[#A88968] font-semibold block mb-2">
-          Curated Furniture
+          {dealSale ? "Discounted pieces" : "Curated Furniture"}
         </span>
         <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4">
           <h1 className="font-serif text-3xl sm:text-5xl text-[#20201E] tracking-tight">
-            Shop All Furniture
+            {dealSale ? "Sale" : "Shop All Furniture"}
           </h1>
           <p className="text-xs sm:text-sm text-[#817A71] tracking-wider uppercase font-medium">
             Showing {filteredAndSortedProducts.length}{" "}
