@@ -1,14 +1,26 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import type { CartItem, Customer, Product, ShippingTier, PaymentMethodType } from "@/types";
+import type {
+  CartItem,
+  Customer,
+  Order,
+  OrderStatus,
+  PaymentMethodOption,
+  PaymentMethodType,
+  Product,
+  ShippingMethod,
+  ShippingTier,
+} from "@/types";
 
 export const CART_KEY = "efendy_cart";
 export const WISHLIST_KEY = "efendy_wishlist";
 export const CHECKOUT_DRAFT_KEY = "efendy_checkout_draft";
+export const ORDERS_KEY = "efendy_orders";
 export const CART_EVENT = "efendy:cart-updated";
 export const WISHLIST_EVENT = "efendy:wishlist-updated";
 export const CHECKOUT_EVENT = "efendy:checkout-updated";
+export const ORDERS_EVENT = "efendy:orders-updated";
 export const CART_OPEN_EVENT = "efendy:open-cart";
 
 function readJSON<T>(key: string, fallback: T): T {
@@ -249,4 +261,66 @@ export function useCheckoutDraft(): {
     });
   }, []);
   return { draft, save };
+}
+
+// ---------- Orders ----------
+
+export function getOrders(): Order[] {
+  return readJSON<Order[]>(ORDERS_KEY, []);
+}
+
+export function getOrderById(id: string): Order | undefined {
+  const normalized = id.startsWith("#") ? id : `#${id}`;
+  return getOrders().find((o) => o.id === id || o.id === normalized);
+}
+
+function generateOrderId(): string {
+  const now = new Date();
+  const y = now.getFullYear();
+  const m = String(now.getMonth() + 1).padStart(2, "0");
+  const d = String(now.getDate()).padStart(2, "0");
+  const prefix = `#ORD-${y}${m}${d}`;
+  const todayCount = getOrders().filter((o) => o.id.startsWith(prefix)).length;
+  return `${prefix}-${String(todayCount + 1).padStart(3, "0")}`;
+}
+
+export interface CreateOrderInput {
+  items: CartItem[];
+  customer: Customer;
+  shipping: ShippingMethod;
+  payment: PaymentMethodOption;
+  subtotal: number;
+  shippingCost: number;
+  total: number;
+  estimatedDeliveryDate: string;
+}
+
+export function createOrder(input: CreateOrderInput): Order {
+  const id = generateOrderId();
+  const order: Order = {
+    id,
+    createdAt: new Date().toISOString(),
+    items: input.items,
+    customer: input.customer,
+    shipping: input.shipping,
+    payment: input.payment,
+    subtotal: input.subtotal,
+    shippingCost: input.shippingCost,
+    total: input.total,
+    status: "paid",
+    trackingNumber: `EFY-${id.replace("#ORD-", "")}`,
+    estimatedDeliveryDate: input.estimatedDeliveryDate,
+  };
+  writeJSON(ORDERS_KEY, [order, ...getOrders()], ORDERS_EVENT);
+  return order;
+}
+
+export function updateOrderStatus(id: string, status: OrderStatus): Order | undefined {
+  const orders = getOrders();
+  const idx = orders.findIndex((o) => o.id === id);
+  if (idx === -1) return undefined;
+  const next = [...orders];
+  next[idx] = { ...next[idx], status };
+  writeJSON(ORDERS_KEY, next, ORDERS_EVENT);
+  return next[idx];
 }
