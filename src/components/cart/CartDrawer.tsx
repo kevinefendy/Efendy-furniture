@@ -106,7 +106,7 @@ export default function CartDrawer({ forceOpenSignal }: CartDrawerProps) {
               <Link
                 href="/shop"
                 onClick={() => setOpen(false)}
-                className="px-6 py-3 bg-[#20201E] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#A88968] transition-colors"
+                className="px-6 py-3 bg-[#20201E] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#6B6B6B] transition-colors"
               >
                 Start Shopping
               </Link>
@@ -139,7 +139,7 @@ export default function CartDrawer({ forceOpenSignal }: CartDrawerProps) {
                         <Link
                           href={`/product/${item.slug}`}
                           onClick={() => setOpen(false)}
-                          className="font-serif text-base text-[#20201E] leading-tight line-clamp-1 hover:text-[#A88968]"
+                          className="font-serif text-base text-[#20201E] leading-tight line-clamp-1 hover:text-[#6B6B6B]"
                         >
                           {item.name}
                         </Link>
@@ -184,7 +184,7 @@ export default function CartDrawer({ forceOpenSignal }: CartDrawerProps) {
                     </div>
                     <button
                       onClick={() => moveToWishlist(item)}
-                      className="mt-1.5 text-[11px] text-[#817A71] hover:text-[#A88968] inline-flex items-center gap-1"
+                      className="mt-1.5 text-[11px] text-[#817A71] hover:text-[#6B6B6B] inline-flex items-center gap-1"
                     >
                       <Heart size={12} /> Move to wishlist
                     </button>
@@ -218,7 +218,7 @@ export default function CartDrawer({ forceOpenSignal }: CartDrawerProps) {
               <Link
                 href="/checkout"
                 onClick={() => setOpen(false)}
-                className="py-3 text-center bg-[#20201E] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#A88968] transition-colors"
+                className="py-3 text-center bg-[#20201E] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#6B6B6B] transition-colors"
               >
                 Checkout
               </Link>

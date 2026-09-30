@@ -33,7 +33,7 @@ export default function OrderTimeline({ status }: OrderTimelineProps) {
                   completed
                     ? "bg-[#20201E] border-[#20201E] text-white"
                     : current
-                      ? "bg-[#A88968] border-[#A88968] text-white animate-pulse"
+                      ? "bg-[#6B6B6B] border-[#6B6B6B] text-white animate-pulse"
                       : "bg-white border-[#E5E1DB] text-stone-300"
                 }`}
               >

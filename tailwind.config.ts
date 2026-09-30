@@ -15,9 +15,9 @@ const config: Config = {
         "muted-foreground": "#817A71",
         border: "#E5E1DB",
         accent: {
-          DEFAULT: "#A88968",
-          hover: "#8E7253",
-          light: "#F0EAE1",
+          DEFAULT: "#6B6B6B",
+          hover: "#4A4A4A",
+          light: "#EDEDED",
         },
         card: {
           DEFAULT: "#FFFFFF",
@@ -26,7 +26,7 @@ const config: Config = {
       },
       fontFamily: {
         serif: ["var(--font-serif)", "Cormorant Garamond", "serif"],
-        sans: ["var(--font-sans)", "Inter", "sans-serif"],
+        sans: ["var(--font-logo)", "Jost", "Inter", "sans-serif"],
         logo: ["var(--font-logo)", "Jost", "Inter", "sans-serif"],
       },
       container: {

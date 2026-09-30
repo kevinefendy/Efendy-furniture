@@ -16,7 +16,7 @@ export default function ShopTheRoom() {
     <section className="py-20 bg-white border-t border-[#E5E1DB]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <span className="text-xs uppercase tracking-widest text-[#A88968] font-semibold block mb-2">
+          <span className="text-xs uppercase tracking-widest text-[#6B6B6B] font-semibold block mb-2">
             Interactive Experience
           </span>
           <h2 className="font-serif text-3xl sm:text-4xl text-[#20201E] tracking-tight">
@@ -59,8 +59,8 @@ export default function ShopTheRoom() {
                   <span
                     className={`relative w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold border-2 transition-colors ${
                       isActive
-                        ? "bg-[#A88968] text-white border-white shadow-lg"
-                        : "bg-white text-[#20201E] border-[#20201E]/20 hover:bg-[#A88968] hover:text-white"
+                        ? "bg-[#6B6B6B] text-white border-white shadow-lg"
+                        : "bg-white text-[#20201E] border-[#20201E]/20 hover:bg-[#6B6B6B] hover:text-white"
                     }`}
                   >
                     ●
@@ -72,7 +72,7 @@ export default function ShopTheRoom() {
                   <div className="absolute left-1/2 bottom-full mb-3 -translate-x-1/2 w-56 sm:w-64 max-w-[calc(100vw-3rem)] bg-white/95 backdrop-blur-md p-4 rounded-sm shadow-2xl border border-[#E5E1DB] animate-in fade-in zoom-in-95 duration-200">
                     <div className="flex items-start justify-between">
                       <div>
-                        <span className="text-[10px] uppercase tracking-wider text-[#A88968] font-bold">
+                        <span className="text-[10px] uppercase tracking-wider text-[#6B6B6B] font-bold">
                           {spot.color}
                         </span>
                         <h4 className="font-serif text-base text-[#20201E] font-medium leading-tight">
@@ -96,7 +96,7 @@ export default function ShopTheRoom() {
 
                     <Link
                       href={`/product/${spot.slug}`}
-                      className="mt-3 w-full py-1.5 bg-[#20201E] text-white text-[11px] font-semibold uppercase tracking-wider flex items-center justify-center gap-1 hover:bg-[#A88968] transition-colors"
+                      className="mt-3 w-full py-1.5 bg-[#20201E] text-white text-[11px] font-semibold uppercase tracking-wider flex items-center justify-center gap-1 hover:bg-[#6B6B6B] transition-colors"
                     >
                       View Piece
                       <ArrowRight size={12} />
@@ -116,7 +116,7 @@ export default function ShopTheRoom() {
               onClick={() => setActiveHotspot(spot.id)}
               className={`p-4 rounded-sm border cursor-pointer transition-all ${
                 activeHotspot === spot.id
-                  ? "border-[#A88968] bg-[#F7F5F0]"
+                  ? "border-[#6B6B6B] bg-[#F7F5F0]"
                   : "border-[#E5E1DB] bg-white hover:border-stone-400"
               }`}
             >
@@ -127,7 +127,7 @@ export default function ShopTheRoom() {
                 </div>
                 <Link
                   href={`/product/${spot.slug}`}
-                  className="text-xs text-[#A88968] hover:underline font-medium"
+                  className="text-xs text-[#6B6B6B] hover:underline font-medium"
                 >
                   Shop →
                 </Link>

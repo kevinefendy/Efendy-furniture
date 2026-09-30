@@ -25,7 +25,7 @@ export default function NewArrivals({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row items-baseline justify-between mb-12">
           <div>
-            <span className="text-xs uppercase tracking-widest text-[#A88968] font-semibold block mb-2">
+            <span className="text-xs uppercase tracking-widest text-[#6B6B6B] font-semibold block mb-2">
               Fresh Off The Workshop
             </span>
             <h2 className="font-serif text-3xl sm:text-4xl text-[#20201E] tracking-tight">
@@ -34,7 +34,7 @@ export default function NewArrivals({
           </div>
           <Link
             href="/shop"
-            className="mt-4 sm:mt-0 text-xs font-semibold uppercase tracking-widest text-[#20201E] hover:text-[#A88968] transition-colors flex items-center gap-1 group"
+            className="mt-4 sm:mt-0 text-xs font-semibold uppercase tracking-widest text-[#20201E] hover:text-[#6B6B6B] transition-colors flex items-center gap-1 group"
           >
             View All Pieces
             <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />

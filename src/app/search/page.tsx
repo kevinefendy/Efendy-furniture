@@ -44,7 +44,7 @@ function SearchPageContent() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       {/* Header */}
       <div className="border-b border-[#E5E1DB] pb-8 mb-10">
-        <span className="text-xs uppercase tracking-widest text-[#A88968] font-bold block mb-2">
+        <span className="text-xs uppercase tracking-widest text-[#6B6B6B] font-bold block mb-2">
           Discover Furniture
         </span>
         <h1 className="font-serif text-3xl sm:text-5xl text-[#20201E] tracking-tight mb-6">
@@ -58,7 +58,7 @@ function SearchPageContent() {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Search by product name, category, or collection..."
-            className="w-full bg-white border border-[#E5E1DB] rounded-sm py-3.5 pl-11 pr-10 text-sm text-[#20201E] focus:outline-none focus:border-[#A88968] shadow-xs"
+            className="w-full bg-white border border-[#E5E1DB] rounded-sm py-3.5 pl-11 pr-10 text-sm text-[#20201E] focus:outline-none focus:border-[#6B6B6B] shadow-xs"
           />
           <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-400" size={18} />
           {searchTerm && (
@@ -105,14 +105,14 @@ function SearchPageContent() {
               <button
                 key={cat}
                 onClick={() => setSearchTerm(cat)}
-                className="px-4 py-2 bg-[#F7F5F0] border border-[#E5E1DB] text-xs uppercase tracking-wider font-semibold hover:border-[#A88968] transition-colors"
+                className="px-4 py-2 bg-[#F7F5F0] border border-[#E5E1DB] text-xs uppercase tracking-wider font-semibold hover:border-[#6B6B6B] transition-colors"
               >
                 {cat}
               </button>
             ))}
             <Link
               href="/shop"
-              className="px-4 py-2 bg-[#20201E] text-white text-xs uppercase tracking-wider font-semibold hover:bg-[#A88968] transition-colors"
+              className="px-4 py-2 bg-[#20201E] text-white text-xs uppercase tracking-wider font-semibold hover:bg-[#6B6B6B] transition-colors"
             >
               All Catalog
             </Link>

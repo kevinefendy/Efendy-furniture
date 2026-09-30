@@ -43,7 +43,7 @@ export default function PaymentSelector({ selectedId, onSelect }: PaymentSelecto
           return (
             <fieldset key={category}>
               <legend className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#817A71] mb-3">
-                <Icon size={15} className="text-[#A88968]" aria-hidden />
+                <Icon size={15} className="text-[#6B6B6B]" aria-hidden />
                 {PAYMENT_CATEGORY_LABELS[category]}
               </legend>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5" role="radiogroup" aria-label={PAYMENT_CATEGORY_LABELS[category]}>
@@ -55,7 +55,7 @@ export default function PaymentSelector({ selectedId, onSelect }: PaymentSelecto
                       role="radio"
                       aria-checked={selected}
                       onClick={() => onSelect(m.id)}
-                      className={`flex items-center gap-3 border rounded-sm px-4 py-3 text-left transition-all focus-visible:outline-2 focus-visible:outline-[#A88968] ${
+                      className={`flex items-center gap-3 border rounded-sm px-4 py-3 text-left transition-all focus-visible:outline-2 focus-visible:outline-[#6B6B6B] ${
                         selected
                           ? "border-[#20201E] bg-[#F7F5F0] ring-1 ring-[#20201E]"
                           : "border-[#E5E1DB] bg-white hover:border-stone-400"

@@ -20,7 +20,7 @@ export default function CollectionSpotlight() {
             </div>
             {/* Small floating detail card */}
             <div className="absolute -bottom-6 -right-4 sm:-bottom-8 sm:right-6 bg-white p-4 sm:p-6 shadow-xl border border-[#E5E1DB] max-w-xs hidden sm:block">
-              <span className="text-[10px] uppercase tracking-widest text-[#A88968] font-bold block mb-1">
+              <span className="text-[10px] uppercase tracking-widest text-[#6B6B6B] font-bold block mb-1">
                 Signature Material
               </span>
               <p className="font-serif text-base text-[#20201E]">
@@ -31,8 +31,8 @@ export default function CollectionSpotlight() {
 
           {/* Editorial Content */}
           <div className="lg:col-span-5 space-y-6 lg:pl-6">
-            <div className="inline-block border-b border-[#A88968] pb-1">
-              <span className="text-xs uppercase tracking-[0.25em] text-[#A88968] font-semibold">
+            <div className="inline-block border-b border-[#6B6B6B] pb-1">
+              <span className="text-xs uppercase tracking-[0.25em] text-[#6B6B6B] font-semibold">
                 Featured Capsule
               </span>
             </div>
@@ -52,7 +52,7 @@ export default function CollectionSpotlight() {
             <div className="pt-4">
               <Link
                 href="/collections"
-                className="inline-flex items-center justify-center px-8 py-3.5 bg-[#20201E] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#A88968] transition-colors group"
+                className="inline-flex items-center justify-center px-8 py-3.5 bg-[#20201E] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#6B6B6B] transition-colors group"
               >
                 Explore Collection
                 <ArrowRight size={15} className="ml-2 group-hover:translate-x-1 transition-transform" />

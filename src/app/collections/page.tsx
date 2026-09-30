@@ -28,7 +28,7 @@ export default function CollectionsPage() {
           >
             <ArrowLeft size={14} /> Back to Catalog
           </Link>
-          <span className="text-xs uppercase tracking-[0.3em] text-[#A88968] font-bold">
+          <span className="text-xs uppercase tracking-[0.3em] text-[#6B6B6B] font-bold">
             Capsule Series
           </span>
           <h1 className="font-serif text-4xl sm:text-6xl font-light tracking-tight mt-1">
@@ -68,7 +68,7 @@ export default function CollectionsPage() {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/20" />
         <div className="relative max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8 flex flex-col justify-end pb-12 text-white">
-          <span className="text-xs uppercase tracking-[0.3em] text-[#A88968] font-bold">
+          <span className="text-xs uppercase tracking-[0.3em] text-[#6B6B6B] font-bold">
             Capsule Series
           </span>
           <h2 className="font-serif text-4xl sm:text-6xl font-light tracking-tight mt-1">

@@ -9,7 +9,7 @@ export default function ShopByRoom() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
           <div>
-            <span className="text-xs uppercase tracking-widest text-[#A88968] font-semibold block mb-2">
+            <span className="text-xs uppercase tracking-widest text-[#6B6B6B] font-semibold block mb-2">
               Curated Spaces
             </span>
             <h2 className="font-serif text-3xl sm:text-4xl text-[#20201E] tracking-tight">
@@ -45,7 +45,7 @@ export default function ShopByRoom() {
                   </h3>
                   <p className="text-xs text-stone-300 mt-1 line-clamp-1">{room.description}</p>
                 </div>
-                <div className="w-9 h-9 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white group-hover:bg-[#A88968] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all">
+                <div className="w-9 h-9 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white group-hover:bg-[#6B6B6B] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all">
                   <ArrowUpRight size={18} />
                 </div>
               </div>

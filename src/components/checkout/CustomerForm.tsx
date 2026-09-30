@@ -19,7 +19,7 @@ const inputClass = (hasError: boolean) =>
   `w-full bg-white border rounded-sm px-3.5 py-3 text-sm text-[#20201E] placeholder:text-stone-400 focus:outline-none transition-colors ${
     hasError
       ? "border-rose-400 focus:border-rose-500"
-      : "border-[#E5E1DB] focus:border-[#A88968]"
+      : "border-[#E5E1DB] focus:border-[#6B6B6B]"
   }`;
 
 export default function CustomerForm({ value, errors, onChange }: CustomerFormProps) {

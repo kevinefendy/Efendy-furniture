@@ -193,7 +193,7 @@ function ShopContent() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       {/* Header */}
       <div className="border-b border-[#E5E1DB] pb-8 mb-8">
-        <span className="text-xs uppercase tracking-widest text-[#A88968] font-semibold block mb-2">
+        <span className="text-xs uppercase tracking-widest text-[#6B6B6B] font-semibold block mb-2">
           {dealSale ? "Discounted pieces" : "Curated Furniture"}
         </span>
         <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4">
@@ -238,7 +238,7 @@ function ShopContent() {
           {activePills.length > 0 && (
             <button
               onClick={resetFilters}
-              className="text-xs text-[#A88968] hover:underline font-medium ml-2"
+              className="text-xs text-[#6B6B6B] hover:underline font-medium ml-2"
             >
               Clear All
             </button>
@@ -255,7 +255,7 @@ function ShopContent() {
               id="sortSelect"
               value={sortOption}
               onChange={(e) => setSortOption(e.target.value as SortOption)}
-              className="appearance-none bg-white border border-[#E5E1DB] text-xs font-medium py-2 pl-3 pr-8 rounded-xs text-[#20201E] focus:outline-none focus:border-[#A88968] cursor-pointer"
+              className="appearance-none bg-white border border-[#E5E1DB] text-xs font-medium py-2 pl-3 pr-8 rounded-xs text-[#20201E] focus:outline-none focus:border-[#6B6B6B] cursor-pointer"
             >
               <option value="featured">Featured Pieces</option>
               <option value="newest">Newest Arrivals</option>

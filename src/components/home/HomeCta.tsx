@@ -5,10 +5,10 @@ export default function HomeCta() {
   return (
     <section className="py-24 bg-[#20201E] text-white text-center relative overflow-hidden">
       {/* Subtle background glow */}
-      <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#A88968_1px,transparent_1px)] [background-size:24px_24px]" />
+      <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#6B6B6B_1px,transparent_1px)] [background-size:24px_24px]" />
 
       <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-        <span className="text-xs uppercase tracking-[0.3em] text-[#A88968] font-semibold block">
+        <span className="text-xs uppercase tracking-[0.3em] text-[#6B6B6B] font-semibold block">
           Curate Your Atmosphere
         </span>
         <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-light tracking-tight leading-tight">
@@ -22,7 +22,7 @@ export default function HomeCta() {
         <div className="pt-4">
           <Link
             href="/shop"
-            className="inline-flex items-center justify-center px-10 py-4 bg-[#F7F5F0] text-[#20201E] text-xs font-semibold uppercase tracking-widest hover:bg-[#A88968] hover:text-white transition-all shadow-xl group"
+            className="inline-flex items-center justify-center px-10 py-4 bg-[#F7F5F0] text-[#20201E] text-xs font-semibold uppercase tracking-widest hover:bg-[#6B6B6B] hover:text-white transition-all shadow-xl group"
           >
             Shop All Furniture
             <ArrowRight size={15} className="ml-2 group-hover:translate-x-1 transition-transform" />

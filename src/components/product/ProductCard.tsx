@@ -50,7 +50,7 @@ export default function ProductCard({
             </span>
           )}
           {product.stock <= 5 && product.stock > 0 && (
-            <span className="bg-[#A88968] text-white text-[10px] uppercase font-semibold px-2 py-0.5 tracking-widest">
+            <span className="bg-[#6B6B6B] text-white text-[10px] uppercase font-semibold px-2 py-0.5 tracking-widest">
               Low Stock
             </span>
           )}
@@ -65,8 +65,8 @@ export default function ProductCard({
           }}
           className={`absolute top-3 right-3 p-2 rounded-full transition-all duration-200 z-10 ${
             isWishlisted
-              ? "bg-[#A88968] text-white shadow-sm"
-              : "bg-white/80 backdrop-blur-sm text-[#20201E] hover:bg-white hover:text-[#A88968]"
+              ? "bg-[#6B6B6B] text-white shadow-sm"
+              : "bg-white/80 backdrop-blur-sm text-[#20201E] hover:bg-white hover:text-[#6B6B6B]"
           }`}
           aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
         >
@@ -99,7 +99,7 @@ export default function ProductCard({
             <span className="font-serif italic text-stone-500">{product.style}</span>
           </div>
           <Link href={`/product/${product.slug}`}>
-            <h3 className="font-serif text-lg text-[#20201E] group-hover:text-[#A88968] transition-colors leading-snug line-clamp-1">
+            <h3 className="font-serif text-lg text-[#20201E] group-hover:text-[#6B6B6B] transition-colors leading-snug line-clamp-1">
               {product.name}
             </h3>
           </Link>

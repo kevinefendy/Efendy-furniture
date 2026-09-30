@@ -9,7 +9,7 @@ export default function InspirationSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-12">
           <div>
-            <span className="text-xs uppercase tracking-widest text-[#A88968] font-semibold block mb-2">
+            <span className="text-xs uppercase tracking-widest text-[#6B6B6B] font-semibold block mb-2">
               The Design Journal
             </span>
             <h2 className="font-serif text-3xl sm:text-4xl text-[#20201E] tracking-tight">
@@ -18,7 +18,7 @@ export default function InspirationSection() {
           </div>
           <Link
             href="/inspiration"
-            className="mt-4 sm:mt-0 text-xs font-semibold uppercase tracking-widest text-[#20201E] hover:text-[#A88968] transition-colors flex items-center gap-1 group"
+            className="mt-4 sm:mt-0 text-xs font-semibold uppercase tracking-widest text-[#20201E] hover:text-[#6B6B6B] transition-colors flex items-center gap-1 group"
           >
             Read All Stories
             <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
@@ -45,13 +45,13 @@ export default function InspirationSection() {
               <div className="p-6 flex-1 flex flex-col justify-between">
                 <div>
                   <div className="flex items-center gap-3 text-xs text-[#817A71] mb-2">
-                    <span className="uppercase tracking-widest font-medium text-[#A88968]">
+                    <span className="uppercase tracking-widest font-medium text-[#6B6B6B]">
                       {article.category}
                     </span>
                     <span>•</span>
                     <span>{article.readTime}</span>
                   </div>
-                  <h3 className="font-serif text-xl text-[#20201E] group-hover:text-[#A88968] transition-colors leading-snug">
+                  <h3 className="font-serif text-xl text-[#20201E] group-hover:text-[#6B6B6B] transition-colors leading-snug">
                     {article.title}
                   </h3>
                   <p className="mt-2 text-xs sm:text-sm text-[#817A71] line-clamp-2 leading-relaxed">
@@ -59,7 +59,7 @@ export default function InspirationSection() {
                   </p>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-[#E5E1DB] flex items-center text-xs font-semibold uppercase tracking-widest text-[#20201E] group-hover:text-[#A88968] transition-colors">
+                <div className="mt-6 pt-4 border-t border-[#E5E1DB] flex items-center text-xs font-semibold uppercase tracking-widest text-[#20201E] group-hover:text-[#6B6B6B] transition-colors">
                   <span>Read Story</span>
                   <ArrowRight size={13} className="ml-1.5 group-hover:translate-x-1 transition-transform" />
                 </div>

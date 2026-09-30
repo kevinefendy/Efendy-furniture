@@ -29,7 +29,7 @@ export default function OrderPage({ params }: OrderPageProps) {
           particleCount: 90,
           spread: 70,
           origin: { y: 0.25 },
-          colors: ["#A88968", "#20201E", "#E5E1DB", "#ffffff"],
+          colors: ["#6B6B6B", "#20201E", "#E5E1DB", "#ffffff"],
         });
       }, 350);
       return () => clearTimeout(t);

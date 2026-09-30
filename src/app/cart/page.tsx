@@ -27,7 +27,7 @@ export default function CartPage() {
         <div className="w-16 h-16 bg-white border border-[#E5E1DB] rounded-full flex items-center justify-center text-[#817A71] mx-auto mb-5">
           <ShoppingBag size={28} />
         </div>
-        <p className="text-xs uppercase tracking-widest text-[#A88968] font-semibold mb-2">
+        <p className="text-xs uppercase tracking-widest text-[#6B6B6B] font-semibold mb-2">
           {cleared ? "Cart cleared" : "Empty bag"}
         </p>
         <h1 className="font-serif text-4xl text-[#20201E]">Your Cart</h1>
@@ -37,7 +37,7 @@ export default function CartPage() {
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Link
             href="/shop"
-            className="px-8 py-3.5 bg-[#20201E] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#A88968] transition-colors inline-flex items-center justify-center gap-2"
+            className="px-8 py-3.5 bg-[#20201E] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#6B6B6B] transition-colors inline-flex items-center justify-center gap-2"
           >
             <ArrowLeft size={14} /> Continue Shopping
           </Link>
@@ -54,7 +54,7 @@ export default function CartPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <span className="text-xs uppercase tracking-widest text-[#A88968] font-semibold block mb-2">
+      <span className="text-xs uppercase tracking-widest text-[#6B6B6B] font-semibold block mb-2">
         Review your pieces
       </span>
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-8">
@@ -93,7 +93,7 @@ export default function CartPage() {
           aria-label="Progress to free shipping"
         >
           <div
-            className="h-full bg-[#A88968] transition-all duration-500"
+            className="h-full bg-[#6B6B6B] transition-all duration-500"
             style={{ width: `${progress * 100}%` }}
           />
         </div>
@@ -130,7 +130,7 @@ export default function CartPage() {
                       </p>
                       <Link
                         href={`/product/${item.slug}`}
-                        className="font-serif text-lg sm:text-xl text-[#20201E] hover:text-[#A88968] leading-snug line-clamp-1"
+                        className="font-serif text-lg sm:text-xl text-[#20201E] hover:text-[#6B6B6B] leading-snug line-clamp-1"
                       >
                         {item.name}
                       </Link>
@@ -178,7 +178,7 @@ export default function CartPage() {
                       </div>
                       <button
                         onClick={() => handleMoveToWishlist(item.productId)}
-                        className="text-xs text-[#817A71] hover:text-[#A88968] inline-flex items-center gap-1.5 underline underline-offset-4"
+                        className="text-xs text-[#817A71] hover:text-[#6B6B6B] inline-flex items-center gap-1.5 underline underline-offset-4"
                       >
                         <Heart size={13} /> Wishlist
                       </button>
@@ -238,7 +238,7 @@ export default function CartPage() {
             <div className="space-y-3 pt-1">
               <Link
                 href="/checkout"
-                className="w-full py-3.5 bg-[#20201E] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#A88968] transition-colors flex items-center justify-center gap-2"
+                className="w-full py-3.5 bg-[#20201E] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#6B6B6B] transition-colors flex items-center justify-center gap-2"
               >
                 Checkout <ArrowRight size={14} />
               </Link>
