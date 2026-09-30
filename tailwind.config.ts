@@ -27,6 +27,7 @@ const config: Config = {
       fontFamily: {
         serif: ["var(--font-serif)", "Cormorant Garamond", "serif"],
         sans: ["var(--font-sans)", "Inter", "sans-serif"],
+        logo: ["var(--font-logo)", "Jost", "Inter", "sans-serif"],
       },
       container: {
         center: true,
