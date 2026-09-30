@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Search, Heart, ShoppingBag, Menu, X, ChevronDown } from "lucide-react";
+import SearchModal from "@/components/search/SearchModal";
 
 interface NavbarProps {
   onOpenSearch?: () => void;
@@ -21,6 +22,7 @@ export default function Navbar({
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [shopMenuOpen, setShopMenuOpen] = useState(false);
+  const [searchModalOpen, setSearchModalOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -175,7 +177,7 @@ export default function Navbar({
           <div className="flex items-center space-x-3 sm:space-x-5">
             {/* Search */}
             <button
-              onClick={onOpenSearch}
+              onClick={onOpenSearch || (() => setSearchModalOpen(true))}
               className="p-2 text-[#20201E] hover:text-[#A88968] transition relative"
               aria-label="Search furniture catalog"
             >
@@ -284,6 +286,12 @@ export default function Navbar({
           </div>
         </div>
       )}
+
+      {/* Search Modal */}
+      <SearchModal
+        isOpen={searchModalOpen}
+        onClose={() => setSearchModalOpen(false)}
+      />
     </header>
   );
 }
