@@ -1,12 +1,14 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import type { CartItem, Product } from "@/types";
+import type { CartItem, Customer, Product, ShippingTier, PaymentMethodType } from "@/types";
 
 export const CART_KEY = "efendy_cart";
 export const WISHLIST_KEY = "efendy_wishlist";
+export const CHECKOUT_DRAFT_KEY = "efendy_checkout_draft";
 export const CART_EVENT = "efendy:cart-updated";
 export const WISHLIST_EVENT = "efendy:wishlist-updated";
+export const CHECKOUT_EVENT = "efendy:checkout-updated";
 export const CART_OPEN_EVENT = "efendy:open-cart";
 
 function readJSON<T>(key: string, fallback: T): T {
@@ -188,4 +190,63 @@ export function useWishlistIds(): {
     setIds(toggleWishlistId(productId));
   }, []);
   return { ids, toggle };
+}
+
+// ---------- Checkout draft ----------
+
+export interface CheckoutDraft {
+  customer: Customer;
+  shippingId: ShippingTier;
+  paymentId: PaymentMethodType | null;
+}
+
+export const EMPTY_CUSTOMER: Customer = {
+  fullName: "",
+  phone: "",
+  address: "",
+  city: "",
+  postalCode: "",
+  notes: "",
+};
+
+export function getCheckoutDraft(): CheckoutDraft {
+  return readJSON<CheckoutDraft>(CHECKOUT_DRAFT_KEY, {
+    customer: EMPTY_CUSTOMER,
+    shippingId: "regular",
+    paymentId: null,
+  });
+}
+
+export function saveCheckoutDraft(draft: CheckoutDraft): CheckoutDraft {
+  writeJSON(CHECKOUT_DRAFT_KEY, draft, CHECKOUT_EVENT);
+  return draft;
+}
+
+export function useCheckoutDraft(): {
+  draft: CheckoutDraft;
+  save: (patch: Partial<CheckoutDraft>) => void;
+} {
+  const [draft, setDraft] = useState<CheckoutDraft>({
+    customer: EMPTY_CUSTOMER,
+    shippingId: "regular",
+    paymentId: null,
+  });
+  useEffect(() => {
+    const sync = () => setDraft(getCheckoutDraft());
+    sync();
+    window.addEventListener(CHECKOUT_EVENT, sync);
+    window.addEventListener("storage", sync);
+    return () => {
+      window.removeEventListener(CHECKOUT_EVENT, sync);
+      window.removeEventListener("storage", sync);
+    };
+  }, []);
+  const save = useCallback((patch: Partial<CheckoutDraft>) => {
+    setDraft((prev) => {
+      const next = { ...prev, ...patch };
+      saveCheckoutDraft(next);
+      return next;
+    });
+  }, []);
+  return { draft, save };
 }
