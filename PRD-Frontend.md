@@ -1,59 +1,74 @@
-# PRD — Modern Furniture Website
+# PRD — Modern Furniture E-Commerce
 
-## 1. Overview
+## 1. Project Overview
 
-### Nama Project
+### Project Name
 
 **[Efendy Furniture]**
 
 ### Project Type
 
-Modern Furniture E-Commerce — Frontend
+Modern Furniture E-Commerce Website
 
-### Referensi
+### Build Challenge
 
-* Article — https://www.article.com/
-* West Elm — https://www.westelm.com/
+**Build Challenge #02 — E-Commerce Website**
 
-### Konsep
+### Design References
 
-Website furniture modern yang menggabungkan pengalaman **e-commerce** dengan **interior lifestyle experience**.
+* Article
+* West Elm
 
-Website tidak hanya menampilkan produk furniture, tetapi membantu pengguna membayangkan bagaimana furniture tersebut terlihat ketika digunakan di dalam sebuah ruangan.
+### Core Concept
 
-### Design Direction
+Website e-commerce furniture modern yang menggabungkan:
 
-> **Modern furniture for better living.**
+* Modern furniture
+* Interior inspiration
+* Room-based shopping
+* Collection
+* E-commerce experience
 
-Karakter visual:
+Website harus terasa seperti **brand furniture sungguhan**, bukan sekadar katalog produk.
 
-* Modern
-* Minimal
-* Warm
-* Premium
-* Editorial
-* Clean
-* Image-focused
+Customer dapat mengikuti seluruh proses:
+
+```text
+DISCOVER
+   ↓
+PRODUCT
+   ↓
+CART
+   ↓
+CHECKOUT
+   ↓
+SHIPPING
+   ↓
+PAYMENT
+   ↓
+ORDER CONFIRMATION
+   ↓
+DELIVERY TRACKING
+```
 
 ---
 
-# 2. Goals
+# 2. Product Vision
 
-## Primary Goals
+> **Modern furniture designed for the way you live.**
 
-1. Menampilkan furniture dengan visual yang menarik.
-2. Membantu user menemukan furniture berdasarkan kategori dan ruangan.
-3. Memberikan pengalaman browsing yang sederhana.
-4. Membuat produk terlihat premium tanpa UI yang berlebihan.
-5. Membantu user membayangkan furniture di dalam ruangan.
-6. Membuat proses dari browsing sampai cart terasa sederhana.
+Website membantu customer:
 
-## Secondary Goals
-
-* Membangun brand identity yang kuat.
-* Menampilkan collection sebagai satu kesatuan interior.
-* Menyediakan inspiration content.
-* Menyiapkan fondasi untuk fitur Room Planner di masa depan.
+1. Menemukan furniture.
+2. Memahami detail produk.
+3. Memilih variant dan quantity.
+4. Memasukkan produk ke cart.
+5. Mengisi informasi checkout.
+6. Memilih pengiriman.
+7. Memilih metode pembayaran.
+8. Melakukan simulasi pembayaran.
+9. Mendapatkan konfirmasi pesanan.
+10. Melihat status pengiriman.
 
 ---
 
@@ -63,224 +78,128 @@ Karakter visual:
 
 ### Young Professional
 
-Usia:
-**20–35 tahun**
+Usia 20–35 tahun.
 
 Karakter:
 
-* Tinggal di apartment / rumah
-* Suka interior modern
-* Aktif menggunakan e-commerce
-* Peduli terhadap desain
-* Mencari furniture yang aesthetic tetapi tetap fungsional
+* Tinggal di apartment atau rumah.
+* Suka desain interior modern.
+* Terbiasa belanja online.
+* Mencari furniture aesthetic dan fungsional.
+* Membutuhkan informasi ukuran dan material sebelum membeli.
 
 ### Young Family
 
-Usia:
-**25–40 tahun**
+Usia 25–40 tahun.
 
 Kebutuhan:
 
-* Furniture ruang keluarga
-* Bedroom furniture
-* Dining furniture
-* Storage
-* Furniture yang cocok satu sama lain
+* Sofa.
+* Dining table.
+* Bed.
+* Cabinet.
+* Storage.
+* Furniture untuk ruang keluarga.
 
 ---
 
-# 4. Core User Problems
+# 4. Design Direction
 
-User biasanya mengalami beberapa masalah:
+## Visual Style
 
-### Problem 1 — Sulit membayangkan furniture
+**Article + West Elm inspired**
 
-User melihat sofa secara individual tetapi tidak tahu bagaimana tampilannya ketika berada di ruangannya.
+Karakter:
 
-### Problem 2 — Terlalu banyak pilihan
+* Modern
+* Minimal
+* Warm
+* Premium
+* Editorial
+* Clean
+* Image-focused
 
-Marketplace furniture memiliki terlalu banyak produk sehingga user sulit menentukan pilihan.
+Website tidak menggunakan tampilan marketplace yang terlalu padat.
 
-### Problem 3 — Furniture tidak matching
-
-User membeli sofa, meja, dan cabinet secara terpisah sehingga hasil akhirnya tidak selalu terlihat harmonis.
-
-### Problem 4 — Website furniture terlalu seperti marketplace
-
-Banyak website hanya fokus pada:
-
-> Product → Price → Buy
-
-Website ini akan lebih fokus pada:
-
-> Inspiration → Room → Collection → Product → Purchase
-
----
-
-# 5. Design Principles
-
-## 5.1 Image First
-
-Furniture adalah produk visual.
-
-Prioritas:
-
-**Image > Typography > Product Information > UI decoration**
-
----
-
-## 5.2 Less UI, More Product
-
-Hindari:
-
-* Gradient berlebihan
-* Shadow berat
-* Banyak badge
-* Warna mencolok
-* Button terlalu besar
-* Card terlalu ramai
-
----
-
-## 5.3 Editorial Experience
-
-Beberapa section website harus terasa seperti majalah interior.
-
-Contoh:
-
-> "How to Create a Calm Living Room"
-
-bukan hanya:
-
-> "10% OFF SOFA"
-
----
-
-## 5.4 Warm Minimalism
-
-Website harus terasa:
-
-**premium tetapi tidak dingin.**
-
-Gunakan:
-
-* Warm white
-* Natural colors
-* Large photography
-* Serif heading
-* Sans-serif body text
-* Large whitespace
-
----
-
-# 6. Color System
-
-## Primary
+### Design Principle
 
 ```text
-Warm White
+Product Photography
+        ↓
+Clean Typography
+        ↓
+Large Whitespace
+        ↓
+Simple Interaction
+        ↓
+Clear Purchase Flow
+```
+
+---
+
+# 5. Color System
+
+### Primary Background
+
+```text
 #F7F5F0
 ```
 
-## Background
+Warm White.
+
+### Main Text
 
 ```text
-White
-#FFFFFF
-```
-
-## Text
-
-```text
-Charcoal
 #20201E
 ```
 
-## Secondary Text
+### Secondary Text
 
 ```text
-Warm Gray
 #817A71
 ```
 
-## Accent
+### Accent
 
 ```text
-Natural Brown
 #A88968
 ```
 
-## Border
+Natural Brown.
+
+### Border
 
 ```text
 #E5E1DB
 ```
 
+### White
+
+```text
+#FFFFFF
+```
+
 ---
 
-# 7. Typography
+# 6. Typography
 
 ## Heading
-
-Recommended:
 
 * Cormorant Garamond
 * DM Serif Display
 
-Usage:
-
-* Hero heading
-* Collection title
-* Editorial section
-* Large marketing text
-
 ## Body
-
-Recommended:
 
 * Inter
 * Manrope
 
-Usage:
+Heading digunakan untuk memberikan nuansa editorial.
 
-* Navigation
-* Product name
-* Description
-* Button
-* Filter
-* Form
+Body menggunakan sans-serif agar tetap mudah dibaca.
 
 ---
 
-# 8. Navigation
-
-## Desktop Navbar
-
-```text
-LOGO
-
-Shop
-Collections
-Rooms
-Inspiration
-
-                         Search
-                         Wishlist
-                         Account
-                         Cart
-```
-
-Navbar behavior:
-
-* Sticky
-* Transparent di hero
-* berubah menjadi solid ketika scroll
-* Smooth transition
-* Minimal shadow / border
-
----
-
-# 9. Sitemap
+# 7. Sitemap
 
 ```text
 /
@@ -291,14 +210,9 @@ Navbar behavior:
 │   ├── /tables
 │   ├── /beds
 │   ├── /storage
-│   ├── /lighting
-│   └── /decor
+│   └── /lighting
 │
 ├── /collections
-│   ├── /new-arrivals
-│   ├── /best-sellers
-│   ├── /nara
-│   └── /minimal
 │
 ├── /rooms
 │   ├── /living-room
@@ -307,8 +221,6 @@ Navbar behavior:
 │   └── /workspace
 │
 ├── /inspiration
-│   ├── /articles
-│   └── /guides
 │
 ├── /product/[slug]
 │
@@ -316,18 +228,52 @@ Navbar behavior:
 │
 ├── /cart
 │
+├── /checkout
+│
+├── /payment
+│
+├── /order/[orderId]
+│
+├── /tracking/[orderId]
+│
 └── /search
 ```
 
 ---
 
-# 10. Homepage
+# 8. Main Navigation
+
+Desktop:
+
+```text
+LOGO
+
+Shop
+Collections
+Rooms
+Inspiration
+
+                    Search
+                    Wishlist
+                    Account
+                    Cart
+```
+
+Navbar:
+
+* Sticky.
+* Responsive.
+* Desktop mega menu.
+* Mobile hamburger.
+* Cart quantity indicator.
+
+---
+
+# 9. Homepage
 
 ## Section 1 — Hero
 
 Full-width interior photography.
-
-Content:
 
 ```text
 NEW COLLECTION
@@ -340,20 +286,11 @@ spaces that feel like home.
 [ SHOP COLLECTION ]
 ```
 
-Requirements:
-
-* Full viewport / large hero
-* High-quality interior image
-* Text overlay
-* CTA
-* Responsive image
-* Mobile-specific image support
+CTA menuju collection.
 
 ---
 
-# 11. Shop By Room
-
-Section:
+## Section 2 — Shop By Room
 
 ```text
 SHOP BY ROOM
@@ -364,30 +301,11 @@ Dining Room
 Workspace
 ```
 
-Layout desktop:
-
-```text
-┌──────────────┐ ┌──────────────┐
-│              │ │              │
-│ Living Room  │ │ Bedroom      │
-│              │ │              │
-└──────────────┘ └──────────────┘
-
-┌──────────────┐ ┌──────────────┐
-│ Dining       │ │ Workspace    │
-│              │ │              │
-└──────────────┘ └──────────────┘
-```
-
-Interaction:
-
-* Hover image zoom
-* Overlay title
-* Click → room page
+User dapat memilih ruangan untuk menemukan furniture yang relevan.
 
 ---
 
-# 12. New Arrivals
+## Section 3 — New Arrivals
 
 Product grid:
 
@@ -397,32 +315,20 @@ NEW ARRIVALS
 [ Product ] [ Product ] [ Product ] [ Product ]
 ```
 
-Product card:
+Product card berisi:
 
-```text
-┌────────────────────┐
-│                    │
-│       IMAGE        │
-│                    │
-│              ♡     │
-└────────────────────┘
-
-Sora Sofa
-Sofa
-Rp 8.900.000
-```
-
-Hover:
-
-* Image swap
-* Wishlist icon
-* Quick View
+* Image
+* Product name
+* Category
+* Price
+* Wishlist
+* Quick view
 
 ---
 
-# 13. Collection Feature
+## Section 4 — Collection
 
-Example:
+Contoh:
 
 ```text
 THE NARA COLLECTION
@@ -431,58 +337,30 @@ Warm wood.
 Soft curves.
 Designed for slow living.
 
-[ LARGE ROOM IMAGE ]
-
 [ EXPLORE COLLECTION ]
 ```
 
-Collection page berisi:
-
-* Hero
-* Collection story
-* Room photography
-* Product grid
-* Related products
-
 ---
 
-# 14. Shop The Room
+## Section 5 — Shop The Room
 
-Interactive room photography.
+Customer dapat melihat furniture melalui foto sebuah ruangan.
 
 ```text
 SHOP THIS ROOM
 
-        ┌─────────────────────┐
-        │                     │
-        │      ROOM IMAGE     │
-        │                     │
-        │   ● Sofa            │
-        │             ● Lamp  │
-        │                     │
-        └─────────────────────┘
+[ LARGE ROOM IMAGE ]
 
-Products in this room
-
-Sora Sofa
-Luna Table
-Milo Lamp
-
-[ SHOP THE ROOM ]
+● Sofa
+● Coffee Table
+● Lamp
 ```
 
-Interaction:
-
-* Hotspot
-* Hover hotspot
-* Product preview
-* Click → Product detail
+Hotspot dapat diklik untuk membuka produk.
 
 ---
 
-# 15. Inspiration
-
-Editorial section.
+## Section 6 — Inspiration
 
 ```text
 INSPIRATION
@@ -494,44 +372,22 @@ How to Create a Calm Living Room
 Choosing the Right Sofa Size
 ```
 
-Card:
+---
+
+## Section 7 — CTA
 
 ```text
-IMAGE
+FIND SOMETHING
+FOR YOUR SPACE
 
-CATEGORY
+Explore our furniture collection.
 
-TITLE
-
-Read Article →
+[ SHOP ALL ]
 ```
 
 ---
 
-# 16. Design Service CTA
-
-```text
-MAKE YOUR SPACE YOUR OWN
-
-Not sure where to start?
-
-Tell us about your space and
-discover furniture that fits your style.
-
-[ GET DESIGN HELP ]
-```
-
-Frontend MVP:
-
-* Button
-* Modal
-* Style selection
-* Room selection
-* Basic recommendation UI
-
----
-
-# 17. Shop Page
+# 10. Product Catalog
 
 URL:
 
@@ -542,16 +398,40 @@ URL:
 Layout:
 
 ```text
-SHOP
+SHOP ALL FURNITURE
+
+Search products...
 
 Filter                         Sort By
 
-────────────────────────────────────
+────────────────────────────────
 
-[Product] [Product] [Product] [Product]
+[ Product ] [ Product ] [ Product ] [ Product ]
 
-[Product] [Product] [Product] [Product]
+[ Product ] [ Product ] [ Product ] [ Product ]
 ```
+
+## Search
+
+Search berdasarkan:
+
+* Product name
+* Category
+* Collection
+
+Contoh:
+
+```text
+Search: sofa
+
+24 products found
+```
+
+Search harus benar-benar berfungsi.
+
+---
+
+# 11. Product Filter
 
 Filter:
 
@@ -588,68 +468,114 @@ Filter:
 * Mid-Century
 * Minimal
 
+Filter harus mengubah product list secara nyata.
+
 ---
 
-# 18. Product Detail
+# 12. Product Card
+
+```text
+┌──────────────────────┐
+│                      │
+│       PRODUCT        │
+│        IMAGE         │
+│                   ♡  │
+└──────────────────────┘
+
+Sora Sofa
+Sofa
+
+Rp 8.900.000
+```
+
+Interaction:
+
+* Click → Product Detail.
+* Wishlist.
+* Hover image.
+* Quick View.
+
+---
+
+# 13. Product Detail
 
 URL:
 
 ```text
-/product/[slug]
+/product/sora-sofa
 ```
 
-Layout:
+## Product Information
+
+Wajib:
+
+* Product name
+* Product image
+* Price
+* Description
+* Stock
+* Variant
+* Quantity
+* Add to Cart
+
+Contoh:
 
 ```text
-┌──────────────────┐ ┌─────────────────────────┐
-│                  │ │ SORA SOFA               │
-│                  │ │                         │
-│ PRODUCT IMAGE    │ │ Rp 8.900.000            │
-│                  │ │                         │
-│                  │ │ ★★★★★                  │
-│                  │ │                         │
-│                  │ │ Color                   │
-│                  │ │ ○ Beige ○ Brown ○ Gray  │
-│                  │ │                         │
-│                  │ │ Quantity                │
-│                  │ │ [-] 1 [+]               │
-│                  │ │                         │
-│                  │ │ [ ADD TO CART ]          │
-└──────────────────┘ └─────────────────────────┘
+SORA SOFA
+
+Rp 8.900.000
+
+★★★★★ 4.9
+
+Soft linen sofa designed
+for everyday living.
+
+Color
+
+○ Beige
+○ Brown
+○ Gray
+
+Stock:
+12 available
+
+Quantity
+
+[-] 1 [+]
+
+[ ADD TO CART ]
 ```
-
-Below:
-
-### Description
-
-### Materials
-
-### Dimensions
-
-### Care
-
-### Delivery
-
-### Reviews
-
-### See It In A Room
-
-### You May Also Like
 
 ---
 
-# 19. Image Gallery
+# 14. Product Variant
 
-Product gallery harus mendukung:
+Furniture dapat memiliki:
 
-* Main image
-* Thumbnail
-* Multiple angles
-* Room photography
-* Zoom
-* Fullscreen
+### Color
 
-Contoh:
+```text
+Beige
+Brown
+Gray
+Black
+```
+
+### Size
+
+```text
+180 cm
+220 cm
+260 cm
+```
+
+Variant yang dipilih harus tersimpan di cart.
+
+---
+
+# 15. Product Gallery
+
+Product memiliki beberapa foto:
 
 ```text
 [ Main Image ]
@@ -657,9 +583,64 @@ Contoh:
 [ 1 ] [ 2 ] [ 3 ] [ 4 ] [ Room ]
 ```
 
+Fitur:
+
+* Thumbnail.
+* Image switching.
+* Zoom.
+* Fullscreen.
+* Lifestyle image.
+
 ---
 
-# 20. Cart
+# 16. Stock / Availability
+
+Product detail harus menunjukkan availability.
+
+Contoh:
+
+```text
+In Stock
+12 available
+```
+
+Jika stock habis:
+
+```text
+Out of Stock
+
+[ NOTIFY ME ]
+```
+
+Untuk frontend prototype, stock dapat menggunakan mock data.
+
+---
+
+# 17. Add to Cart
+
+Ketika user memilih:
+
+```text
+Variant
++
+Quantity
++
+Add to Cart
+```
+
+Product masuk ke cart.
+
+Tampilkan feedback:
+
+```text
+✓ Sora Sofa added to cart
+```
+
+Cart counter juga bertambah.
+
+---
+
+# 18. Shopping Cart
 
 URL:
 
@@ -672,194 +653,635 @@ Layout:
 ```text
 YOUR CART
 
-──────────────────────────────
+──────────────────────────────────
 
 Sora Sofa
-Qty: [-] 1 [+]
+
+[ IMAGE ]
+
+Color: Beige
+Size: 220 cm
+
+[-] 1 [+]
+
 Rp 8.900.000
 
-Luna Table
-Qty: [-] 1 [+]
-Rp 3.200.000
+Remove
+♡ Wishlist
 
-──────────────────────────────
+──────────────────────────────────
+
+Luna Table
+
+...
+
+──────────────────────────────────
 
 Subtotal
 Rp 12.100.000
 
+[ CONTINUE SHOPPING ]
+
 [ CHECKOUT ]
 ```
 
-Frontend state:
+---
 
-* Add product
-* Remove product
-* Increase quantity
-* Decrease quantity
-* Calculate subtotal
-* Persist cart menggunakan localStorage
+# 19. Cart Requirements
+
+Customer dapat:
+
+* Add product.
+* Increase quantity.
+* Decrease quantity.
+* Remove product.
+* Change variant.
+* View subtotal.
+* View total.
+* Continue shopping.
+* Checkout.
+
+Cart harus tetap konsisten selama user menggunakan website.
+
+### Frontend Persistence
+
+Gunakan:
+
+```text
+localStorage
+```
+
+sehingga refresh halaman tidak menghapus cart.
 
 ---
 
-# 21. Wishlist
+# 20. Checkout
 
-User dapat:
-
-* Add wishlist
-* Remove wishlist
-* View wishlist
-
-Product card menggunakan icon:
+URL:
 
 ```text
-♡
+/checkout
 ```
 
-Ketika aktif:
+Checkout dibagi menjadi beberapa section.
 
 ```text
-♥
-```
+CHECKOUT
 
-Untuk frontend prototype, wishlist dapat disimpan menggunakan localStorage.
-
----
-
-# 22. Search
-
-Search overlay:
-
-```text
-SEARCH
-
-[ Search furniture... ]
-
-Popular searches
-
-Sofa
-Dining Table
-Bed
-Chair
-Lighting
-```
-
-Search result:
-
-```text
-SEARCH RESULTS FOR "SOFA"
-
-24 Products
-
-[Product] [Product] [Product] [Product]
+1. Contact
+2. Shipping
+3. Payment
+4. Order Summary
 ```
 
 ---
 
-# 23. Quick View
+# 21. Customer Information
 
-Ketika user memilih Quick View:
+Form wajib:
+
+### Full Name
 
 ```text
-┌──────────────────────────────────────┐
-│                              ×       │
-│                                      │
-│ IMAGE          SORA SOFA             │
-│                Rp 8.900.000          │
-│                                      │
-│                Beige                 │
-│                ○ ○ ○                 │
-│                                      │
-│                [ ADD TO CART ]       │
-│                                      │
-│                View Full Details →   │
-└──────────────────────────────────────┘
+Your name
+```
+
+### Phone Number
+
+```text
+08xxxxxxxxxx
+```
+
+### Address
+
+```text
+Street address
+```
+
+### City / Region
+
+```text
+Jakarta
+```
+
+### Order Note
+
+```text
+Optional note
+```
+
+Validasi:
+
+* Required field.
+* Nomor HP valid.
+* Tidak boleh kosong.
+* Error message jelas.
+
+---
+
+# 22. Shipping
+
+Customer memilih metode pengiriman.
+
+## Regular
+
+```text
+Regular Delivery
+
+Estimated:
+3–5 days
+
+Rp 25.000
+```
+
+## Express
+
+```text
+Express Delivery
+
+Estimated:
+1–2 days
+
+Rp 45.000
+```
+
+## Same Day
+
+```text
+Same Day
+
+Estimated:
+Today
+
+Rp 65.000
+```
+
+Pemilihan shipping harus mengubah:
+
+```text
+Shipping Cost
++
+Estimated Delivery
++
+Total Payment
 ```
 
 ---
 
-# 24. Responsive Design
+# 23. Order Summary
 
-## Desktop
+Checkout harus menampilkan:
 
-Breakpoint:
+```text
+ORDER SUMMARY
+
+Sora Sofa
+Rp 8.900.000
+
+Luna Table
+Rp 3.200.000
+
+────────────────
+
+Subtotal
+Rp 12.100.000
+
+Shipping
+Rp 45.000
+
+────────────────
+
+TOTAL
+Rp 12.145.000
+```
+
+Customer dapat memeriksa semua informasi sebelum pembayaran.
+
+---
+
+# 24. Payment
+
+URL:
+
+```text
+/payment
+```
+
+Metode pembayaran:
+
+### Bank Transfer
+
+```text
+○ BCA
+○ BNI
+○ BRI
+○ Mandiri
+```
+
+### Virtual Account
+
+```text
+○ BCA Virtual Account
+○ BNI Virtual Account
+○ Mandiri Virtual Account
+```
+
+### E-Wallet
+
+```text
+○ GoPay
+○ OVO
+○ DANA
+```
+
+### QRIS
+
+```text
+○ QRIS
+```
+
+### COD
+
+Jika tersedia:
+
+```text
+○ Cash on Delivery
+```
+
+---
+
+# 25. Payment Simulation
+
+Tidak menggunakan payment gateway sungguhan.
+
+Flow:
+
+```text
+Select Payment
+       ↓
+Payment Summary
+       ↓
+[ SIMULATE PAYMENT ]
+       ↓
+Payment Success
+```
+
+Contoh:
+
+```text
+PAYMENT
+
+Total
+
+Rp 12.145.000
+
+QRIS
+
+[ SIMULATE PAYMENT ]
+```
+
+Setelah tombol ditekan:
+
+```text
+✓ PAYMENT SUCCESSFUL
+```
+
+---
+
+# 26. Order Confirmation
+
+URL:
+
+```text
+/order/[orderId]
+```
+
+Halaman:
+
+```text
+✓ ORDER CONFIRMED
+
+Thank you for your order.
+
+Order ID
+#ORD-20260930-001
+
+──────────────────────
+
+Payment
+QRIS
+
+Shipping
+Express
+
+Total
+Rp 12.145.000
+
+──────────────────────
+
+Shipping Address
+
+Kevin
+Jakarta, Indonesia
+
+[ TRACK ORDER ]
+```
+
+---
+
+# 27. Order Status
+
+Status pesanan:
+
+```text
+Pesanan Dibuat
+      ↓
+Pembayaran Berhasil
+      ↓
+Pesanan Diproses
+      ↓
+Diserahkan ke Kurir
+      ↓
+Dalam Pengiriman
+      ↓
+Pesanan Sampai
+```
+
+---
+
+# 28. Delivery Tracking
+
+URL:
+
+```text
+/tracking/[orderId]
+```
+
+UI:
+
+```text
+TRACK YOUR ORDER
+
+Order #ORD-20260930-001
+
+● Pesanan Dibuat
+│
+● Pembayaran Berhasil
+│
+● Pesanan Diproses
+│
+● Diserahkan ke Kurir
+│
+○ Dalam Pengiriman
+│
+○ Pesanan Sampai
+```
+
+Tambahkan:
+
+```text
+Courier
+Express Delivery
+
+Estimated Arrival
+2 October 2026
+```
+
+Status tracking merupakan simulasi frontend.
+
+---
+
+# 29. Order Progress
+
+Progress dapat dibuat menggunakan timeline.
+
+Status aktif:
+
+```text
+Completed
+Completed
+Completed
+Current
+Upcoming
+Upcoming
+```
+
+Customer dapat melihat posisi pesanan secara jelas.
+
+---
+
+# 30. Wishlist
+
+Customer dapat menyimpan furniture:
+
+```text
+♡ Add to Wishlist
+```
+
+Wishlist page:
+
+```text
+MY WISHLIST
+
+[ Product ] [ Product ] [ Product ] [ Product ]
+```
+
+Gunakan localStorage untuk prototype.
+
+---
+
+# 31. Quick View
+
+Customer dapat melihat informasi singkat tanpa meninggalkan halaman catalog.
+
+```text
+SORA SOFA
+
+Rp 8.900.000
+
+Beige
+
+[ ADD TO CART ]
+
+View Full Details →
+```
+
+---
+
+# 32. Cart Drawer
+
+Ketika product ditambahkan:
+
+```text
+┌─────────────────────────┐
+│ YOUR CART            ×  │
+├─────────────────────────┤
+│ Sora Sofa               │
+│ Rp 8.900.000            │
+│ [-] 1 [+]               │
+├─────────────────────────┤
+│ Luna Table              │
+│ Rp 3.200.000            │
+├─────────────────────────┤
+│ Subtotal                │
+│ Rp 12.100.000           │
+│                         │
+│ [ VIEW CART ]           │
+│ [ CHECKOUT ]            │
+└─────────────────────────┘
+```
+
+---
+
+# 33. Mobile Experience
+
+Mobile navigation:
+
+```text
+☰     LOGO      🛒
+```
+
+Product grid:
+
+```text
+[Product] [Product]
+
+[Product] [Product]
+```
+
+Checkout harus menggunakan single-column layout.
+
+Shipping dan payment menggunakan selectable cards.
+
+---
+
+# 34. Responsive Breakpoints
+
+### Desktop
 
 ```text
 ≥ 1280px
 ```
 
-Prioritas:
-
-* Large photography
-* 4-column product grid
-* Mega menu
-* Spacious layout
-
-## Tablet
+### Tablet
 
 ```text
 768px – 1279px
 ```
 
-* 2–3 column grid
-* Simplified navbar
-* Smaller hero
-
-## Mobile
+### Mobile
 
 ```text
 < 768px
 ```
 
-* Hamburger menu
-* 2-column product grid
-* Horizontal category scroll
-* Full-width CTA
-* Smaller typography
-* Touch-friendly controls
+Semua halaman wajib responsive:
+
+* Homepage
+* Catalog
+* Product
+* Cart
+* Checkout
+* Payment
+* Confirmation
+* Tracking
 
 ---
 
-# 25. Animation
+# 35. Frontend State
 
-Animation harus subtle.
+Frontend harus mengelola:
 
-Gunakan:
+```text
+Cart
+Wishlist
+Search
+Filter
+Sort
+Product Variant
+Quantity
+Shipping Method
+Payment Method
+Customer Information
+Order
+Order Status
+```
 
-### Page
+Untuk challenge:
 
-* Fade in
-* Slight slide
+```text
+React State
++
+localStorage
+```
 
-### Product
-
-* Image zoom on hover
-* Smooth image transition
-
-### Button
-
-* Background transition
-* Slight movement
-
-### Navigation
-
-* Smooth dropdown
-
-### Cart
-
-* Slide-in cart drawer
-
-Hindari:
-
-* Excessive bounce
-* Parallax berlebihan
-* Loading animation yang lama
-* Animasi yang mengganggu browsing
+sudah cukup.
 
 ---
 
-# 26. Component Architecture
+# 36. Mock Data
 
-Frontend components:
+Karena frontend-only, gunakan mock data.
+
+Contoh:
+
+```ts
+type Product = {
+  id: string
+  name: string
+  slug: string
+  category: string
+  price: number
+  stock: number
+  description: string
+  images: string[]
+  colors: string[]
+  sizes?: string[]
+  material: string
+}
+```
+
+Order:
+
+```ts
+type Order = {
+  id: string
+  items: CartItem[]
+  customer: Customer
+  shipping: ShippingMethod
+  payment: PaymentMethod
+  subtotal: number
+  shippingCost: number
+  total: number
+  status: OrderStatus
+}
+```
+
+---
+
+# 37. Order Status State
+
+```ts
+type OrderStatus =
+  | "created"
+  | "paid"
+  | "processing"
+  | "shipped"
+  | "in_transit"
+  | "delivered"
+```
+
+Frontend dapat menggunakan tombol simulasi:
+
+```text
+[ NEXT STATUS ]
+```
+
+atau otomatis mengubah status untuk demo.
+
+---
+
+# 38. Main Components
 
 ```text
 components/
@@ -875,16 +1297,12 @@ components/
 │   ├── ProductGrid
 │   ├── ProductGallery
 │   ├── ProductInfo
+│   ├── ProductVariant
 │   ├── ProductFilter
 │   └── QuickView
 │
-├── collection/
-│   ├── CollectionCard
-│   └── CollectionHero
-│
 ├── room/
 │   ├── RoomCard
-│   ├── RoomHero
 │   └── RoomHotspot
 │
 ├── cart/
@@ -892,358 +1310,302 @@ components/
 │   ├── CartDrawer
 │   └── CartSummary
 │
-├── search/
-│   └── SearchOverlay
+├── checkout/
+│   ├── CustomerForm
+│   ├── ShippingSelector
+│   ├── PaymentSelector
+│   └── OrderSummary
+│
+├── order/
+│   ├── OrderConfirmation
+│   ├── OrderTimeline
+│   └── OrderTracking
 │
 └── ui/
     ├── Button
-    ├── Modal
-    ├── Badge
     ├── Input
+    ├── Modal
     ├── Select
+    ├── Badge
+    ├── Toast
     └── Accordion
 ```
 
 ---
 
-# 27. Recommended Tech Stack
+# 39. Main User Flow
 
-## Framework
-
-**Next.js**
-
-## Language
-
-**TypeScript**
-
-## Styling
-
-**Tailwind CSS**
-
-## UI
-
-**shadcn/ui**
-
-Gunakan shadcn hanya untuk component yang memang membutuhkan interaction.
-
-Jangan membuat seluruh website terlihat seperti dashboard SaaS.
-
----
-
-## Icons
-
-**Lucide React**
-
----
-
-## Animation
-
-**Framer Motion**
-
-Gunakan seperlunya.
-
----
-
-## State
-
-Untuk MVP:
+## Complete Challenge Flow
 
 ```text
-React State
-+
+                    HOMEPAGE
+                       │
+                       ↓
+                 PRODUCT CATALOG
+                       │
+              ┌────────┴────────┐
+              ↓                 ↓
+           SEARCH             FILTER
+              └────────┬────────┘
+                       ↓
+                PRODUCT DETAIL
+                       │
+                Select Variant
+                       │
+                   Quantity
+                       │
+                       ↓
+                  ADD TO CART
+                       │
+                       ↓
+                     CART
+                       │
+                       ↓
+                   CHECKOUT
+                       │
+              Customer Information
+                       │
+                       ↓
+                   SHIPPING
+                       │
+                       ↓
+                    PAYMENT
+                       │
+                       ↓
+              SIMULATE PAYMENT
+                       │
+                       ↓
+                PAYMENT SUCCESS
+                       │
+                       ↓
+              ORDER CONFIRMATION
+                       │
+                       ↓
+               DELIVERY TRACKING
+                       │
+                       ↓
+                 ORDER ARRIVED
+```
+
+---
+
+# 40. Required Features Checklist
+
+## Discover Product
+
+* [x] Homepage
+* [x] Product Catalog
+* [x] Search
+* [x] Category
+* [x] Filter
+* [x] Sort
+* [x] Product Card
+
+## Product Detail
+
+* [x] Product Name
+* [x] Product Image
+* [x] Price
+* [x] Description
+* [x] Stock
+* [x] Variant
+* [x] Quantity
+* [x] Add to Cart
+
+## Cart
+
+* [x] Add Product
+* [x] Change Quantity
+* [x] Remove Product
+* [x] Subtotal
+* [x] Total
+* [x] Continue Shopping
+* [x] Checkout
+
+## Checkout
+
+* [x] Name
+* [x] Phone
+* [x] Address
+* [x] City / Region
+* [x] Order Note
+* [x] Product Summary
+* [x] Shipping Cost
+* [x] Total
+
+## Delivery
+
+* [x] Regular
+* [x] Express
+* [x] Same Day
+* [x] Shipping Price
+* [x] Estimated Delivery
+* [x] Order Tracking
+
+## Payment
+
+* [x] Bank Transfer
+* [x] Virtual Account
+* [x] E-Wallet
+* [x] QRIS
+* [x] Payment Simulation
+* [x] Payment Success
+
+## Order
+
+* [x] Order ID
+* [x] Product
+* [x] Total
+* [x] Address
+* [x] Payment Method
+* [x] Shipping Method
+* [x] Order Status
+* [x] Delivery Tracking
+
+---
+
+# 41. Tech Stack
+
+```text
+Framework
+Next.js
+
+Language
+TypeScript
+
+Styling
+Tailwind CSS
+
+UI Components
+shadcn/ui
+
+Icons
+Lucide React
+
+Animation
+Framer Motion
+
+State
+React State / Context
+
+Persistence
 localStorage
 ```
 
-State yang diperlukan:
-
-* Cart
-* Wishlist
-* Search
-* Filter
-* Quick View
-
 ---
 
-# 28. Frontend Data Structure
+# 42. Performance
 
-Karena frontend-only, gunakan mock data.
+Requirements:
 
-Contoh:
-
-```ts
-type Product = {
-  id: string
-  name: string
-  slug: string
-  category: string
-  price: number
-  image: string
-  images: string[]
-  colors: string[]
-  material: string
-  dimensions: string
-  style: string
-}
-```
-
-Collection:
-
-```ts
-type Collection = {
-  id: string
-  name: string
-  description: string
-  image: string
-  products: string[]
-}
-```
-
-Room:
-
-```ts
-type Room = {
-  id: string
-  name: string
-  image: string
-  products: string[]
-}
-```
-
----
-
-# 29. Image Requirements
-
-Furniture website sangat bergantung pada image quality.
-
-Setiap product idealnya memiliki:
-
-1. Product front
-2. Product side
-3. Detail material
-4. Lifestyle image
-5. Room image
-
-Image harus:
-
-* High resolution
-* Consistent aspect ratio
-* Natural lighting
-* Minimal background
-* Tidak terlalu banyak watermark
-
----
-
-# 30. Performance
-
-Target:
-
-* Fast initial load
-* Optimized images
+* Next.js Image
 * Lazy loading
-* Responsive images
-* Avoid unnecessary JavaScript
-* Use Next.js Image
-* Use server components jika memungkinkan
-
-Target UX:
-
-> User harus bisa melihat produk utama tanpa menunggu halaman terlalu lama.
+* Responsive image
+* Optimized asset size
+* Minimal client-side JavaScript
+* Avoid unnecessary animation
+* Fast page transition
 
 ---
 
-# 31. Accessibility
+# 43. Accessibility
 
 Wajib:
 
 * Semantic HTML
-* Alt text untuk image
+* Alt text
 * Keyboard navigation
-* Focus state
-* Accessible button
+* Visible focus state
+* Accessible form label
 * Proper contrast
-* Form label
-* Screen-reader friendly navigation
+* Touch-friendly button
+* Error message yang jelas
 
 ---
 
-# 32. SEO Frontend
+# 44. Definition of Done
 
-Setiap product page harus memiliki:
-
-```text
-Title
-Meta Description
-Canonical URL
-Open Graph Image
-```
-
-Contoh:
+Project dianggap selesai apabila customer dapat:
 
 ```text
-Sora Sofa — Modern Linen Sofa | [Brand]
-```
-
-URL:
-
-```text
-/product/sora-sofa
-```
-
-Bukan:
-
-```text
-/product?id=123
-```
-
----
-
-# 33. Homepage User Flow
-
-```text
-Landing
-   ↓
-Hero
-   ↓
-Shop by Room
-   ↓
-New Arrivals
-   ↓
-Collection
-   ↓
-Shop the Room
-   ↓
-Inspiration
-   ↓
-Product
-   ↓
-Add to Cart
-   ↓
-Cart
-   ↓
-Checkout
-```
-
----
-
-# 34. Product Discovery Flow
-
-```text
-Homepage
-   ↓
-Shop
-   ↓
-Filter
-   ↓
-Product Grid
-   ↓
-Quick View
-   ↓
-Product Detail
-   ↓
-Choose Variant
-   ↓
-Add Cart
-```
-
----
-
-# 35. MVP Scope
-
-## Must Have
-
-* Homepage
-* Navbar
-* Footer
-* Shop page
-* Category
-* Product card
-* Product detail
-* Search
-* Filter
-* Cart
-* Wishlist
-* Responsive design
-* Mock product data
-
-## Should Have
-
-* Collection
-* Shop by Room
-* Quick View
-* Cart drawer
-* Product image gallery
-* Inspiration
-
-## Later
-
-* Room Planner
-* AR Furniture
-* AI Room Recommendation
-* User Account
-* Real Checkout
-* Payment
-* Order Tracking
-
----
-
-# 36. Success Criteria
-
-Frontend dianggap berhasil jika:
-
-### Visual
-
-* Website terlihat modern dan premium.
-* Product photography menjadi fokus.
-* Layout tidak terlihat seperti marketplace.
-* Typography dan spacing konsisten.
-
-### UX
-
-* User dapat menemukan produk maksimal dalam beberapa langkah.
-* Filter mudah digunakan.
-* Product detail mudah dipahami.
-* Cart dapat digunakan tanpa login.
-* Website nyaman digunakan di mobile.
-
-### Brand
-
-Website harus memberikan kesan:
-
-> **"Gue bukan cuma beli furniture. Gue sedang membangun style rumah gue."**
-
----
-
-# 37. Final Design Direction
-
-Referensi utama:
-
-**Article**
-→ Product simplicity
-→ Collection system
-→ Minimal UI
-→ Modern furniture
-
-**West Elm**
-→ Lifestyle
-→ Room inspiration
-→ Editorial content
-→ Design experience
-
-### Final Formula
-
-```text
-ARTICLE
-Product + Collection
-        +
-WEST ELM
-Lifestyle + Room Inspiration
+1. Membuka homepage
         ↓
-YOUR BRAND
-Modern Furniture
-+
-Interior Inspiration
-+
-Simple E-Commerce
+2. Menemukan produk
+        ↓
+3. Menggunakan search
+        ↓
+4. Menggunakan filter
+        ↓
+5. Membuka product detail
+        ↓
+6. Memilih variant
+        ↓
+7. Mengatur quantity
+        ↓
+8. Add to Cart
+        ↓
+9. Mengubah cart
+        ↓
+10. Checkout
+        ↓
+11. Mengisi informasi customer
+        ↓
+12. Memilih shipping
+        ↓
+13. Melihat ongkir
+        ↓
+14. Melihat total
+        ↓
+15. Memilih payment
+        ↓
+16. Simulasi pembayaran
+        ↓
+17. Mendapat Order ID
+        ↓
+18. Melihat order status
+        ↓
+19. Melihat delivery tracking
+        ↓
+20. Melihat status Pesanan Sampai
 ```
 
-Tujuan akhirnya bukan membuat website yang terlihat seperti **toko furniture online**, tetapi seperti **brand interior modern yang kebetulan memiliki e-commerce**.
+---
+
+# 45. Final Product Concept
+
+Website ini mengambil:
+
+### From Article
+
+* Minimal product presentation
+* Modern furniture
+* Collection-based shopping
+* Clean visual
+
+### From West Elm
+
+* Room inspiration
+* Lifestyle presentation
+* Shop by room
+* Editorial content
+
+### Added for Build Challenge
+
+* Search
+* Functional filter
+* Product detail
+* Variant
+* Cart
+* Checkout
+* Shipping simulation
+* Payment simulation
+* Order confirmation
+* Delivery tracking
+
+Sehingga konsep akhirnya:
+
+> **A modern furniture e-commerce website that combines premium interior inspiration with a complete and usable online shopping journey.**
+
+Core experience:
+
+**Discover → Product → Cart → Checkout → Payment → Delivery**
