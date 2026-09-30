@@ -4,6 +4,9 @@ import { useState, useMemo, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { PRODUCTS } from "@/data/products";
 import ProductGrid from "@/components/product/ProductGrid";
+import QuickViewModal from "@/components/product/QuickViewModal";
+import { addToCart as addToCartStore, useWishlistIds } from "@/lib/store";
+import type { Product } from "@/types";
 import ProductFilter, {
   FilterState,
   SortOption,
@@ -24,6 +27,8 @@ function ShopContent() {
 
   const [sortOption, setSortOption] = useState<SortOption>("featured");
   const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
+  const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
+  const { ids: wishlistIds, toggle: toggleWishlist } = useWishlistIds();
 
   const resetFilters = () => {
     setFilters({
@@ -236,9 +241,22 @@ function ShopContent() {
 
         {/* Products Grid */}
         <div className="flex-1">
-          <ProductGrid products={filteredAndSortedProducts} />
+          <ProductGrid
+            products={filteredAndSortedProducts}
+            onQuickView={setQuickViewProduct}
+            wishlistIds={wishlistIds}
+            onToggleWishlist={(p) => toggleWishlist(p.id)}
+          />
         </div>
       </div>
+
+      <QuickViewModal
+        product={quickViewProduct}
+        onClose={() => setQuickViewProduct(null)}
+        onAddToCart={(p, color, size, qty) =>
+          addToCartStore(p, color, size, qty || 1)
+        }
+      />
     </div>
   );
 }

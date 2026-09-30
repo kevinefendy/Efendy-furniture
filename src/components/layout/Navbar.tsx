@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Search, Heart, ShoppingBag, Menu, X, ChevronDown } from "lucide-react";
 import SearchModal from "@/components/search/SearchModal";
+import { useCartCount, useWishlistIds } from "@/lib/store";
 
 interface NavbarProps {
   onOpenSearch?: () => void;
@@ -24,6 +25,11 @@ export default function Navbar({
   const [shopMenuOpen, setShopMenuOpen] = useState(false);
   const [searchModalOpen, setSearchModalOpen] = useState(false);
   const pathname = usePathname();
+  const liveCartCount = useCartCount();
+  const { ids: liveWishlistIds } = useWishlistIds();
+  const effectiveCartCount = cartCount > 0 ? cartCount : liveCartCount;
+  const effectiveWishlistCount =
+    wishlistCount > 0 ? wishlistCount : liveWishlistIds.length;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -191,26 +197,26 @@ export default function Navbar({
               aria-label="View Wishlist"
             >
               <Heart size={20} />
-              {wishlistCount > 0 && (
+              {effectiveWishlistCount > 0 && (
                 <span className="absolute top-1 right-1 w-4 h-4 bg-[#A88968] text-white text-[10px] font-bold rounded-full flex items-center justify-center animate-in zoom-in">
-                  {wishlistCount}
+                  {effectiveWishlistCount}
                 </span>
               )}
             </Link>
 
             {/* Cart Trigger */}
-            <button
-              onClick={onOpenCart}
+            <Link
+              href="/cart"
               className="p-2 text-[#20201E] hover:text-[#A88968] transition relative flex items-center"
               aria-label="Open Cart"
             >
               <ShoppingBag size={20} />
-              {cartCount > 0 && (
+              {effectiveCartCount > 0 && (
                 <span className="absolute top-1 right-1 w-4 h-4 bg-[#20201E] text-white text-[10px] font-bold rounded-full flex items-center justify-center">
-                  {cartCount}
+                  {effectiveCartCount}
                 </span>
               )}
-            </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -272,9 +278,9 @@ export default function Navbar({
               className="block text-xl font-serif text-[#20201E] hover:text-[#A88968] flex items-center justify-between"
             >
               <span>My Wishlist</span>
-              {wishlistCount > 0 && (
+              {effectiveWishlistCount > 0 && (
                 <span className="text-xs bg-[#A88968] text-white px-2 py-0.5 rounded-full">
-                  {wishlistCount}
+                  {effectiveWishlistCount}
                 </span>
               )}
             </Link>

@@ -4,6 +4,9 @@ import { useState, useMemo, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { PRODUCTS } from "@/data/products";
 import ProductGrid from "@/components/product/ProductGrid";
+import QuickViewModal from "@/components/product/QuickViewModal";
+import { addToCart as addToCartStore, useWishlistIds } from "@/lib/store";
+import type { Product } from "@/types";
 import { Search, X } from "lucide-react";
 import Link from "next/link";
 
@@ -11,6 +14,8 @@ function SearchPageContent() {
   const searchParams = useSearchParams();
   const initialQuery = searchParams.get("q") || "";
   const [searchTerm, setSearchTerm] = useState(initialQuery);
+  const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
+  const { ids: wishlistIds, toggle: toggleWishlist } = useWishlistIds();
 
   const searchResults = useMemo(() => {
     const q = searchTerm.trim().toLowerCase();
@@ -80,7 +85,12 @@ function SearchPageContent() {
 
       {/* Results or Empty State */}
       {searchResults.length > 0 ? (
-        <ProductGrid products={searchResults} />
+        <ProductGrid
+          products={searchResults}
+          onQuickView={setQuickViewProduct}
+          wishlistIds={wishlistIds}
+          onToggleWishlist={(p) => toggleWishlist(p.id)}
+        />
       ) : (
         <div className="py-20 text-center bg-white border border-[#E5E1DB] rounded-sm p-8">
           <div className="w-12 h-12 bg-stone-100 rounded-full flex items-center justify-center mx-auto mb-4 text-[#817A71]">
@@ -109,6 +119,11 @@ function SearchPageContent() {
           </div>
         </div>
       )}
+      <QuickViewModal
+        product={quickViewProduct}
+        onClose={() => setQuickViewProduct(null)}
+        onAddToCart={(p, color, size, qty) => addToCartStore(p, color, size, qty || 1)}
+      />
     </div>
   );
 }
