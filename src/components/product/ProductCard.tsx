@@ -99,7 +99,7 @@ export default function ProductCard({
             <span className="font-serif italic text-stone-500">{product.style}</span>
           </div>
           <Link href={`/product/${product.slug}`}>
-            <h3 className="font-serif text-lg text-[#20201E] group-hover:text-[#6B6B6B] transition-colors leading-snug line-clamp-1">
+            <h3 className="text-[15px] font-medium text-[#20201E] group-hover:text-[#6B6B6B] transition-colors leading-snug line-clamp-1">
               {product.name}
             </h3>
           </Link>

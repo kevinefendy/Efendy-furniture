@@ -218,7 +218,7 @@ export default function Navbar({
               onMouseLeave={() => setOpenDropdown(null)}
             >
               <Link
-                href="/rooms/living-room"
+                href="/rooms"
                 className="flex items-center gap-1 hover:text-[#6B6B6B] transition-colors py-3"
               >
                 Rooms <ChevronDown size={13} className="opacity-60" />
