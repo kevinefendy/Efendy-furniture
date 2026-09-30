@@ -190,14 +190,15 @@ function ShopContent() {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       {/* Header */}
       <div className="border-b border-[#E5E1DB] pb-8 mb-8">
         <span className="text-xs uppercase tracking-widest text-[#6B6B6B] font-semibold block mb-2">
           {dealSale ? "Discounted pieces" : "Curated Furniture"}
         </span>
         <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4">
-          <h1 className="font-serif text-3xl sm:text-5xl text-[#20201E] tracking-tight">
+          <h1 className="text-3xl sm:text-[32px] font-bold text-[#20201E] tracking-tight">
             {dealSale ? "Sale" : "Shop All Furniture"}
           </h1>
           <p className="text-xs sm:text-sm text-[#817A71] tracking-wider uppercase font-medium">
@@ -301,6 +302,7 @@ function ShopContent() {
           openCartDrawer();
         }}
       />
+      </div>
     </div>
   );
 }

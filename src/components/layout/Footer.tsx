@@ -18,7 +18,7 @@ const SHOP_LINKS = [
 const EXPLORE_LINKS = [
   { name: "Ideas & Inspiration", href: "/inspiration" },
   { name: "Furniture Collections", href: "/collections" },
-  { name: "Shop by Room", href: "/rooms/living-room" },
+  { name: "Shop by Room", href: "/rooms" },
   { name: "New Arrivals", href: "/shop?sort=newest" },
   { name: "Best Sellers", href: "/shop?sort=rating" },
   { name: "Search", href: "/search" },

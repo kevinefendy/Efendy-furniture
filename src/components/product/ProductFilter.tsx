@@ -23,6 +23,7 @@ interface ProductFilterProps {
   onResetFilters: () => void;
   isOpenMobile?: boolean;
   onCloseMobile?: () => void;
+  sortControl?: React.ReactNode;
 }
 
 const CATEGORIES: ProductCategory[] = [
@@ -64,6 +65,7 @@ export default function ProductFilter({
   onResetFilters,
   isOpenMobile = false,
   onCloseMobile,
+  sortControl,
 }: ProductFilterProps) {
   const toggleCategory = (cat: ProductCategory) => {
     const next = filters.categories.includes(cat)
@@ -101,10 +103,11 @@ export default function ProductFilter({
 
   const content = (
     <div className="space-y-8 text-sm">
+      {sortControl}
       {/* Reset Bar */}
       <div className="flex items-center justify-between pb-3 border-b border-[#E5E1DB]">
         <div className="flex items-center gap-2">
-          <span className="font-serif text-lg text-[#20201E] font-medium">Filter By</span>
+          <span className="text-[15px] font-bold text-[#20201E]">Filter By</span>
           {activeCount > 0 && (
             <span className="bg-[#6B6B6B] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
               {activeCount}

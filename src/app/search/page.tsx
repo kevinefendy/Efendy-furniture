@@ -41,13 +41,14 @@ function SearchPageContent() {
   }, [searchTerm]);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       {/* Header */}
       <div className="border-b border-[#E5E1DB] pb-8 mb-10">
         <span className="text-xs uppercase tracking-widest text-[#6B6B6B] font-bold block mb-2">
           Discover Furniture
         </span>
-        <h1 className="font-serif text-3xl sm:text-5xl text-[#20201E] tracking-tight mb-6">
+        <h1 className="text-3xl sm:text-[32px] font-bold text-[#20201E] tracking-tight mb-6">
           Search Results
         </h1>
 
@@ -127,6 +128,7 @@ function SearchPageContent() {
           openCartDrawer();
         }}
       />
+      </div>
     </div>
   );
 }
