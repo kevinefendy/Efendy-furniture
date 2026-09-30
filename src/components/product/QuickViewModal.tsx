@@ -69,7 +69,7 @@ export default function QuickViewModal({
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-3xl bg-[#F7F5F0] border border-[#E5E1DB] rounded-sm shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200"
+        className="relative w-full max-w-3xl max-h-[90dvh] overflow-y-auto md:overflow-hidden bg-[#F7F5F0] border border-[#E5E1DB] rounded-sm shadow-2xl animate-in zoom-in-95 duration-200"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}

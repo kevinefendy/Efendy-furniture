@@ -223,7 +223,7 @@ export default function Navbar({
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-x-0 top-[113px] bottom-0 bg-[#F7F5F0] z-50 overflow-y-auto border-t border-[#E5E1DB] p-6 space-y-6 animate-in slide-in-from-left duration-200">
+        <div className="lg:hidden absolute inset-x-0 top-full bg-[#F7F5F0] z-50 max-h-[calc(100dvh-5rem)] overflow-y-auto border-t border-[#E5E1DB] shadow-xl p-6 space-y-6 animate-in slide-in-from-top-2 duration-200">
           <div className="space-y-4">
             <Link
               href="/shop"
