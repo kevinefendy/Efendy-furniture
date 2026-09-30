@@ -32,7 +32,7 @@ export default function WishlistPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <span className="text-xs uppercase tracking-widest text-[#A88968] font-semibold block mb-2">
+      <span className="text-xs uppercase tracking-widest text-[#6B6B6B] font-semibold block mb-2">
         Saved pieces
       </span>
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-8 border-b border-[#E5E1DB] pb-8">
@@ -41,7 +41,7 @@ export default function WishlistPage() {
         </h1>
         <Link
           href="/shop"
-          className="text-xs uppercase tracking-wider font-semibold text-[#A88968] hover:underline inline-flex items-center gap-1"
+          className="text-xs uppercase tracking-wider font-semibold text-[#6B6B6B] hover:underline inline-flex items-center gap-1"
         >
           <ArrowLeft size={13} /> Continue Shopping
         </Link>
@@ -60,7 +60,7 @@ export default function WishlistPage() {
           </p>
           <Link
             href="/shop"
-            className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#20201E] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#A88968] transition-colors"
+            className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#20201E] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#6B6B6B] transition-colors"
           >
             <ShoppingBag size={14} /> Explore Catalog
           </Link>
@@ -79,7 +79,7 @@ export default function WishlistPage() {
                 <button
                   onClick={() => handleQuickAddDefault(product)}
                   disabled={product.stock === 0}
-                  className="w-full py-2.5 bg-[#20201E] text-white text-[11px] font-semibold uppercase tracking-widest hover:bg-[#A88968] transition-colors disabled:bg-stone-300 disabled:cursor-not-allowed flex items-center justify-center gap-1.5"
+                  className="w-full py-2.5 bg-[#20201E] text-white text-[11px] font-semibold uppercase tracking-widest hover:bg-[#6B6B6B] transition-colors disabled:bg-stone-300 disabled:cursor-not-allowed flex items-center justify-center gap-1.5"
                 >
                   <ShoppingBag size={13} />
                   {product.stock === 0 ? "Out of Stock" : "Move to Bag"}

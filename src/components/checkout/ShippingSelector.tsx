@@ -36,7 +36,7 @@ export default function ShippingSelector({ selectedId, onSelect }: ShippingSelec
               role="radio"
               aria-checked={selected}
               onClick={() => onSelect(m.id)}
-              className={`w-full flex items-center gap-4 border rounded-sm px-4 py-4 text-left transition-all focus-visible:outline-2 focus-visible:outline-[#A88968] ${
+              className={`w-full flex items-center gap-4 border rounded-sm px-4 py-4 text-left transition-all focus-visible:outline-2 focus-visible:outline-[#6B6B6B] ${
                 selected
                   ? "border-[#20201E] bg-[#F7F5F0] ring-1 ring-[#20201E]"
                   : "border-[#E5E1DB] bg-white hover:border-stone-400"
@@ -44,7 +44,7 @@ export default function ShippingSelector({ selectedId, onSelect }: ShippingSelec
             >
               <span
                 className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 ${
-                  selected ? "bg-[#20201E] text-white" : "bg-[#F7F5F0] text-[#A88968]"
+                  selected ? "bg-[#20201E] text-white" : "bg-[#F7F5F0] text-[#6B6B6B]"
                 }`}
               >
                 <Icon size={18} aria-hidden />

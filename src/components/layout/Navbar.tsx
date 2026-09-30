@@ -99,7 +99,7 @@ export default function Navbar({
           {/* Mobile hamburger */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 -ml-2 text-[#20201E] hover:text-[#A88968] transition"
+            className="lg:hidden p-2 -ml-2 text-[#20201E] hover:text-[#6B6B6B] transition"
             aria-label="Toggle navigation menu"
             aria-expanded={mobileMenuOpen}
           >
@@ -109,7 +109,7 @@ export default function Navbar({
           {/* Logo */}
           <Link href="/" className="shrink-0 select-none" aria-label="Efendy Furniture home">
             <span className="font-logo text-[26px] lg:text-[32px] font-medium tracking-[0.18em] text-[#6B6B6B] leading-none">
-              EFENDY<span className="text-[#A88968]">.</span>
+              EFENDY<span className="text-[#6B6B6B]">.</span>
             </span>
           </Link>
 
@@ -126,7 +126,7 @@ export default function Navbar({
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Search products & help ..."
                 aria-label="Search products"
-                className="w-full border border-stone-300 rounded-sm py-2.5 pl-4 pr-11 text-sm text-[#20201E] placeholder:text-stone-400 focus:outline-none focus:border-[#A88968] transition-colors"
+                className="w-full border border-stone-300 rounded-sm py-2.5 pl-4 pr-11 text-sm text-[#20201E] placeholder:text-stone-400 focus:outline-none focus:border-[#6B6B6B] transition-colors"
               />
               <button
                 type="submit"
@@ -148,33 +148,33 @@ export default function Navbar({
             </span>
             <Link
               href="/inspiration"
-              className="hidden sm:block p-2 text-stone-600 hover:text-[#A88968] transition"
+              className="hidden sm:block p-2 text-stone-600 hover:text-[#6B6B6B] transition"
               aria-label="Help and inspiration"
             >
               <CircleHelp size={22} strokeWidth={1.5} />
             </Link>
             <button
               onClick={onOpenSearch || (() => setSearchModalOpen(true))}
-              className="md:hidden p-2 text-stone-600 hover:text-[#A88968] transition"
+              className="md:hidden p-2 text-stone-600 hover:text-[#6B6B6B] transition"
               aria-label="Search furniture catalog"
             >
               <Search size={22} strokeWidth={1.5} />
             </button>
             <Link
               href="/wishlist"
-              className="p-2 text-stone-600 hover:text-[#A88968] transition relative"
+              className="p-2 text-stone-600 hover:text-[#6B6B6B] transition relative"
               aria-label="View Wishlist"
             >
               <Heart size={22} strokeWidth={1.5} />
               {effectiveWishlistCount > 0 && (
-                <span className="absolute top-0.5 right-0.5 min-w-4 h-4 px-0.5 bg-[#A88968] text-white text-[10px] font-bold rounded-full flex items-center justify-center">
+                <span className="absolute top-0.5 right-0.5 min-w-4 h-4 px-0.5 bg-[#6B6B6B] text-white text-[10px] font-bold rounded-full flex items-center justify-center">
                   {effectiveWishlistCount}
                 </span>
               )}
             </Link>
             <button
               onClick={() => onOpenCart?.() ?? openCartDrawer()}
-              className="p-2 text-stone-600 hover:text-[#A88968] transition relative"
+              className="p-2 text-stone-600 hover:text-[#6B6B6B] transition relative"
               aria-label="Open Cart"
             >
               <ShoppingBag size={22} strokeWidth={1.5} />
@@ -196,7 +196,7 @@ export default function Navbar({
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search products & help ..."
               aria-label="Search products"
-              className="w-full border border-stone-300 rounded-sm py-2 pl-4 pr-11 text-sm text-[#20201E] placeholder:text-stone-400 focus:outline-none focus:border-[#A88968] transition-colors"
+              className="w-full border border-stone-300 rounded-sm py-2 pl-4 pr-11 text-sm text-[#20201E] placeholder:text-stone-400 focus:outline-none focus:border-[#6B6B6B] transition-colors"
             />
             <button
               type="submit"
@@ -219,7 +219,7 @@ export default function Navbar({
             >
               <Link
                 href="/rooms/living-room"
-                className="flex items-center gap-1 hover:text-[#A88968] transition-colors py-3"
+                className="flex items-center gap-1 hover:text-[#6B6B6B] transition-colors py-3"
               >
                 Rooms <ChevronDown size={13} className="opacity-60" />
               </Link>
@@ -229,7 +229,7 @@ export default function Navbar({
                     <Link
                       key={l.name}
                       href={l.href}
-                      className="block px-5 py-2.5 text-sm hover:bg-[#F7F5F0] hover:text-[#A88968] transition-colors"
+                      className="block px-5 py-2.5 text-sm hover:bg-[#F7F5F0] hover:text-[#6B6B6B] transition-colors"
                     >
                       {l.name}
                     </Link>
@@ -246,8 +246,8 @@ export default function Navbar({
             >
               <Link
                 href="/shop"
-                className={`flex items-center gap-1 hover:text-[#A88968] transition-colors py-3 ${
-                  pathname === "/shop" ? "text-[#A88968]" : ""
+                className={`flex items-center gap-1 hover:text-[#6B6B6B] transition-colors py-3 ${
+                  pathname === "/shop" ? "text-[#6B6B6B]" : ""
                 }`}
               >
                 Products <ChevronDown size={13} className="opacity-60" />
@@ -256,7 +256,7 @@ export default function Navbar({
                 <div className="absolute top-full left-0 w-56 bg-white border border-[#E5E1DB] shadow-lg rounded-sm py-2 animate-in fade-in slide-in-from-top-1 duration-150">
                   <Link
                     href="/shop"
-                    className="block px-5 py-2.5 text-sm font-medium hover:bg-[#F7F5F0] hover:text-[#A88968] transition-colors"
+                    className="block px-5 py-2.5 text-sm font-medium hover:bg-[#F7F5F0] hover:text-[#6B6B6B] transition-colors"
                   >
                     Shop All Furniture
                   </Link>
@@ -265,7 +265,7 @@ export default function Navbar({
                     <Link
                       key={l.name}
                       href={l.href}
-                      className="block px-5 py-2 text-sm hover:bg-[#F7F5F0] hover:text-[#A88968] transition-colors"
+                      className="block px-5 py-2 text-sm hover:bg-[#F7F5F0] hover:text-[#6B6B6B] transition-colors"
                     >
                       {l.name}
                     </Link>
@@ -280,8 +280,8 @@ export default function Navbar({
                   href={link.href}
                   className={`py-3 transition-colors whitespace-nowrap ${
                     link.highlight
-                      ? "text-[#A88968] font-semibold hover:text-[#8E7253]"
-                      : "hover:text-[#A88968]"
+                      ? "text-[#6B6B6B] font-semibold hover:text-[#4A4A4A]"
+                      : "hover:text-[#6B6B6B]"
                   }`}
                 >
                   {link.name}
@@ -303,7 +303,7 @@ export default function Navbar({
               <Link
                 key={l.name}
                 href={l.href}
-                className="block py-2 font-logo text-lg tracking-wide text-[#20201E] hover:text-[#A88968]"
+                className="block py-2 font-logo text-lg tracking-wide text-[#20201E] hover:text-[#6B6B6B]"
               >
                 {l.name}
               </Link>
@@ -317,7 +317,7 @@ export default function Navbar({
               <Link
                 key={l.name}
                 href={l.href}
-                className="block py-1.5 text-[15px] text-[#333330] hover:text-[#A88968]"
+                className="block py-1.5 text-[15px] text-[#333330] hover:text-[#6B6B6B]"
               >
                 {l.name}
               </Link>
@@ -331,19 +331,19 @@ export default function Navbar({
                   key={l.name}
                   href={l.href}
                   className={`block py-1.5 text-[15px] ${
-                    l.highlight ? "text-[#A88968] font-semibold" : "text-[#333330]"
-                  } hover:text-[#A88968]`}
+                    l.highlight ? "text-[#6B6B6B] font-semibold" : "text-[#333330]"
+                  } hover:text-[#6B6B6B]`}
                 >
                   {l.name}
                 </Link>
               ))}
             <Link
               href="/wishlist"
-              className="flex items-center justify-between py-1.5 text-[15px] text-[#333330] hover:text-[#A88968]"
+              className="flex items-center justify-between py-1.5 text-[15px] text-[#333330] hover:text-[#6B6B6B]"
             >
               <span>My Wishlist</span>
               {effectiveWishlistCount > 0 && (
-                <span className="text-xs bg-[#A88968] text-white px-2 py-0.5 rounded-full">
+                <span className="text-xs bg-[#6B6B6B] text-white px-2 py-0.5 rounded-full">
                   {effectiveWishlistCount}
                 </span>
               )}

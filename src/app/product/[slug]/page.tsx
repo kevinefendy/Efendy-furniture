@@ -132,7 +132,7 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
           </div>
           <Link
             href="/cart"
-            className="ml-2 text-xs text-[#A88968] font-bold uppercase tracking-wider hover:underline"
+            className="ml-2 text-xs text-[#6B6B6B] font-bold uppercase tracking-wider hover:underline"
           >
             View Bag
           </Link>
@@ -177,7 +177,7 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
             <div>
               <div className="flex items-center justify-between text-xs text-[#817A71] mb-1.5 uppercase tracking-widest font-semibold">
                 <span>{product.category}</span>
-                <span className="text-[#A88968]">{product.style} Design</span>
+                <span className="text-[#6B6B6B]">{product.style} Design</span>
               </div>
               <h1 className="font-serif text-3xl sm:text-4xl text-[#20201E] tracking-tight font-medium">
                 {product.name}
@@ -228,7 +228,7 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
                     role="radio"
                     aria-checked={selectedColor === c.name}
                     onClick={() => setSelectedColor(c.name)}
-                    className={`group relative flex items-center justify-center w-8 h-8 rounded-full border-2 transition-all p-0.5 focus-visible:outline-2 focus-visible:outline-[#A88968] ${
+                    className={`group relative flex items-center justify-center w-8 h-8 rounded-full border-2 transition-all p-0.5 focus-visible:outline-2 focus-visible:outline-[#6B6B6B] ${
                       selectedColor === c.name
                         ? "border-[#20201E] scale-110"
                         : "border-transparent hover:border-stone-300"
@@ -263,7 +263,7 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
                       role="radio"
                       aria-checked={selectedSize === s}
                       onClick={() => setSelectedSize(s)}
-                      className={`px-4 py-2 text-xs uppercase tracking-wider font-medium border rounded-sm transition-all focus-visible:outline-2 focus-visible:outline-[#A88968] ${
+                      className={`px-4 py-2 text-xs uppercase tracking-wider font-medium border rounded-sm transition-all focus-visible:outline-2 focus-visible:outline-[#6B6B6B] ${
                         selectedSize === s
                           ? "bg-[#20201E] text-white border-[#20201E] shadow-sm"
                           : "bg-white text-stone-700 border-[#E5E1DB] hover:border-stone-400"
@@ -304,11 +304,11 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
                           placeholder="you@email.com"
                           aria-invalid={!!notifyError}
                           aria-describedby={notifyError ? "notify-error" : undefined}
-                          className="flex-1 bg-[#F7F5F0] border border-[#E5E1DB] rounded-sm px-3 py-2.5 text-sm focus:outline-none focus:border-[#A88968]"
+                          className="flex-1 bg-[#F7F5F0] border border-[#E5E1DB] rounded-sm px-3 py-2.5 text-sm focus:outline-none focus:border-[#6B6B6B]"
                         />
                         <button
                           type="submit"
-                          className="px-4 py-2.5 bg-[#20201E] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#A88968] transition-colors flex items-center gap-1.5"
+                          className="px-4 py-2.5 bg-[#20201E] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#6B6B6B] transition-colors flex items-center gap-1.5"
                         >
                           <Bell size={14} /> Notify Me
                         </button>
@@ -361,7 +361,7 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
                 <button
                   onClick={handleAddToCart}
                   disabled={outOfStock}
-                  className="flex-1 min-w-0 h-12 bg-[#20201E] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#A88968] transition-all flex items-center justify-center gap-2 shadow-md disabled:bg-stone-400 disabled:cursor-not-allowed px-2"
+                  className="flex-1 min-w-0 h-12 bg-[#20201E] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#6B6B6B] transition-all flex items-center justify-center gap-2 shadow-md disabled:bg-stone-400 disabled:cursor-not-allowed px-2"
                 >
                   <ShoppingBag size={16} className="shrink-0" aria-hidden />
                   {outOfStock ? (
@@ -380,9 +380,9 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
                 <button
                   onClick={() => toggleWishlist(product.id)}
                   aria-pressed={isWishlisted}
-                  className={`w-12 h-12 border border-[#E5E1DB] rounded-sm flex items-center justify-center transition-colors focus-visible:outline-2 focus-visible:outline-[#A88968] ${
+                  className={`w-12 h-12 border border-[#E5E1DB] rounded-sm flex items-center justify-center transition-colors focus-visible:outline-2 focus-visible:outline-[#6B6B6B] ${
                     isWishlisted
-                      ? "bg-[#A88968] text-white border-[#A88968]"
+                      ? "bg-[#6B6B6B] text-white border-[#6B6B6B]"
                       : "bg-white text-[#20201E] hover:border-stone-400"
                   }`}
                   aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
@@ -391,7 +391,7 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
                 </button>
               </div>
               {product.stock <= 5 && !outOfStock && (
-                <p className="text-xs text-[#A88968] font-medium">
+                <p className="text-xs text-[#6B6B6B] font-medium">
                   Only {product.stock} left — order soon.
                 </p>
               )}
@@ -400,17 +400,17 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
             {/* Value Highlights */}
             <div className="pt-4 grid grid-cols-3 gap-3 text-center border-t border-[#E5E1DB]">
               <div className="p-3 bg-white/70 rounded-sm border border-[#E5E1DB]/60">
-                <Truck size={18} className="mx-auto text-[#A88968] mb-1" aria-hidden />
+                <Truck size={18} className="mx-auto text-[#6B6B6B] mb-1" aria-hidden />
                 <span className="block text-[11px] font-semibold text-[#20201E]">White Glove</span>
                 <span className="block text-[10px] text-stone-500">Scheduled arrival</span>
               </div>
               <div className="p-3 bg-white/70 rounded-sm border border-[#E5E1DB]/60">
-                <ShieldCheck size={18} className="mx-auto text-[#A88968] mb-1" aria-hidden />
+                <ShieldCheck size={18} className="mx-auto text-[#6B6B6B] mb-1" aria-hidden />
                 <span className="block text-[11px] font-semibold text-[#20201E]">5-Year Warranty</span>
                 <span className="block text-[10px] text-stone-500">Solid timber frame</span>
               </div>
               <div className="p-3 bg-white/70 rounded-sm border border-[#E5E1DB]/60">
-                <RotateCcw size={18} className="mx-auto text-[#A88968] mb-1" aria-hidden />
+                <RotateCcw size={18} className="mx-auto text-[#6B6B6B] mb-1" aria-hidden />
                 <span className="block text-[11px] font-semibold text-[#20201E]">30-Day Trial</span>
                 <span className="block text-[10px] text-stone-500">Hassle-free returns</span>
               </div>
@@ -435,7 +435,7 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
                     role="tab"
                     aria-selected={activeTab === tab.id}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`pb-2.5 mr-6 transition-colors focus-visible:outline-2 focus-visible:outline-[#A88968] ${
+                    className={`pb-2.5 mr-6 transition-colors focus-visible:outline-2 focus-visible:outline-[#6B6B6B] ${
                       activeTab === tab.id
                         ? "border-b-2 border-[#20201E] text-[#20201E]"
                         : "text-stone-400 hover:text-stone-700"
@@ -493,14 +493,14 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
           <div className="mt-28 pt-16 border-t border-[#E5E1DB]">
             <div className="flex items-center justify-between mb-8">
               <div>
-                <span className="text-xs uppercase tracking-widest text-[#A88968] font-bold block mb-1">
+                <span className="text-xs uppercase tracking-widest text-[#6B6B6B] font-bold block mb-1">
                   Complete The Look
                 </span>
                 <h2 className="font-serif text-3xl text-[#20201E]">Pairs Well With</h2>
               </div>
               <Link
                 href="/shop"
-                className="text-xs uppercase tracking-wider font-semibold text-[#A88968] hover:underline"
+                className="text-xs uppercase tracking-wider font-semibold text-[#6B6B6B] hover:underline"
               >
                 View Catalog →
               </Link>

@@ -60,7 +60,7 @@ export default function Footer() {
         <div className="mb-10">
           <Link href="/" aria-label="Efendy Furniture home">
             <span className="font-logo text-[32px] font-medium tracking-[0.18em] text-[#6B6B6B] leading-none">
-              EFENDY<span className="text-[#A88968]">.</span>
+              EFENDY<span className="text-[#6B6B6B]">.</span>
             </span>
           </Link>
           <div className="flex items-center gap-3 mt-5">
@@ -71,7 +71,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label={`Efendy Furniture on ${name}`}
-                className="w-9 h-9 rounded-full border border-stone-300 flex items-center justify-center text-stone-500 hover:text-[#A88968] hover:border-[#A88968] transition-colors"
+                className="w-9 h-9 rounded-full border border-stone-300 flex items-center justify-center text-stone-500 hover:text-[#6B6B6B] hover:border-[#6B6B6B] transition-colors"
               >
                 <Icon size={17} strokeWidth={1.6} />
               </a>
@@ -86,7 +86,7 @@ export default function Footer() {
             <ul className="space-y-2.5 text-[13.5px]">
               {SHOP_LINKS.map((l) => (
                 <li key={l.name}>
-                  <Link href={l.href} className="hover:text-[#A88968] transition-colors">
+                  <Link href={l.href} className="hover:text-[#6B6B6B] transition-colors">
                     {l.name}
                   </Link>
                 </li>
@@ -99,7 +99,7 @@ export default function Footer() {
             <ul className="space-y-2.5 text-[13.5px]">
               {EXPLORE_LINKS.map((l) => (
                 <li key={l.name}>
-                  <Link href={l.href} className="hover:text-[#A88968] transition-colors">
+                  <Link href={l.href} className="hover:text-[#6B6B6B] transition-colors">
                     {l.name}
                   </Link>
                 </li>
@@ -112,7 +112,7 @@ export default function Footer() {
             <ul className="space-y-2.5 text-[13.5px]">
               {SUPPORT_LINKS.map((l) => (
                 <li key={l.name}>
-                  <Link href={l.href} className="hover:text-[#A88968] transition-colors">
+                  <Link href={l.href} className="hover:text-[#6B6B6B] transition-colors">
                     {l.name}
                   </Link>
                 </li>
@@ -142,7 +142,7 @@ export default function Footer() {
                   placeholder="Your email"
                   aria-invalid={!!error}
                   aria-describedby={error ? "footer-email-error" : undefined}
-                  className="w-full max-w-sm bg-[#F7F5F0] border border-stone-300 text-[#20201E] placeholder:text-stone-400 text-sm rounded-sm px-4 py-2.5 focus:outline-none focus:border-[#A88968] transition-colors"
+                  className="w-full max-w-sm bg-[#F7F5F0] border border-stone-300 text-[#20201E] placeholder:text-stone-400 text-sm rounded-sm px-4 py-2.5 focus:outline-none focus:border-[#6B6B6B] transition-colors"
                 />
                 {error && (
                   <p id="footer-email-error" role="alert" className="mt-2 text-xs text-rose-500">
@@ -152,7 +152,7 @@ export default function Footer() {
                 <div className="mt-3">
                   <button
                     type="submit"
-                    className="px-7 py-2.5 bg-[#A88968] hover:bg-[#8E7253] text-white text-xs font-bold tracking-[0.15em] rounded-full transition-colors"
+                    className="px-7 py-2.5 bg-[#6B6B6B] hover:bg-[#4A4A4A] text-white text-xs font-bold tracking-[0.15em] rounded-full transition-colors"
                   >
                     SUBSCRIBE
                   </button>

@@ -82,7 +82,7 @@ export default function CheckoutPage() {
         </p>
         <Link
           href="/shop"
-          className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#20201E] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#A88968] transition-colors"
+          className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#20201E] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#6B6B6B] transition-colors"
         >
           <ArrowLeft size={14} /> Back to Shop
         </Link>
@@ -92,7 +92,7 @@ export default function CheckoutPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <span className="text-xs uppercase tracking-widest text-[#A88968] font-semibold block mb-2">
+      <span className="text-xs uppercase tracking-widest text-[#6B6B6B] font-semibold block mb-2">
         Almost yours
       </span>
       <h1 className="font-serif text-3xl sm:text-5xl text-[#20201E] tracking-tight mb-6">
@@ -150,7 +150,7 @@ export default function CheckoutPage() {
             </Link>
             <button
               onClick={handleContinue}
-              className="flex-1 py-3.5 bg-[#20201E] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#A88968] transition-colors flex items-center justify-center gap-2"
+              className="flex-1 py-3.5 bg-[#20201E] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#6B6B6B] transition-colors flex items-center justify-center gap-2"
             >
               Continue to Payment <ArrowRight size={14} />
             </button>

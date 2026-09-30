@@ -96,7 +96,7 @@ export default function PaymentPage() {
         </p>
         <Link
           href="/shop"
-          className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#20201E] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#A88968] transition-colors"
+          className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#20201E] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#6B6B6B] transition-colors"
         >
           Back to Shop
         </Link>
@@ -113,7 +113,7 @@ export default function PaymentPage() {
         </p>
         <Link
           href="/checkout"
-          className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#20201E] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#A88968] transition-colors"
+          className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#20201E] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#6B6B6B] transition-colors"
         >
           <ArrowLeft size={14} /> Back to Checkout
         </Link>
@@ -147,7 +147,7 @@ export default function PaymentPage() {
           {createdOrderId && (
             <Link
               href={`/order/${createdOrderId.replace("#", "")}`}
-              className="inline-block mt-6 px-8 py-3 bg-[#20201E] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#A88968] transition-colors"
+              className="inline-block mt-6 px-8 py-3 bg-[#20201E] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#6B6B6B] transition-colors"
             >
               View Order Confirmation
             </Link>
@@ -159,7 +159,7 @@ export default function PaymentPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <span className="text-xs uppercase tracking-widest text-[#A88968] font-semibold block mb-2">
+      <span className="text-xs uppercase tracking-widest text-[#6B6B6B] font-semibold block mb-2">
         Secure simulated checkout
       </span>
       <h1 className="font-serif text-3xl sm:text-5xl text-[#20201E] tracking-tight mb-8">
@@ -216,7 +216,7 @@ export default function PaymentPage() {
             <button
               onClick={handleSimulate}
               disabled={!payment || phase === "processing"}
-              className="w-full py-3.5 bg-[#20201E] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#A88968] transition-colors disabled:bg-stone-300 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              className="w-full py-3.5 bg-[#20201E] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#6B6B6B] transition-colors disabled:bg-stone-300 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
               {phase === "processing" ? (
                 <>

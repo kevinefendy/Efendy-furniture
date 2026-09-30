@@ -66,7 +66,7 @@ export default function TrackingPage({ params }: TrackingPageProps) {
         <ArrowLeft size={13} /> Back to order
       </Link>
 
-      <span className="text-xs uppercase tracking-widest text-[#A88968] font-semibold block mb-2">
+      <span className="text-xs uppercase tracking-widest text-[#6B6B6B] font-semibold block mb-2">
         Delivery simulation
       </span>
       <h1 className="font-serif text-3xl sm:text-5xl text-[#20201E] tracking-tight">
@@ -88,7 +88,7 @@ export default function TrackingPage({ params }: TrackingPageProps) {
               </p>
               <button
                 onClick={handleNext}
-                className="w-full sm:w-auto px-8 py-3 bg-[#20201E] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#A88968] transition-colors inline-flex items-center justify-center gap-2"
+                className="w-full sm:w-auto px-8 py-3 bg-[#20201E] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#6B6B6B] transition-colors inline-flex items-center justify-center gap-2"
               >
                 Next Status <ArrowRight size={14} />
               </button>
@@ -100,7 +100,7 @@ export default function TrackingPage({ params }: TrackingPageProps) {
               </p>
               <Link
                 href="/shop"
-                className="inline-block mt-4 px-8 py-3 bg-[#20201E] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#A88968] transition-colors"
+                className="inline-block mt-4 px-8 py-3 bg-[#20201E] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#6B6B6B] transition-colors"
               >
                 Shop Again
               </Link>
@@ -115,21 +115,21 @@ export default function TrackingPage({ params }: TrackingPageProps) {
               Delivery Details
             </h2>
             <div className="flex items-start gap-3 text-sm">
-              <Truck size={17} className="text-[#A88968] mt-0.5 shrink-0" aria-hidden />
+              <Truck size={17} className="text-[#6B6B6B] mt-0.5 shrink-0" aria-hidden />
               <div>
                 <p className="text-[#817A71] text-xs uppercase tracking-wider">Courier</p>
                 <p className="text-[#20201E] font-medium">{order.shipping.name}</p>
               </div>
             </div>
             <div className="flex items-start gap-3 text-sm">
-              <Hash size={17} className="text-[#A88968] mt-0.5 shrink-0" aria-hidden />
+              <Hash size={17} className="text-[#6B6B6B] mt-0.5 shrink-0" aria-hidden />
               <div>
                 <p className="text-[#817A71] text-xs uppercase tracking-wider">Tracking Number</p>
                 <p className="text-[#20201E] font-medium font-mono">{order.trackingNumber}</p>
               </div>
             </div>
             <div className="flex items-start gap-3 text-sm">
-              <CalendarCheck size={17} className="text-[#A88968] mt-0.5 shrink-0" aria-hidden />
+              <CalendarCheck size={17} className="text-[#6B6B6B] mt-0.5 shrink-0" aria-hidden />
               <div>
                 <p className="text-[#817A71] text-xs uppercase tracking-wider">Estimated Arrival</p>
                 <p className="text-[#20201E] font-medium">{order.estimatedDeliveryDate}</p>

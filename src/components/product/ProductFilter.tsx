@@ -106,7 +106,7 @@ export default function ProductFilter({
         <div className="flex items-center gap-2">
           <span className="font-serif text-lg text-[#20201E] font-medium">Filter By</span>
           {activeCount > 0 && (
-            <span className="bg-[#A88968] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+            <span className="bg-[#6B6B6B] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
               {activeCount}
             </span>
           )}
@@ -136,7 +136,7 @@ export default function ProductFilter({
                 type="checkbox"
                 checked={filters.categories.includes(cat)}
                 onChange={() => toggleCategory(cat)}
-                className="w-4 h-4 rounded-xs border-stone-300 text-[#A88968] focus:ring-[#A88968]"
+                className="w-4 h-4 rounded-xs border-stone-300 text-[#6B6B6B] focus:ring-[#6B6B6B]"
               />
               <span>{cat}</span>
             </label>
@@ -159,7 +159,7 @@ export default function ProductFilter({
                 type="checkbox"
                 checked={filters.priceRange.includes(pr.id)}
                 onChange={() => togglePriceRange(pr.id)}
-                className="w-4 h-4 rounded-xs border-stone-300 text-[#A88968] focus:ring-[#A88968]"
+                className="w-4 h-4 rounded-xs border-stone-300 text-[#6B6B6B] focus:ring-[#6B6B6B]"
               />
               <span>{pr.label}</span>
             </label>
@@ -212,7 +212,7 @@ export default function ProductFilter({
                 type="checkbox"
                 checked={filters.styles.includes(st)}
                 onChange={() => toggleStyle(st)}
-                className="w-4 h-4 rounded-xs border-stone-300 text-[#A88968] focus:ring-[#A88968]"
+                className="w-4 h-4 rounded-xs border-stone-300 text-[#6B6B6B] focus:ring-[#6B6B6B]"
               />
               <span>{st}</span>
             </label>
@@ -247,7 +247,7 @@ export default function ProductFilter({
             <div className="pt-6 border-t border-[#E5E1DB] mt-6">
               <button
                 onClick={onCloseMobile}
-                className="w-full py-3 bg-[#20201E] text-white text-xs font-semibold uppercase tracking-wider hover:bg-[#A88968] transition"
+                className="w-full py-3 bg-[#20201E] text-white text-xs font-semibold uppercase tracking-wider hover:bg-[#6B6B6B] transition"
               >
                 Apply Filters ({activeCount})
               </button>

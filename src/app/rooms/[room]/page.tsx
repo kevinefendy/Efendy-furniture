@@ -46,7 +46,7 @@ export default function RoomDetailPage({ params }: RoomPageProps) {
           >
             <ArrowLeft size={14} /> Shop All
           </Link>
-          <span className="text-xs uppercase tracking-[0.3em] text-[#A88968] font-bold">
+          <span className="text-xs uppercase tracking-[0.3em] text-[#6B6B6B] font-bold">
             Curated Space
           </span>
           <h1 className="font-serif text-4xl sm:text-5xl font-light tracking-tight mt-1">
@@ -65,7 +65,7 @@ export default function RoomDetailPage({ params }: RoomPageProps) {
               href={`/rooms/${r.id}`}
               className={`text-xs uppercase tracking-wider font-semibold whitespace-nowrap transition-colors py-1 ${
                 r.id === room.id
-                  ? "text-[#A88968] border-b-2 border-[#A88968]"
+                  ? "text-[#6B6B6B] border-b-2 border-[#6B6B6B]"
                   : "text-stone-500 hover:text-[#20201E]"
               }`}
             >

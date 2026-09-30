@@ -97,7 +97,7 @@ export default function QuickViewModal({
           <div className="p-6 sm:p-8 flex flex-col justify-between overflow-y-auto max-h-[80vh]">
             <div className="space-y-4">
               <div>
-                <span className="text-xs uppercase tracking-widest text-[#A88968] font-bold">
+                <span className="text-xs uppercase tracking-widest text-[#6B6B6B] font-bold">
                   {product.category} • {product.style}
                 </span>
                 <h3 className="font-serif text-2xl text-[#20201E] font-medium leading-tight mt-1">
@@ -198,7 +198,7 @@ export default function QuickViewModal({
             <div className="pt-6 border-t border-[#E5E1DB] mt-6 space-y-3">
               <button
                 onClick={handleAddToCart}
-                className="w-full py-3 bg-[#20201E] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#A88968] transition-colors flex items-center justify-center gap-2"
+                className="w-full py-3 bg-[#20201E] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#6B6B6B] transition-colors flex items-center justify-center gap-2"
               >
                 {addedNotice ? (
                   <>

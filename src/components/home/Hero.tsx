@@ -35,7 +35,7 @@ export default function Hero() {
           <div className="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
             <Link
               href="/collections"
-              className="inline-flex items-center justify-center px-8 py-4 bg-[#F7F5F0] text-[#20201E] text-xs font-semibold uppercase tracking-widest hover:bg-[#A88968] hover:text-white transition-all duration-200 group shadow-lg"
+              className="inline-flex items-center justify-center px-8 py-4 bg-[#F7F5F0] text-[#20201E] text-xs font-semibold uppercase tracking-widest hover:bg-[#6B6B6B] hover:text-white transition-all duration-200 group shadow-lg"
             >
               Shop Collection
               <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />

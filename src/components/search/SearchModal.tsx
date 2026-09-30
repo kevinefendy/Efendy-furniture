@@ -63,7 +63,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
         <div className="max-w-4xl mx-auto">
           {/* Header Close */}
           <div className="flex items-center justify-between mb-6">
-            <span className="text-xs uppercase tracking-widest text-[#A88968] font-bold">
+            <span className="text-xs uppercase tracking-widest text-[#6B6B6B] font-bold">
               Product Search
             </span>
             <button
@@ -83,7 +83,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search by furniture name, category, or style (e.g. sofa, oak, japandi)..."
-              className="w-full bg-white border border-[#E5E1DB] rounded-sm py-4 pl-12 pr-12 text-base text-[#20201E] placeholder-stone-400 focus:outline-none focus:border-[#A88968] shadow-sm font-sans"
+              className="w-full bg-white border border-[#E5E1DB] rounded-sm py-4 pl-12 pr-12 text-base text-[#20201E] placeholder-stone-400 focus:outline-none focus:border-[#6B6B6B] shadow-sm font-sans"
             />
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-stone-400" size={20} />
             {query && (
@@ -109,7 +109,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
                     key={item}
                     type="button"
                     onClick={() => setQuery(item)}
-                    className="px-3 py-1.5 bg-white border border-[#E5E1DB] text-xs text-[#20201E] hover:border-[#A88968] hover:text-[#A88968] rounded-full transition-colors"
+                    className="px-3 py-1.5 bg-white border border-[#E5E1DB] text-xs text-[#20201E] hover:border-[#6B6B6B] hover:text-[#6B6B6B] rounded-full transition-colors"
                   >
                     {item}
                   </button>
@@ -128,7 +128,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
                 {liveResults.length > 0 && (
                   <button
                     onClick={handleSearchSubmit}
-                    className="text-xs font-semibold uppercase tracking-wider text-[#A88968] hover:underline flex items-center gap-1"
+                    className="text-xs font-semibold uppercase tracking-wider text-[#6B6B6B] hover:underline flex items-center gap-1"
                   >
                     View All Results <ArrowRight size={13} />
                   </button>
@@ -146,7 +146,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
                       key={product.id}
                       href={`/product/${product.slug}`}
                       onClick={onClose}
-                      className="flex items-center gap-4 p-3 bg-white border border-[#E5E1DB] rounded-sm hover:border-[#A88968] transition-all group"
+                      className="flex items-center gap-4 p-3 bg-white border border-[#E5E1DB] rounded-sm hover:border-[#6B6B6B] transition-all group"
                     >
                       <div className="relative w-16 h-16 bg-stone-100 rounded-xs overflow-hidden shrink-0">
                         <Image
@@ -161,7 +161,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
                         <span className="text-[10px] uppercase tracking-wider text-[#817A71] block">
                           {product.category} • {product.style}
                         </span>
-                        <h4 className="font-serif text-sm text-[#20201E] group-hover:text-[#A88968] transition-colors truncate">
+                        <h4 className="font-serif text-sm text-[#20201E] group-hover:text-[#6B6B6B] transition-colors truncate">
                           {product.name}
                         </h4>
                         <p className="text-xs font-semibold text-stone-900 mt-0.5">

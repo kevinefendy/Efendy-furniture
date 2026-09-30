@@ -63,7 +63,7 @@ export default function ProductGallery({ images, productName }: ProductGalleryPr
               role="tab"
               aria-selected={selectedIndex === idx}
               onClick={() => setSelectedIndex(idx)}
-              className={`relative w-16 h-20 sm:w-20 sm:h-24 rounded-sm overflow-hidden border-2 transition-all shrink-0 focus-visible:outline-2 focus-visible:outline-[#A88968] ${
+              className={`relative w-16 h-20 sm:w-20 sm:h-24 rounded-sm overflow-hidden border-2 transition-all shrink-0 focus-visible:outline-2 focus-visible:outline-[#6B6B6B] ${
                 selectedIndex === idx
                   ? "border-[#20201E] opacity-100 ring-1 ring-[#20201E]"
                   : "border-[#E5E1DB] opacity-65 hover:opacity-100 hover:border-stone-400"
@@ -126,7 +126,7 @@ export default function ProductGallery({ images, productName }: ProductGalleryPr
               {selectedIndex + 1} / {images.length}
             </span>
             {isLifestyle && (
-              <span className="bg-[#A88968] text-white text-[10px] uppercase tracking-wider px-2 py-1 rounded-sm">
+              <span className="bg-[#6B6B6B] text-white text-[10px] uppercase tracking-wider px-2 py-1 rounded-sm">
                 Lifestyle
               </span>
             )}
