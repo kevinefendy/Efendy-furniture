@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { formatIDR } from "@/lib/utils";
-import type { CartItem } from "@/types";
+import { getEstimatedDeliveryDate } from "@/data/checkout";
+import type { CartItem, ShippingTier } from "@/types";
 
 interface OrderSummaryProps {
   items: CartItem[];
@@ -10,6 +11,7 @@ interface OrderSummaryProps {
   shippingCost: number;
   total: number;
   shippingName: string;
+  shippingId?: ShippingTier;
 }
 
 export default function OrderSummary({
@@ -18,6 +20,7 @@ export default function OrderSummary({
   shippingCost,
   total,
   shippingName,
+  shippingId,
 }: OrderSummaryProps) {
   return (
     <div className="bg-white border border-[#E5E1DB] rounded-sm p-6 lg:sticky lg:top-28 space-y-5">
@@ -61,6 +64,14 @@ export default function OrderSummary({
           <dt>Shipping ({shippingName})</dt>
           <dd className="text-[#20201E] font-medium">{formatIDR(shippingCost)}</dd>
         </div>
+        {shippingId && (
+          <div className="flex justify-between text-[#817A71]">
+            <dt>Estimated arrival</dt>
+            <dd className="text-[#20201E] font-medium text-right">
+              {getEstimatedDeliveryDate(shippingId)}
+            </dd>
+          </div>
+        )}
         <div className="flex justify-between items-baseline pt-2 border-t border-[#E5E1DB]">
           <dt className="text-xs font-semibold uppercase tracking-widest text-[#20201E]">
             Total

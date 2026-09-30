@@ -6,6 +6,7 @@ import { Minus, Plus, Trash2, Heart, ArrowLeft, ArrowRight, ShoppingBag } from "
 import { formatIDR } from "@/lib/utils";
 import { useCart, getWishlistIds, toggleWishlistId } from "@/lib/store";
 import { PRODUCTS } from "@/data/products";
+import { SHIPPING_METHODS, getEstimatedDeliveryDate } from "@/data/checkout";
 import { useState } from "react";
 
 const FREE_SHIPPING_THRESHOLD = 10000000;
@@ -222,7 +223,12 @@ export default function CartPage() {
               </div>
               <div className="flex justify-between text-[#817A71]">
                 <span>Shipping</span>
-                <span>Calculated at checkout</span>
+                <span className="text-right">
+                  from {formatIDR(SHIPPING_METHODS[0].price)}
+                  <span className="block text-[11px]">
+                    Regular • arrives {getEstimatedDeliveryDate("regular")}
+                  </span>
+                </span>
               </div>
               <div className="flex justify-between items-baseline pt-2">
                 <span className="text-xs font-semibold uppercase tracking-widest">Total</span>

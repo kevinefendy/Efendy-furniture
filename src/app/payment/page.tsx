@@ -190,6 +190,12 @@ export default function PaymentPage() {
                 <dt>Shipping ({shipping.name})</dt>
                 <dd className="text-[#20201E] font-medium">{formatIDR(shipping.price)}</dd>
               </div>
+              <div className="flex justify-between text-[#817A71]">
+                <dt>Estimated arrival</dt>
+                <dd className="text-[#20201E] font-medium text-right">
+                  {getEstimatedDeliveryDate(shipping.id)}
+                </dd>
+              </div>
               <div className="flex justify-between items-baseline pt-3 border-t border-[#E5E1DB]">
                 <dt className="text-xs font-semibold uppercase tracking-widest text-[#20201E]">
                   Total

@@ -164,6 +164,7 @@ export default function CheckoutPage() {
             shippingCost={shipping.price}
             total={total}
             shippingName={shipping.name}
+            shippingId={shipping.id}
           />
         </div>
       </div>
