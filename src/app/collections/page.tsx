@@ -6,6 +6,7 @@ import { ArrowLeft } from "lucide-react";
 
 export default function CollectionsPage() {
   const naraProducts = PRODUCTS.filter((p) => p.collectionName === "Nara");
+  const awanProducts = PRODUCTS.filter((p) => p.collectionName === "Awan");
 
   return (
     <div className="min-h-screen bg-[#F7F5F0]">
@@ -51,6 +52,46 @@ export default function CollectionsPage() {
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
           {naraProducts.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      </div>
+
+      {/* Awan Collection Banner */}
+      <div className="relative h-[45vh] min-h-[340px] w-full bg-stone-900 overflow-hidden">
+        <Image
+          src="https://images.unsplash.com/photo-1615873968403-89e068629265?auto=format&fit=crop&w=2000&q=85"
+          alt="The Awan Collection"
+          fill
+          sizes="100vw"
+          className="object-cover object-center opacity-80"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/20" />
+        <div className="relative max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8 flex flex-col justify-end pb-12 text-white">
+          <span className="text-xs uppercase tracking-[0.3em] text-[#A88968] font-bold">
+            Capsule Series
+          </span>
+          <h2 className="font-serif text-4xl sm:text-6xl font-light tracking-tight mt-1">
+            The Awan Collection
+          </h2>
+          <p className="text-sm sm:text-base text-stone-300 max-w-lg mt-2 font-light">
+            Light as a cloud. Soft Scandinavian forms for rest, focus, and quiet
+            mornings — bedroom calm and workspace clarity.
+          </p>
+        </div>
+      </div>
+
+      {/* Awan Grid */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="flex items-center justify-between mb-8 pb-4 border-b border-[#E5E1DB]">
+          <h2 className="font-serif text-2xl text-[#20201E]">Collection Pieces</h2>
+          <span className="text-xs text-[#817A71] uppercase tracking-wider">
+            {awanProducts.length} Items Available
+          </span>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+          {awanProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
