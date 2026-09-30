@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Search, Heart, ShoppingBag, Menu, X, ChevronDown } from "lucide-react";
 import SearchModal from "@/components/search/SearchModal";
-import { useCartCount, useWishlistIds } from "@/lib/store";
+import { useCartCount, useWishlistIds, openCartDrawer } from "@/lib/store";
 
 interface NavbarProps {
   onOpenSearch?: () => void;
@@ -205,8 +205,8 @@ export default function Navbar({
             </Link>
 
             {/* Cart Trigger */}
-            <Link
-              href="/cart"
+            <button
+              onClick={() => onOpenCart?.() ?? openCartDrawer()}
               className="p-2 text-[#20201E] hover:text-[#A88968] transition relative flex items-center"
               aria-label="Open Cart"
             >
@@ -216,7 +216,7 @@ export default function Navbar({
                   {effectiveCartCount}
                 </span>
               )}
-            </Link>
+            </button>
           </div>
         </div>
       </div>

@@ -7,6 +7,7 @@ export const CART_KEY = "efendy_cart";
 export const WISHLIST_KEY = "efendy_wishlist";
 export const CART_EVENT = "efendy:cart-updated";
 export const WISHLIST_EVENT = "efendy:wishlist-updated";
+export const CART_OPEN_EVENT = "efendy:open-cart";
 
 function readJSON<T>(key: string, fallback: T): T {
   if (typeof window === "undefined") return fallback;
@@ -71,6 +72,67 @@ export function addToCart(
 
 export function getCartCount(): number {
   return getCart().reduce((sum, i) => sum + i.quantity, 0);
+}
+
+export function getCartSubtotal(): number {
+  return getCart().reduce((sum, i) => sum + i.price * i.quantity, 0);
+}
+
+export function updateCartQuantity(id: string, quantity: number): CartItem[] {
+  const cart = getCart();
+  const next = cart
+    .map((i) =>
+      i.id === id ? { ...i, quantity: Math.max(1, Math.min(i.stock, quantity)) } : i
+    )
+    .filter((i) => i.quantity > 0);
+  writeJSON(CART_KEY, next, CART_EVENT);
+  return next;
+}
+
+export function removeFromCart(id: string): CartItem[] {
+  const next = getCart().filter((i) => i.id !== id);
+  writeJSON(CART_KEY, next, CART_EVENT);
+  return next;
+}
+
+export function clearCart(): CartItem[] {
+  writeJSON(CART_KEY, [], CART_EVENT);
+  return [];
+}
+
+export function openCartDrawer() {
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new Event(CART_OPEN_EVENT));
+  }
+}
+
+export function useCart(): {
+  items: CartItem[];
+  count: number;
+  subtotal: number;
+  updateQuantity: (id: string, qty: number) => void;
+  removeItem: (id: string) => void;
+  clear: () => void;
+} {
+  const [items, setItems] = useState<CartItem[]>([]);
+  useEffect(() => {
+    const sync = () => setItems(getCart());
+    sync();
+    window.addEventListener(CART_EVENT, sync);
+    window.addEventListener("storage", sync);
+    return () => {
+      window.removeEventListener(CART_EVENT, sync);
+      window.removeEventListener("storage", sync);
+    };
+  }, []);
+  return {
+    items,
+    count: items.reduce((s, i) => s + i.quantity, 0),
+    subtotal: items.reduce((s, i) => s + i.price * i.quantity, 0),
+    updateQuantity: (id, qty) => setItems(updateCartQuantity(id, qty)),
+    removeItem: (id) => setItems(removeFromCart(id)),
+    clear: () => setItems(clearCart()),
+  };
 }
 
 export function useCartCount(): number {

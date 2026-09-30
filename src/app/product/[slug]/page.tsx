@@ -12,6 +12,7 @@ import {
   addToCart as addToCartStore,
   getWishlistIds,
   toggleWishlistId,
+  openCartDrawer,
   WISHLIST_EVENT,
 } from "@/lib/store";
 import type { Product } from "@/types";
@@ -87,12 +88,14 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
     addToCartStore(product, selectedColor || product.colors[0]?.name, selectedSize, quantity);
     setAddedToast(true);
     setTimeout(() => setAddedToast(false), 3000);
+    openCartDrawer();
   };
 
   const handleQuickAdd = (p: Product, color: string, size?: string, qty = 1) => {
     addToCartStore(p, color, size, qty);
     setAddedToast(true);
     setTimeout(() => setAddedToast(false), 3000);
+    openCartDrawer();
   };
 
   const toggleWishlist = (id: string) => {

@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Product } from "@/types";
 import { formatIDR } from "@/lib/utils";
-import { addToCart as addToCartStore } from "@/lib/store";
+import { addToCart as addToCartStore, openCartDrawer } from "@/lib/store";
 import { X, Star, Check, ShoppingBag, ArrowRight } from "lucide-react";
 
 interface QuickViewModalProps {
@@ -54,6 +54,7 @@ export default function QuickViewModal({
       onAddToCart(product, color, selectedSize, quantity);
     } else {
       addToCartStore(product, color, selectedSize, quantity);
+      openCartDrawer();
     }
     setAddedNotice(true);
     setTimeout(() => setAddedNotice(false), 2000);
