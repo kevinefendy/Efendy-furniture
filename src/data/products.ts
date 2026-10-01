@@ -82,9 +82,11 @@ export const PRODUCTS: Product[] = [
       { name: "Black", code: "#2B2B2B" },
     ],
     images: [
-      "https://images.unsplash.com/photo-1580481077195-c3a821a5060f?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1586105251261-72a756497a11?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1581539250439-c96689b516dd?auto=format&fit=crop&w=1200&q=80",
     ],
     featured: true,
     isNewArrival: true,
@@ -112,7 +114,7 @@ export const PRODUCTS: Product[] = [
     images: [
       "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1540518614846-7ede433c4ef4?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1505693314120-0d443867891c?auto=format&fit=crop&w=1200&q=80",
     ],
     featured: false,
     isNewArrival: true,
@@ -581,7 +583,7 @@ export const PRODUCTS: Product[] = [
     ],
     images: [
       "https://images.unsplash.com/photo-1580480055273-228ff5388ef8?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1580481077195-c3a821a5060f?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1505797149-43b0069ec26b?auto=format&fit=crop&w=1200&q=80",
     ],
     featured: false,
     isNewArrival: true,
