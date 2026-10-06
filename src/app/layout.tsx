@@ -5,6 +5,7 @@ import AnnouncementBar from "@/components/layout/AnnouncementBar";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CartDrawerHost from "@/components/cart/CartDrawerHost";
+import ChairAI from "@/components/chat/ChairAI";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -39,6 +40,7 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <Footer />
         <CartDrawerHost />
+        <ChairAI />
       </body>
     </html>
   );
