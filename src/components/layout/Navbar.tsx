@@ -163,7 +163,7 @@ export default function Navbar() {
               )}
             </button>
             <Link
-              href="/cart"
+              href="/akun"
               className="hidden sm:block p-2.5 text-[#1A1A1A] hover:text-[#C2410C] transition-colors"
               aria-label="Akun saya"
             >

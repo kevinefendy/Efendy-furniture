@@ -5,7 +5,6 @@ import Hero from "@/components/home/Hero";
 import KategoriCepat from "@/components/home/KategoriCepat";
 import ProdukUnggulan from "@/components/home/ProdukUnggulan";
 import KenapaEfendy from "@/components/home/KenapaEfendy";
-import ShopTheRoom from "@/components/home/ShopTheRoom";
 import KoleksiKurasi from "@/components/home/KoleksiKurasi";
 import Testimoni from "@/components/home/Testimoni";
 import Showroom from "@/components/home/Showroom";
@@ -14,7 +13,7 @@ import QuickViewModal from "@/components/product/QuickViewModal";
 import { addToCart as addToCartStore, useWishlistIds, openCartDrawer } from "@/lib/store";
 import type { Product } from "@/types";
 
-// Homepage retail: Hero → Kategori → Unggulan → Kenapa → Shop the Room →
+// Homepage retail: Hero → Kategori → Unggulan → Kenapa →
 // Koleksi → Testimoni → Showroom → Artikel. Putih/#F7F7F5 bergantian.
 export default function HomePage() {
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
@@ -30,7 +29,6 @@ export default function HomePage() {
         onToggleWishlist={(p) => toggleWishlist(p.id)}
       />
       <KenapaEfendy />
-      <ShopTheRoom />
       <KoleksiKurasi />
       <Testimoni />
       <Showroom />

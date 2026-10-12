@@ -789,46 +789,6 @@ export const INSPIRATION_ARTICLES = [
   },
 ];
 
-export const SHOP_THE_ROOM_DATA = {
-  roomName: "Ruang Tamu Hangat Keluarga Andini",
-  description:
-    "Sofa abu empuk, meja kopi marmer, dan lampu gantung rotan. Semua yang di foto bisa langsung dibeli.",
-  image:
-    "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1600&q=85",
-  hotspots: [
-    {
-      id: "hs-1",
-      productId: "prod-001",
-      name: "Sofa 3 Seat Oslo Fabric Abu",
-      price: 5499000,
-      slug: "sofa-3-seat-oslo-fabric-abu",
-      top: "62%",
-      left: "48%",
-      color: "Abu Muda",
-    },
-    {
-      id: "hs-2",
-      productId: "prod-007",
-      name: "Meja Kopi Bulat Marmer Putih Kaki Kayu",
-      price: 1899000,
-      slug: "meja-kopi-bulat-marmer-putih",
-      top: "76%",
-      left: "32%",
-      color: "Marmer Putih",
-    },
-    {
-      id: "hs-3",
-      productId: "prod-016",
-      name: "Lampu Gantung Rotan Anyam 40cm",
-      price: 549000,
-      slug: "lampu-gantung-rotan-anyam-40cm",
-      top: "38%",
-      left: "78%",
-      color: "Natural Rotan",
-    },
-  ],
-};
-
 export const KOLEKSI_TEMA = [
   {
     id: "rumah-minimalis",

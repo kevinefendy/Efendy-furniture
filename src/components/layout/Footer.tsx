@@ -25,6 +25,7 @@ const BANTUAN = [
 ];
 
 const TENTANG = [
+  { nama: "Akun Saya", href: "/akun" },
   { nama: "Koleksi Baru", href: "/shop?sort=newest" },
   { nama: "Sale", href: "/shop?deal=sale" },
   { nama: "Showroom Kami", href: "/#showroom" },

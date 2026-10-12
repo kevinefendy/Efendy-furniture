@@ -505,7 +505,7 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
                 View Catalog →
               </Link>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
               {relatedProducts.map((p) => (
                 <ProductCard
                   key={p.id}

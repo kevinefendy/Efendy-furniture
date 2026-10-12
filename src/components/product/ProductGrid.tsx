@@ -18,17 +18,17 @@ export default function ProductGrid({
 }: ProductGridProps) {
   if (products.length === 0) {
     return (
-      <div className="py-20 text-center">
-        <p className="font-serif text-2xl text-[#20201E]">No pieces found</p>
-        <p className="text-sm text-[#817A71] mt-2">
-          Try adjusting your search or category filters to find what you are looking for.
+      <div className="py-16 text-center">
+        <p className="font-serif font-medium text-2xl">Nggak ketemu.</p>
+        <p className="text-[15px] text-[#6B6B6B] mt-2">
+          Coba longgarkan filter atau pakai kata kunci lain.
         </p>
       </div>
     );
   }
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
       {products.map((product) => (
         <ProductCard
           key={product.id}

@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useMemo, Suspense } from "react";
+import { useState, useMemo, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import { PRODUCTS } from "@/data/products";
+import { PRODUCTS, ROOMS_DATA } from "@/data/products";
 import ProductGrid from "@/components/product/ProductGrid";
 import QuickViewModal from "@/components/product/QuickViewModal";
 import { addToCart as addToCartStore, useWishlistIds, openCartDrawer } from "@/lib/store";
@@ -10,124 +10,135 @@ import type { Product } from "@/types";
 import { Search, X } from "lucide-react";
 import Link from "next/link";
 
+const KATEGORI_SUGGEST = ["Sofa", "Meja", "Kursi", "Lemari", "Tempat Tidur", "Rak", "Outdoor", "Dekorasi"];
+
+function cocok(p: Product, q: string): boolean {
+  const query = q.trim().toLowerCase();
+  if (!query) return true;
+  const ruang = ROOMS_DATA.find((r) => r.id === p.room)?.name.toLowerCase() ?? "";
+  return (
+    p.name.toLowerCase().includes(query) ||
+    p.category.toLowerCase().includes(query) ||
+    (p.collectionName?.toLowerCase().includes(query) ?? false) ||
+    p.style.toLowerCase().includes(query) ||
+    p.material.toLowerCase().includes(query) ||
+    p.description.toLowerCase().includes(query) ||
+    ruang.includes(query)
+  );
+}
+
 function SearchPageContent() {
   const searchParams = useSearchParams();
-  const initialQuery = searchParams.get("q") || "";
-  const [searchTerm, setSearchTerm] = useState(initialQuery);
+  const paramQ = searchParams.get("q") || "";
+  // Sinkron dengan URL: kalau datang dari hero/modal saat sudah di halaman ini, ikut update.
+  const [searchTerm, setSearchTerm] = useState(paramQ);
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
   const { ids: wishlistIds, toggle: toggleWishlist } = useWishlistIds();
 
-  const searchResults = useMemo(() => {
-    const q = searchTerm.trim().toLowerCase();
-    if (!q) return PRODUCTS;
+  useEffect(() => {
+    setSearchTerm(paramQ);
+  }, [paramQ]);
 
-    return PRODUCTS.filter((p) => {
-      const matchName = p.name.toLowerCase().includes(q);
-      const matchCategory = p.category.toLowerCase().includes(q);
-      const matchCollection = p.collectionName?.toLowerCase().includes(q);
-      const matchStyle = p.style.toLowerCase().includes(q);
-      const matchMaterial = p.material.toLowerCase().includes(q);
-      const matchDescription = p.description.toLowerCase().includes(q);
-
-      return (
-        matchName ||
-        matchCategory ||
-        matchCollection ||
-        matchStyle ||
-        matchMaterial ||
-        matchDescription
-      );
-    });
-  }, [searchTerm]);
+  const searchResults = useMemo(
+    () => PRODUCTS.filter((p) => cocok(p, searchTerm)),
+    [searchTerm]
+  );
 
   return (
     <div className="bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      {/* Header */}
-      <div className="border-b border-[#E5E1DB] pb-8 mb-10">
-        <span className="text-xs uppercase tracking-widest text-[#6B6B6B] font-bold block mb-2">
-          Discover Furniture
-        </span>
-        <h1 className="text-3xl sm:text-[32px] font-bold text-[#20201E] tracking-tight mb-6">
-          Search Results
-        </h1>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
+        <div className="border-b border-[#E8E6E1] pb-8 mb-10">
+          <span className="text-[13px] uppercase tracking-widest text-[#C2410C] font-semibold block mb-2">
+            Pencarian
+          </span>
+          <h1 className="font-serif font-medium text-[32px] sm:text-[44px] tracking-tight mb-6">
+            Hasil pencarian
+          </h1>
 
-        {/* Search Bar Input */}
-        <div className="relative max-w-2xl">
-          <input
-            type="text"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="Search by product name, category, or collection..."
-            className="w-full bg-white border border-[#E5E1DB] rounded-sm py-3.5 pl-11 pr-10 text-sm text-[#20201E] focus:outline-none focus:border-[#6B6B6B] shadow-xs"
-          />
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-400" size={18} />
-          {searchTerm && (
-            <button
-              onClick={() => setSearchTerm("")}
-              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-700"
-            >
-              <X size={16} />
-            </button>
-          )}
-        </div>
-
-        {/* Counter */}
-        <p className="mt-4 text-xs sm:text-sm text-[#817A71]">
-          {searchTerm.trim() ? (
-            <>
-              Found <strong className="text-[#20201E]">{searchResults.length}</strong> {searchResults.length === 1 ? "product" : "products"} for &ldquo;<span className="italic">{searchTerm}</span>&rdquo;
-            </>
-          ) : (
-            `Showing all ${searchResults.length} products in our collection`
-          )}
-        </p>
-      </div>
-
-      {/* Results or Empty State */}
-      {searchResults.length > 0 ? (
-        <ProductGrid
-          products={searchResults}
-          onQuickView={setQuickViewProduct}
-          wishlistIds={wishlistIds}
-          onToggleWishlist={(p) => toggleWishlist(p.id)}
-        />
-      ) : (
-        <div className="py-20 text-center bg-white border border-[#E5E1DB] rounded-sm p-8">
-          <div className="w-12 h-12 bg-stone-100 rounded-full flex items-center justify-center mx-auto mb-4 text-[#817A71]">
-            <Search size={24} />
-          </div>
-          <h3 className="font-serif text-2xl text-[#20201E]">No pieces match your search</h3>
-          <p className="text-sm text-[#817A71] max-w-md mx-auto mt-2 mb-6">
-            We couldn&apos;t find any furniture matching &ldquo;{searchTerm}&rdquo;. Try browsing by our core categories below:
-          </p>
-          <div className="flex flex-wrap justify-center gap-2">
-            {["Sofa", "Chair", "Table", "Bed", "Lighting"].map((cat) => (
+          <form
+            role="search"
+            onSubmit={(e) => e.preventDefault()}
+            className="relative max-w-2xl"
+          >
+            <label htmlFor="search-page-input" className="sr-only">
+              Cari furniture
+            </label>
+            <input
+              id="search-page-input"
+              type="search"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="Cari nama produk, kategori, atau bahan…"
+              className="w-full bg-white border border-[#E8E6E1] rounded-[8px] py-3.5 pl-11 pr-10 text-[16px] placeholder:text-[#6B6B6B] focus:outline-none focus:border-[#C2410C] transition-colors"
+            />
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#6B6B6B]" size={18} />
+            {searchTerm && (
               <button
-                key={cat}
-                onClick={() => setSearchTerm(cat)}
-                className="px-4 py-2 bg-[#F7F5F0] border border-[#E5E1DB] text-xs uppercase tracking-wider font-semibold hover:border-[#6B6B6B] transition-colors"
+                type="button"
+                onClick={() => setSearchTerm("")}
+                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#6B6B6B] hover:text-[#1A1A1A]"
+                aria-label="Hapus pencarian"
               >
-                {cat}
+                <X size={16} />
               </button>
-            ))}
-            <Link
-              href="/shop"
-              className="px-4 py-2 bg-[#20201E] text-white text-xs uppercase tracking-wider font-semibold hover:bg-[#6B6B6B] transition-colors"
-            >
-              All Catalog
-            </Link>
-          </div>
+            )}
+          </form>
+
+          <p className="mt-4 text-[15px] text-[#6B6B6B]">
+            {searchTerm.trim() ? (
+              <>
+                Ketemu <strong className="text-[#1A1A1A]">{searchResults.length}</strong> produk
+                untuk “<span className="italic">{searchTerm.trim()}</span>”
+              </>
+            ) : (
+              <>Menampilkan semua {searchResults.length} produk</>
+            )}
+          </p>
         </div>
-      )}
-      <QuickViewModal
-        product={quickViewProduct}
-        onClose={() => setQuickViewProduct(null)}
-        onAddToCart={(p, color, size, qty) => {
-          addToCartStore(p, color, size, qty || 1);
-          openCartDrawer();
-        }}
-      />
+
+        {searchResults.length > 0 ? (
+          <ProductGrid
+            products={searchResults}
+            onQuickView={setQuickViewProduct}
+            wishlistIds={wishlistIds}
+            onToggleWishlist={(p) => toggleWishlist(p.id)}
+          />
+        ) : (
+          <div className="py-16 text-center bg-white border border-[#E8E6E1] rounded-[8px] p-8">
+            <div className="w-12 h-12 bg-[#F7F7F5] border border-[#E8E6E1] rounded-full flex items-center justify-center mx-auto mb-4 text-[#6B6B6B]">
+              <Search size={22} />
+            </div>
+            <h2 className="font-serif font-medium text-2xl">Yah, nggak ketemu.</h2>
+            <p className="text-[15px] text-[#6B6B6B] max-w-md mx-auto mt-2 mb-6">
+              Coba kata lain, atau telusuri langsung per kategori di bawah ini:
+            </p>
+            <div className="flex flex-wrap justify-center gap-2">
+              {KATEGORI_SUGGEST.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setSearchTerm(cat)}
+                  className="px-4 py-2 bg-white border border-[#E8E6E1] text-sm font-medium rounded-full hover:border-[#C2410C] hover:text-[#C2410C] transition-colors"
+                >
+                  {cat}
+                </button>
+              ))}
+              <Link
+                href="/shop"
+                className="px-4 py-2 bg-[#1A1A1A] text-white text-sm font-medium rounded-full hover:bg-black transition-colors"
+              >
+                Semua Katalog
+              </Link>
+            </div>
+          </div>
+        )}
+        <QuickViewModal
+          product={quickViewProduct}
+          onClose={() => setQuickViewProduct(null)}
+          onAddToCart={(p, color, size, qty) => {
+            addToCartStore(p, color, size, qty || 1);
+            openCartDrawer();
+          }}
+        />
       </div>
     </div>
   );
@@ -135,7 +146,7 @@ function SearchPageContent() {
 
 export default function SearchPage() {
   return (
-    <Suspense fallback={<div className="max-w-7xl mx-auto px-4 py-16 text-center">Loading search results...</div>}>
+    <Suspense fallback={<div className="max-w-7xl mx-auto px-4 py-16 text-center">Memuat pencarian...</div>}>
       <SearchPageContent />
     </Suspense>
   );

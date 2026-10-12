@@ -22,6 +22,8 @@ export const WISHLIST_EVENT = "efendy:wishlist-updated";
 export const CHECKOUT_EVENT = "efendy:checkout-updated";
 export const ORDERS_EVENT = "efendy:orders-updated";
 export const CART_OPEN_EVENT = "efendy:open-cart";
+export const PROFILE_KEY = "efendy_profile";
+export const PROFILE_EVENT = "efendy:profile-updated";
 
 function readJSON<T>(key: string, fallback: T): T {
   if (typeof window === "undefined") return fallback;
@@ -323,4 +325,52 @@ export function updateOrderStatus(id: string, status: OrderStatus): Order | unde
   next[idx] = { ...next[idx], status };
   writeJSON(ORDERS_KEY, next, ORDERS_EVENT);
   return next[idx];
+}
+
+// ---------- Profile ----------
+
+export interface Profile {
+  fullName: string;
+  phone: string;
+  email: string;
+  address: string;
+  city: string;
+}
+
+export const EMPTY_PROFILE: Profile = {
+  fullName: "",
+  phone: "",
+  email: "",
+  address: "",
+  city: "",
+};
+
+export function getProfile(): Profile {
+  return readJSON<Profile>(PROFILE_KEY, EMPTY_PROFILE);
+}
+
+export function saveProfile(profile: Profile): Profile {
+  writeJSON(PROFILE_KEY, profile, PROFILE_EVENT);
+  return profile;
+}
+
+export function useProfile(): {
+  profile: Profile;
+  save: (profile: Profile) => void;
+} {
+  const [profile, setProfile] = useState<Profile>(EMPTY_PROFILE);
+  useEffect(() => {
+    const sync = () => setProfile(getProfile());
+    sync();
+    window.addEventListener(PROFILE_EVENT, sync);
+    window.addEventListener("storage", sync);
+    return () => {
+      window.removeEventListener(PROFILE_EVENT, sync);
+      window.removeEventListener("storage", sync);
+    };
+  }, []);
+  const save = useCallback((next: Profile) => {
+    setProfile(saveProfile(next));
+  }, []);
+  return { profile, save };
 }
