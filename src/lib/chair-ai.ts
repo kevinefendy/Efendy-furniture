@@ -48,21 +48,23 @@ function searchProducts(query: string, limit = 3): Product[] {
 function byCategory(keyword: string, limit = 3): Product[] {
   const map: Record<string, string> = {
     sofa: "Sofa",
-    kursi: "Chair",
-    chair: "Chair",
-    meja: "Table",
-    table: "Table",
-    bed: "Bed",
-    kasur: "Bed",
-    "tempat tidur": "Bed",
-    lemari: "Storage",
-    storage: "Storage",
-    rak: "Storage",
-    lampu: "Lighting",
-    lighting: "Lighting",
-    dekor: "Decor",
-    vas: "Decor",
-    hiasan: "Decor",
+    kursi: "Kursi",
+    chair: "Kursi",
+    meja: "Meja",
+    table: "Meja",
+    bed: "Tempat Tidur",
+    kasur: "Tempat Tidur",
+    "tempat tidur": "Tempat Tidur",
+    lemari: "Lemari",
+    storage: "Lemari",
+    rak: "Rak",
+    lampu: "Dekorasi",
+    lighting: "Dekorasi",
+    dekor: "Dekorasi",
+    vas: "Dekorasi",
+    hiasan: "Dekorasi",
+    outdoor: "Outdoor",
+    teras: "Outdoor",
   };
   const cat = map[keyword.toLowerCase()];
   if (!cat) return [];
@@ -254,38 +256,38 @@ export function getChairAIResponse(rawInput: string): ChairAIResponse {
 
   // ——— Ruangan ———
   if (q.includes("ruang tamu") || q.includes("living")) {
-    const hits = PRODUCTS.filter((p) => p.room === "living-room").slice(0, 3);
+    const hits = PRODUCTS.filter((p) => p.room === "ruang-tamu").slice(0, 3);
     return {
-      text: `Untuk ruang tamu yang calm & cozy, ini favorit customer:\n${hits.map((p) => `• ${p.name} — ${formatIDR(p.price)}`).join("\n")}`,
+      text: `Untuk ruang tamu yang calm & cozy, ini favorit customer:\n${hits.map((p) => `�?� ${p.name} �?" ${formatIDR(p.price)}`).join("\n")}`,
       products: hits.map(toHit),
-      links: [{ label: "Shop Living Room", href: "/rooms/living-room" }],
+      links: [{ label: "Shop Living Room", href: "/rooms/ruang-tamu" }],
       suggestions: ["Rekomendasi sofa di bawah 10 juta?", "Lampu ruang tamu yang bagus?"],
     };
   }
   if (q.includes("kamar") || q.includes("bedroom") || q.includes("tidur")) {
-    const hits = PRODUCTS.filter((p) => p.room === "bedroom").slice(0, 3);
+    const hits = PRODUCTS.filter((p) => p.room === "kamar-tidur").slice(0, 3);
     return {
-      text: `Buat kamar yang tenang, coba ini:\n${hits.map((p) => `• ${p.name} — ${formatIDR(p.price)}`).join("\n")}`,
+      text: `Buat kamar yang tenang, coba ini:\n${hits.map((p) => `�?� ${p.name} �?" ${formatIDR(p.price)}`).join("\n")}`,
       products: hits.map(toHit),
-      links: [{ label: "Shop Bedroom", href: "/rooms/bedroom" }],
+      links: [{ label: "Shop Bedroom", href: "/rooms/kamar-tidur" }],
       suggestions: ["Kasur yang nyaman?", "Lemari pakaian yang bagus?"],
     };
   }
   if (q.includes("makan") || q.includes("dining") || q.includes("dapur")) {
-    const hits = PRODUCTS.filter((p) => p.room === "dining-room").slice(0, 3);
+    const hits = PRODUCTS.filter((p) => p.room === "ruang-makan").slice(0, 3);
     return {
-      text: `Untuk ruang makan hangat, rekomendasi saya:\n${hits.map((p) => `• ${p.name} — ${formatIDR(p.price)}`).join("\n")}`,
+      text: `Untuk ruang makan hangat, rekomendasi saya:\n${hits.map((p) => `�?� ${p.name} �?" ${formatIDR(p.price)}`).join("\n")}`,
       products: hits.map(toHit),
-      links: [{ label: "Shop Dining Room", href: "/rooms/dining-room" }],
+      links: [{ label: "Shop Dining Room", href: "/rooms/ruang-makan" }],
       suggestions: ["Meja makan yang bagus?", "Kursi makan yang nyaman?"],
     };
   }
   if (q.includes("kerja") || q.includes("kantor") || q.includes("workspace") || q.includes("wfh") || q.includes("belajar")) {
-    const hits = PRODUCTS.filter((p) => p.room === "workspace").slice(0, 3);
+    const hits = PRODUCTS.filter((p) => p.room === "kantor").slice(0, 3);
     return {
-      text: `Buat setup kerja fokus & nyaman:\n${hits.map((p) => `• ${p.name} — ${formatIDR(p.price)}`).join("\n")}`,
+      text: `Buat setup kerja fokus & nyaman:\n${hits.map((p) => `�?� ${p.name} �?" ${formatIDR(p.price)}`).join("\n")}`,
       products: hits.map(toHit),
-      links: [{ label: "Shop Workspace", href: "/rooms/workspace" }],
+      links: [{ label: "Shop Workspace", href: "/rooms/kantor" }],
       suggestions: ["Kursi ergonomis?", "Meja kerja minimalis?"],
     };
   }

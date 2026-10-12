@@ -3,34 +3,96 @@
 @tailwind utilities;
 
 :root {
-  --background: #F7F5F0;
-  --foreground: #20201E;
+  --background: #ffffff;
+  --foreground: #1a1a1a;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: var(--font-logo), "Jost", system-ui, -apple-system, sans-serif;
+  color: #1a1a1a;
+  background: #ffffff;
+  font-family: var(--font-body), "Inter Tight", system-ui, -apple-system, sans-serif;
+  font-size: 17px;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
 
-::selection {
-  background-color: #6B6B6B;
-  color: #FFFFFF;
+h1,
+h2,
+h3,
+.font-heading {
+  font-family: var(--font-heading), "Fraunces", Georgia, serif;
+  line-height: 1.15;
 }
 
-/* Custom scrollbar for editorial minimalist aesthetic */
+::selection {
+  background-color: #c2410c;
+  color: #ffffff;
+}
+
+/* Scrollbar tipis netral */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #F7F5F0;
+  background: #f7f7f5;
 }
 ::-webkit-scrollbar-thumb {
-  background: #D8D2C8;
-  border-radius: 3px;
+  background: #d8d5cf;
+  border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #6B6B6B;
+  background: #6b6b6b;
+}
+
+/* ── Scroll reveal: fade + 16px slide up, 600ms. Halus, tanpa parallax/WebGL ── */
+@keyframes ef-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal {
+  opacity: 0;
+}
+.reveal.is-visible {
+  animation: ef-reveal 600ms ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+  }
+  .reveal.is-visible {
+    animation: none;
+  }
+}
+
+/* Harga: tabular nums agar sejajar */
+.price {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+/* Focus ring aksesibel (kontras AA) */
+:focus-visible {
+  outline: 2px solid #c2410c;
+  outline-offset: 2px;
+}
+
+/* Line clamp fallback */
+.clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }

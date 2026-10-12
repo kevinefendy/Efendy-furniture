@@ -5,7 +5,7 @@ import ProductCard from "@/components/product/ProductCard";
 import { ArrowLeft } from "lucide-react";
 
 export default function InspirationPage() {
-  const featuredLivingPieces = PRODUCTS.filter((p) => p.room === "living-room").slice(0, 3);
+  const featuredLivingPieces = PRODUCTS.filter((p) => p.room === "ruang-tamu").slice(0, 3);
 
   return (
     <div className="min-h-screen bg-[#F7F5F0]">

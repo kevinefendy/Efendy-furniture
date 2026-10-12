@@ -2,183 +2,178 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Instagram, Facebook, Twitter, Youtube, Check } from "lucide-react";
+import { Instagram, Facebook, Youtube, Check, MapPin, Phone, Mail } from "lucide-react";
 
-const SHOP_LINKS = [
-  { name: "All Furniture", href: "/shop" },
-  { name: "Sofas", href: "/shop?category=Sofa" },
-  { name: "Chairs", href: "/shop?category=Chair" },
-  { name: "Tables", href: "/shop?category=Table" },
-  { name: "Beds", href: "/shop?category=Bed" },
-  { name: "Storage", href: "/shop?category=Storage" },
-  { name: "Lighting", href: "/shop?category=Lighting" },
-  { name: "Sale", href: "/shop?deal=sale" },
+// Footer retail 4 kolom + newsletter simpel (1 input + 1 tombol). Border top tipis.
+const KATEGORI = [
+  { nama: "Sofa", href: "/shop?category=Sofa" },
+  { nama: "Meja", href: "/shop?category=Meja" },
+  { nama: "Kursi", href: "/shop?category=Kursi" },
+  { nama: "Lemari", href: "/shop?category=Lemari" },
+  { nama: "Tempat Tidur", href: "/shop?category=Tempat%20Tidur" },
+  { nama: "Rak", href: "/shop?category=Rak" },
+  { nama: "Outdoor", href: "/shop?category=Outdoor" },
+  { nama: "Dekorasi", href: "/shop?category=Dekorasi" },
 ];
 
-const EXPLORE_LINKS = [
-  { name: "Ideas & Inspiration", href: "/inspiration" },
-  { name: "Furniture Collections", href: "/collections" },
-  { name: "Shop by Room", href: "/rooms" },
-  { name: "New Arrivals", href: "/shop?sort=newest" },
-  { name: "Best Sellers", href: "/shop?sort=rating" },
-  { name: "Search", href: "/search" },
+const BANTUAN = [
+  { nama: "Pengiriman & Instalasi", href: "/#bantuan" },
+  { nama: "Retur 30 Hari", href: "/#bantuan" },
+  { nama: "Garansi 1–3 Tahun", href: "/#bantuan" },
+  { nama: "Cicilan 0% 12 Bulan", href: "/#bantuan" },
+  { nama: "Lacak Pesanan", href: "/cart" },
 ];
 
-const SUPPORT_LINKS = [
-  { name: "My Wishlist", href: "/wishlist" },
-  { name: "Shopping Bag", href: "/cart" },
-  { name: "Checkout", href: "/checkout" },
-  { name: "Contact Us", href: "mailto:hello@efendy-furniture.com" },
-];
-
-const SOCIALS = [
-  { name: "Instagram", href: "https://instagram.com", Icon: Instagram },
-  { name: "Facebook", href: "https://facebook.com", Icon: Facebook },
-  { name: "Twitter", href: "https://twitter.com", Icon: Twitter },
-  { name: "Youtube", href: "https://youtube.com", Icon: Youtube },
+const TENTANG = [
+  { nama: "Koleksi Baru", href: "/shop?sort=newest" },
+  { nama: "Sale", href: "/shop?deal=sale" },
+  { nama: "Showroom Kami", href: "/#showroom" },
+  { nama: "Tips Dekorasi", href: "/#artikel" },
+  { nama: "Wishlist", href: "/wishlist" },
 ];
 
 export default function Footer() {
   const [email, setEmail] = useState("");
-  const [subscribed, setSubscribed] = useState(false);
+  const [done, setDone] = useState(false);
   const [error, setError] = useState("");
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const subscribe = (e: React.FormEvent) => {
     e.preventDefault();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
-      setError("Please enter a valid email address.");
+      setError("Masukkan alamat email yang valid ya.");
       return;
     }
     setError("");
-    setSubscribed(true);
+    setDone(true);
   };
 
   return (
-    <footer className="bg-white text-stone-500 border-t border-[#E5E1DB]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-8">
-        {/* Logo + socials */}
-        <div className="mb-10">
-          <Link href="/" aria-label="Efendy Furniture home">
-            <span className="font-logo text-[32px] font-medium tracking-[0.18em] text-[#6B6B6B] leading-none">
-              EFENDY<span className="text-[#6B6B6B]">.</span>
-            </span>
-          </Link>
-          <div className="flex items-center gap-3 mt-5">
-            {SOCIALS.map(({ name, href, Icon }) => (
-              <a
-                key={name}
-                href={href}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={`Efendy Furniture on ${name}`}
-                className="w-9 h-9 rounded-full border border-stone-300 flex items-center justify-center text-stone-500 hover:text-[#6B6B6B] hover:border-[#6B6B6B] transition-colors"
-              >
-                <Icon size={17} strokeWidth={1.6} />
-              </a>
-            ))}
-          </div>
-        </div>
-
-        {/* Link columns + newsletter */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-10">
-          <nav aria-label="Shop links">
-            <h3 className="text-sm font-semibold text-[#20201E] mb-4">Shop</h3>
-            <ul className="space-y-2.5 text-[13.5px]">
-              {SHOP_LINKS.map((l) => (
-                <li key={l.name}>
-                  <Link href={l.href} className="hover:text-[#6B6B6B] transition-colors">
-                    {l.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-
-          <nav aria-label="Explore links">
-            <h3 className="text-sm font-semibold text-[#20201E] mb-4">Explore</h3>
-            <ul className="space-y-2.5 text-[13.5px]">
-              {EXPLORE_LINKS.map((l) => (
-                <li key={l.name}>
-                  <Link href={l.href} className="hover:text-[#6B6B6B] transition-colors">
-                    {l.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-
-          <nav aria-label="Support links">
-            <h3 className="text-sm font-semibold text-[#20201E] mb-4">Support</h3>
-            <ul className="space-y-2.5 text-[13.5px]">
-              {SUPPORT_LINKS.map((l) => (
-                <li key={l.name}>
-                  <Link href={l.href} className="hover:text-[#6B6B6B] transition-colors">
-                    {l.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-
-          {/* Newsletter */}
-          <div className="col-span-2 md:col-span-1 lg:col-span-2 lg:pl-10">
-            <h3 className="text-[15px] font-normal text-[#20201E] leading-snug mb-4">
-              Get new products and promotions in your inbox.
+    <footer className="bg-white text-[#1A1A1A] border-t border-[#E8E6E1]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-16">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-10">
+          {/* Kategori */}
+          <nav aria-label="Kategori produk">
+            <h3 className="font-sans text-sm font-semibold uppercase tracking-widest mb-4">
+              Kategori
             </h3>
-            {subscribed ? (
-              <p role="status" className="flex items-center gap-2 text-sm text-emerald-600">
-                <Check size={16} /> You&apos;re subscribed. Welcome in!
+            <ul className="space-y-2.5 text-[15px] text-[#1A1A1A]">
+              {KATEGORI.map((l) => (
+                <li key={l.nama}>
+                  <Link href={l.href} className="hover:text-[#C2410C] hover:underline underline-offset-4 transition">
+                    {l.nama}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          {/* Bantuan */}
+          <nav aria-label="Bantuan" id="bantuan">
+            <h3 className="font-sans text-sm font-semibold uppercase tracking-widest mb-4">
+              Bantuan
+            </h3>
+            <ul className="space-y-2.5 text-[15px]">
+              {BANTUAN.map((l) => (
+                <li key={l.nama}>
+                  <Link href={l.href} className="hover:text-[#C2410C] hover:underline underline-offset-4 transition">
+                    {l.nama}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          {/* Tentang */}
+          <nav aria-label="Tentang Efendy">
+            <h3 className="font-sans text-sm font-semibold uppercase tracking-widest mb-4">
+              Tentang Efendy
+            </h3>
+            <ul className="space-y-2.5 text-[15px]">
+              {TENTANG.map((l) => (
+                <li key={l.nama}>
+                  <Link href={l.href} className="hover:text-[#C2410C] hover:underline underline-offset-4 transition">
+                    {l.nama}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <div className="flex items-center gap-2 mt-5">
+              {[
+                { Icon: Instagram, label: "Instagram Efendy Furniture" },
+                { Icon: Facebook, label: "Facebook Efendy Furniture" },
+                { Icon: Youtube, label: "Youtube Efendy Furniture" },
+              ].map(({ Icon, label }) => (
+                <a
+                  key={label}
+                  href="#"
+                  aria-label={label}
+                  className="w-10 h-10 rounded-full border border-[#E8E6E1] flex items-center justify-center text-[#1A1A1A] hover:border-[#C2410C] hover:text-[#C2410C] transition-colors"
+                >
+                  <Icon size={18} strokeWidth={1.7} />
+                </a>
+              ))}
+            </div>
+          </nav>
+
+          {/* Kontak + newsletter */}
+          <div>
+            <h3 className="font-sans text-sm font-semibold uppercase tracking-widest mb-4">
+              Kabar & Promo
+            </h3>
+            <p className="text-[15px] text-[#6B6B6B] mb-4">
+              Daftarkan email biar nggak ketinggalan koleksi baru dan sale.
+            </p>
+            {done ? (
+              <p role="status" className="flex items-center gap-2 text-[15px] text-emerald-700">
+                <Check size={17} /> Siap! Cek inbox email kamu ya.
               </p>
             ) : (
-              <form onSubmit={handleSubscribe} noValidate>
-                <label htmlFor="footer-email" className="sr-only">
-                  Email address
+              <form onSubmit={subscribe} noValidate className="flex gap-2">
+                <label htmlFor="newsletter-email" className="sr-only">
+                  Alamat email
                 </label>
                 <input
-                  id="footer-email"
+                  id="newsletter-email"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Your email"
+                  placeholder="Alamat email"
                   aria-invalid={!!error}
-                  aria-describedby={error ? "footer-email-error" : undefined}
-                  className="w-full max-w-sm bg-[#F7F5F0] border border-stone-300 text-[#20201E] placeholder:text-stone-400 text-sm rounded-sm px-4 py-2.5 focus:outline-none focus:border-[#6B6B6B] transition-colors"
+                  className="flex-1 min-w-0 border border-[#E8E6E1] rounded-[8px] px-4 py-2.5 text-[15px] placeholder:text-[#6B6B6B] focus:outline-none focus:border-[#C2410C]"
                 />
-                {error && (
-                  <p id="footer-email-error" role="alert" className="mt-2 text-xs text-rose-500">
-                    {error}
-                  </p>
-                )}
-                <div className="mt-3">
-                  <button
-                    type="submit"
-                    className="px-7 py-2.5 bg-[#6B6B6B] hover:bg-[#4A4A4A] text-white text-xs font-bold tracking-[0.15em] rounded-full transition-colors"
-                  >
-                    SUBSCRIBE
-                  </button>
-                </div>
+                <button
+                  type="submit"
+                  className="shrink-0 px-5 py-2.5 rounded-[8px] bg-[#1A1A1A] hover:bg-black text-white text-sm font-medium transition-colors"
+                >
+                  Daftar
+                </button>
               </form>
             )}
-            <p className="mt-5 text-xs text-stone-400">
-              Showroom: Senopati, South Jakarta
-              <br />
-              hello@efendy-furniture.com
-            </p>
+            {error && (
+              <p role="alert" className="mt-2 text-sm text-[#C2410C]">
+                {error}
+              </p>
+            )}
+            <ul className="mt-6 space-y-2.5 text-[15px] text-[#6B6B6B]">
+              <li className="flex items-start gap-2">
+                <MapPin size={17} className="mt-0.5 shrink-0" /> Jakarta · Surabaya · Bandung
+              </li>
+              <li className="flex items-center gap-2">
+                <Phone size={17} className="shrink-0" /> 0812-1000-1001
+              </li>
+              <li className="flex items-center gap-2">
+                <Mail size={17} className="shrink-0" /> halo@efendyfurniture.id
+              </li>
+            </ul>
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="mt-12 pt-6 border-t border-[#E5E1DB] text-[13px] space-y-2">
-          <p className="flex items-center gap-2 text-stone-500">
-            <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-600 text-white text-[9px] font-bold">
-              ID
-            </span>
-            ID | EN
+        <div className="mt-12 pt-6 border-t border-[#E8E6E1] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-sm text-[#6B6B6B]">
+          <p className="font-sans font-bold text-[#1A1A1A] text-lg">
+            Efendy<span className="text-[#C2410C]">.</span>
+            <span className="ml-2 font-normal text-sm text-[#6B6B6B]">Furniture Indonesia</span>
           </p>
-          <p className="text-stone-400">
-            Terms of Use - Privacy Policy - Cookies - Accessibility - Shop
-          </p>
-          <p className="text-stone-400">Copyright © 2026 Efendy Furniture. All rights reserved.</p>
+          <p>© 2026 Efendy Furniture. Buatan Indonesia, untuk rumah Indonesia.</p>
         </div>
       </div>
     </footer>

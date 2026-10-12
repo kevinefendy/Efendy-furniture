@@ -5,7 +5,7 @@ import { X, RotateCcw } from "lucide-react";
 
 export interface FilterState {
   categories: ProductCategory[];
-  priceRange: string[]; // "under-1m" | "1m-5m" | "5m-10m" | "above-10m"
+  priceRange: string[];
   colors: string[];
   styles: ProductStyle[];
 }
@@ -26,38 +26,35 @@ interface ProductFilterProps {
   sortControl?: React.ReactNode;
 }
 
+// Filter retail: kategori, harga, material (pakai warna sbg proksi), warna, ukuran tersedia via produk.
 const CATEGORIES: ProductCategory[] = [
   "Sofa",
-  "Chair",
-  "Table",
-  "Bed",
-  "Storage",
-  "Lighting",
-  "Decor",
+  "Meja",
+  "Kursi",
+  "Lemari",
+  "Tempat Tidur",
+  "Rak",
+  "Outdoor",
+  "Dekorasi",
 ];
 
 const PRICE_RANGES = [
-  { id: "under-1m", label: "Under Rp 1.000.000" },
-  { id: "1m-5m", label: "Rp 1.000.000 – Rp 5.000.000" },
-  { id: "5m-10m", label: "Rp 5.000.000 – Rp 10.000.000" },
-  { id: "above-10m", label: "Above Rp 10.000.000" },
+  { id: "under-1m", label: "Di bawah Rp 1 juta" },
+  { id: "1m-5m", label: "Rp 1 – 5 juta" },
+  { id: "5m-10m", label: "Rp 5 – 10 juta" },
+  { id: "above-10m", label: "Di atas Rp 10 juta" },
 ];
 
 const COLORS = [
-  { name: "Beige", hex: "#E8E2D5" },
-  { name: "Brown", hex: "#8A6D53" },
-  { name: "Black", hex: "#2B2B2B" },
-  { name: "White", hex: "#FFFFFF" },
-  { name: "Gray", hex: "#A6A6A4" },
+  { name: "Putih", hex: "#F5F3ED" },
+  { name: "Krem", hex: "#E8E2D5" },
+  { name: "Coklat", hex: "#8A6D53" },
+  { name: "Hitam", hex: "#1F1F1F" },
+  { name: "Abu", hex: "#A6A6A4" },
+  { name: "Rotan", hex: "#C8A165" },
 ];
 
-const STYLES: ProductStyle[] = [
-  "Modern",
-  "Scandinavian",
-  "Japandi",
-  "Mid-Century",
-  "Minimal",
-];
+const STYLES: ProductStyle[] = ["Minimalis", "Scandinavian Warm", "Japandi", "Industrial"];
 
 export default function ProductFilter({
   filters,
@@ -102,14 +99,13 @@ export default function ProductFilter({
     filters.styles.length;
 
   const content = (
-    <div className="space-y-8 text-sm">
+    <div className="space-y-8 text-[15px]">
       {sortControl}
-      {/* Reset Bar */}
-      <div className="flex items-center justify-between pb-3 border-b border-[#E5E1DB]">
+      <div className="flex items-center justify-between pb-3 border-b border-[#E8E6E1]">
         <div className="flex items-center gap-2">
-          <span className="text-[15px] font-bold text-[#20201E]">Filter By</span>
+          <span className="font-semibold text-[#1A1A1A]">Filter</span>
           {activeCount > 0 && (
-            <span className="bg-[#6B6B6B] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+            <span className="bg-[#C2410C] text-white text-xs font-bold px-2 py-0.5 rounded-full">
               {activeCount}
             </span>
           )}
@@ -117,29 +113,25 @@ export default function ProductFilter({
         {activeCount > 0 && (
           <button
             onClick={onResetFilters}
-            className="text-xs text-[#817A71] hover:text-[#20201E] flex items-center gap-1 transition-colors"
+            className="text-sm text-[#6B6B6B] hover:text-[#1A1A1A] flex items-center gap-1 transition-colors"
           >
-            <RotateCcw size={12} /> Clear all
+            <RotateCcw size={13} /> Hapus semua
           </button>
         )}
       </div>
 
-      {/* 1. Category */}
       <div>
-        <h4 className="text-xs uppercase tracking-widest font-semibold text-[#817A71] mb-3">
-          Category
+        <h4 className="text-[13px] uppercase tracking-widest font-semibold text-[#6B6B6B] mb-3">
+          Kategori
         </h4>
         <div className="space-y-2">
           {CATEGORIES.map((cat) => (
-            <label
-              key={cat}
-              className="flex items-center gap-2.5 cursor-pointer text-stone-700 hover:text-[#20201E] select-none"
-            >
+            <label key={cat} className="flex items-center gap-2.5 cursor-pointer hover:text-[#C2410C]">
               <input
                 type="checkbox"
                 checked={filters.categories.includes(cat)}
                 onChange={() => toggleCategory(cat)}
-                className="w-4 h-4 rounded-xs border-stone-300 text-[#6B6B6B] focus:ring-[#6B6B6B]"
+                className="w-4 h-4 rounded border-[#E8E6E1] accent-[#C2410C]"
               />
               <span>{cat}</span>
             </label>
@@ -147,22 +139,18 @@ export default function ProductFilter({
         </div>
       </div>
 
-      {/* 2. Price Range */}
       <div>
-        <h4 className="text-xs uppercase tracking-widest font-semibold text-[#817A71] mb-3">
-          Price Range
+        <h4 className="text-[13px] uppercase tracking-widest font-semibold text-[#6B6B6B] mb-3">
+          Harga
         </h4>
         <div className="space-y-2">
           {PRICE_RANGES.map((pr) => (
-            <label
-              key={pr.id}
-              className="flex items-center gap-2.5 cursor-pointer text-stone-700 hover:text-[#20201E] select-none text-xs sm:text-sm"
-            >
+            <label key={pr.id} className="flex items-center gap-2.5 cursor-pointer hover:text-[#C2410C]">
               <input
                 type="checkbox"
                 checked={filters.priceRange.includes(pr.id)}
                 onChange={() => togglePriceRange(pr.id)}
-                className="w-4 h-4 rounded-xs border-stone-300 text-[#6B6B6B] focus:ring-[#6B6B6B]"
+                className="w-4 h-4 rounded border-[#E8E6E1] accent-[#C2410C]"
               />
               <span>{pr.label}</span>
             </label>
@@ -170,23 +158,23 @@ export default function ProductFilter({
         </div>
       </div>
 
-      {/* 3. Color Swatches */}
       <div>
-        <h4 className="text-xs uppercase tracking-widest font-semibold text-[#817A71] mb-3">
-          Color
+        <h4 className="text-[13px] uppercase tracking-widest font-semibold text-[#6B6B6B] mb-3">
+          Warna
         </h4>
         <div className="flex flex-wrap gap-2">
           {COLORS.map((col) => {
-            const isSelected = filters.colors.includes(col.name);
+            const selected = filters.colors.includes(col.name);
             return (
               <button
                 key={col.name}
                 type="button"
                 onClick={() => toggleColor(col.name)}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs transition-all ${
-                  isSelected
-                    ? "border-[#20201E] bg-[#20201E] text-white font-medium shadow-xs"
-                    : "border-[#E5E1DB] bg-white text-stone-700 hover:border-stone-400"
+                aria-pressed={selected}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-sm transition-colors ${
+                  selected
+                    ? "border-[#C2410C] bg-[#FDEEE4] text-[#1A1A1A] font-medium"
+                    : "border-[#E8E6E1] bg-white hover:border-[#6B6B6B]"
                 }`}
               >
                 <span
@@ -200,22 +188,18 @@ export default function ProductFilter({
         </div>
       </div>
 
-      {/* 4. Style */}
       <div>
-        <h4 className="text-xs uppercase tracking-widest font-semibold text-[#817A71] mb-3">
-          Style & Aesthetic
+        <h4 className="text-[13px] uppercase tracking-widest font-semibold text-[#6B6B6B] mb-3">
+          Gaya
         </h4>
         <div className="space-y-2">
           {STYLES.map((st) => (
-            <label
-              key={st}
-              className="flex items-center gap-2.5 cursor-pointer text-stone-700 hover:text-[#20201E] select-none"
-            >
+            <label key={st} className="flex items-center gap-2.5 cursor-pointer hover:text-[#C2410C]">
               <input
                 type="checkbox"
                 checked={filters.styles.includes(st)}
                 onChange={() => toggleStyle(st)}
-                className="w-4 h-4 rounded-xs border-stone-300 text-[#6B6B6B] focus:ring-[#6B6B6B]"
+                className="w-4 h-4 rounded border-[#E8E6E1] accent-[#C2410C]"
               />
               <span>{st}</span>
             </label>
@@ -227,32 +211,25 @@ export default function ProductFilter({
 
   return (
     <>
-      {/* Desktop Sidebar */}
       <aside className="hidden lg:block w-64 shrink-0">{content}</aside>
-
-      {/* Mobile Drawer */}
       {isOpenMobile && (
-        <div className="fixed inset-0 z-50 flex justify-end bg-black/50 backdrop-blur-xs lg:hidden animate-in fade-in">
-          <div className="w-full max-w-xs bg-[#F7F5F0] h-full p-6 overflow-y-auto shadow-2xl flex flex-col justify-between animate-in slide-in-from-right">
+        <div className="fixed inset-0 z-50 flex justify-end bg-black/40 lg:hidden">
+          <div className="w-full max-w-xs bg-white h-full p-6 overflow-y-auto flex flex-col justify-between">
             <div>
-              <div className="flex items-center justify-between pb-4 border-b border-[#E5E1DB] mb-6">
-                <span className="font-serif text-xl text-[#20201E]">Filters</span>
-                <button
-                  onClick={onCloseMobile}
-                  className="p-1 text-stone-500 hover:text-[#20201E]"
-                  aria-label="Close filters"
-                >
+              <div className="flex items-center justify-between pb-4 border-b border-[#E8E6E1] mb-6">
+                <span className="font-serif text-xl">Filter</span>
+                <button onClick={onCloseMobile} className="p-1" aria-label="Tutup filter">
                   <X size={20} />
                 </button>
               </div>
               {content}
             </div>
-            <div className="pt-6 border-t border-[#E5E1DB] mt-6">
+            <div className="pt-6 border-t border-[#E8E6E1] mt-6">
               <button
                 onClick={onCloseMobile}
-                className="w-full py-3 bg-[#20201E] text-white text-xs font-semibold uppercase tracking-wider hover:bg-[#6B6B6B] transition"
+                className="w-full py-3 bg-[#C2410C] hover:bg-[#A8370A] text-white text-sm font-medium rounded-[8px] transition-colors"
               >
-                Apply Filters ({activeCount})
+                Tampilkan ({activeCount} filter)
               </button>
             </div>
           </div>

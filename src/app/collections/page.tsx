@@ -1,100 +1,73 @@
 import Image from "next/image";
 import Link from "next/link";
-import { PRODUCTS } from "@/data/products";
+import { PRODUCTS, KOLEKSI_TEMA } from "@/data/products";
 import ProductCard from "@/components/product/ProductCard";
 import { ArrowLeft } from "lucide-react";
 
+// Halaman koleksi: 4 tema kurasi (Rumah Minimalis, Scandinavian Warm, Japandi Calm, Industrial Loft).
 export default function CollectionsPage() {
-  const naraProducts = PRODUCTS.filter((p) => p.collectionName === "Nara");
-  const awanProducts = PRODUCTS.filter((p) => p.collectionName === "Awan");
-
   return (
-    <div className="min-h-screen bg-[#F7F5F0]">
-      {/* Hero Banner */}
-      <div className="relative h-[55vh] min-h-[400px] w-full bg-stone-900 overflow-hidden">
+    <div className="min-h-screen bg-white">
+      <div className="relative h-[45vh] min-h-[340px] w-full overflow-hidden bg-[#F7F7F5]">
         <Image
-          src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=2000&q=85"
-          alt="The Nara Collection"
+          src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=2000&q=85"
+          alt="Koleksi furniture Efendy Furniture"
           fill
           priority
           sizes="100vw"
-          className="object-cover object-center opacity-80"
+          className="object-cover object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/20" />
-        <div className="relative max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8 flex flex-col justify-end pb-12 text-white">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+        <div className="relative max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8 flex flex-col justify-end pb-10 text-white">
           <Link
             href="/shop"
-            className="inline-flex items-center gap-1.5 text-xs uppercase tracking-widest text-stone-300 hover:text-white mb-4"
+            className="inline-flex items-center gap-1.5 text-sm text-white/80 hover:text-white mb-3"
           >
-            <ArrowLeft size={14} /> Back to Catalog
+            <ArrowLeft size={15} /> Kembali belanja
           </Link>
-          <span className="text-xs uppercase tracking-[0.3em] text-[#6B6B6B] font-bold">
-            Capsule Series
-          </span>
-          <h1 className="font-serif text-4xl sm:text-6xl font-light tracking-tight mt-1">
-            The Nara Collection
+          <h1 className="font-serif font-medium text-[36px] sm:text-[54px] tracking-tight">
+            Koleksi gaya rumah
           </h1>
-          <p className="text-sm sm:text-base text-stone-300 max-w-lg mt-2 font-light">
-            Warm wood. Soft curves. Designed for slow living. Each piece is an exploration of Japanese
-            quietude and honest Indonesian craftsmanship.
+          <p className="text-[16px] text-white/85 max-w-xl mt-2">
+            Empat tema yang paling sering dipilih pelanggan. Pilih yang paling kamu banget,
+            langsung isi seisi rumah.
           </p>
         </div>
       </div>
 
-      {/* Grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="flex items-center justify-between mb-8 pb-4 border-b border-[#E5E1DB]">
-          <h2 className="font-serif text-2xl text-[#20201E]">Collection Pieces</h2>
-          <span className="text-xs text-[#817A71] uppercase tracking-wider">
-            {naraProducts.length} Items Available
-          </span>
-        </div>
-
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-          {naraProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
-      </div>
-
-      {/* Awan Collection Banner */}
-      <div className="relative h-[45vh] min-h-[340px] w-full bg-stone-900 overflow-hidden">
-        <Image
-          src="https://images.unsplash.com/photo-1615873968403-89e068629265?auto=format&fit=crop&w=2000&q=85"
-          alt="The Awan Collection"
-          fill
-          sizes="100vw"
-          className="object-cover object-center opacity-80"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/20" />
-        <div className="relative max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8 flex flex-col justify-end pb-12 text-white">
-          <span className="text-xs uppercase tracking-[0.3em] text-[#6B6B6B] font-bold">
-            Capsule Series
-          </span>
-          <h2 className="font-serif text-4xl sm:text-6xl font-light tracking-tight mt-1">
-            The Awan Collection
-          </h2>
-          <p className="text-sm sm:text-base text-stone-300 max-w-lg mt-2 font-light">
-            Light as a cloud. Soft Scandinavian forms for rest, focus, and quiet
-            mornings — bedroom calm and workspace clarity.
-          </p>
-        </div>
-      </div>
-
-      {/* Awan Grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="flex items-center justify-between mb-8 pb-4 border-b border-[#E5E1DB]">
-          <h2 className="font-serif text-2xl text-[#20201E]">Collection Pieces</h2>
-          <span className="text-xs text-[#817A71] uppercase tracking-wider">
-            {awanProducts.length} Items Available
-          </span>
-        </div>
-
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-          {awanProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 space-y-16">
+        {KOLEKSI_TEMA.map((koleksi) => {
+          const styleName =
+            koleksi.nama === "Rumah Minimalis"
+              ? "Minimalis"
+              : koleksi.nama === "Industrial Loft"
+                ? "Industrial"
+                : koleksi.nama === "Japandi Calm"
+                  ? "Japandi"
+                  : "Scandinavian Warm";
+          const items = PRODUCTS.filter((p) => p.style === styleName).slice(0, 4);
+          return (
+            <section key={koleksi.id} aria-label={`Koleksi ${koleksi.nama}`}>
+              <div className="flex items-end justify-between gap-4 mb-6 pb-4 border-b border-[#E8E6E1]">
+                <div>
+                  <h2 className="font-serif font-medium text-[28px] tracking-tight">{koleksi.nama}</h2>
+                  <p className="text-[15px] text-[#6B6B6B] mt-1">{koleksi.deskripsi}</p>
+                </div>
+                <Link
+                  href={`/shop?style=${encodeURIComponent(styleName)}`}
+                  className="shrink-0 text-[15px] font-medium underline underline-offset-4 decoration-[#C2410C] decoration-2"
+                >
+                  Lihat semua
+                </Link>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                {items.map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
+              </div>
+            </section>
+          );
+        })}
       </div>
     </div>
   );

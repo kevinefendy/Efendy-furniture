@@ -57,16 +57,16 @@ export default function RoomDetailPage({ params }: RoomPageProps) {
       </div>
 
       {/* Room navigation tabs */}
-      <div className="border-b border-[#E5E1DB] bg-white sticky top-[122px] lg:top-[124px] z-30 shadow-xs">
+      <div className="border-b border-[#E8E6E1] bg-white sticky top-[100px] lg:top-[108px] z-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-6 overflow-x-auto py-3">
           {ROOMS_DATA.map((r) => (
             <Link
               key={r.id}
               href={`/rooms/${r.id}`}
-              className={`text-xs uppercase tracking-wider font-semibold whitespace-nowrap transition-colors py-1 ${
+              className={`text-sm font-medium whitespace-nowrap transition-colors py-1 ${
                 r.id === room.id
-                  ? "text-[#6B6B6B] border-b-2 border-[#6B6B6B]"
-                  : "text-stone-500 hover:text-[#20201E]"
+                  ? "text-[#C2410C] border-b-2 border-[#C2410C]"
+                  : "text-[#6B6B6B] hover:text-[#1A1A1A]"
               }`}
             >
               {r.name}
@@ -77,10 +77,10 @@ export default function RoomDetailPage({ params }: RoomPageProps) {
 
       {/* Products Grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="flex items-center justify-between mb-8 pb-4 border-b border-[#E5E1DB]">
-          <h2 className="text-xl font-bold text-[#20201E]">Furniture for {room.name}</h2>
-          <span className="text-xs text-[#817A71] uppercase tracking-wider">
-            {roomProducts.length} Items Found
+        <div className="flex items-center justify-between mb-8 pb-4 border-b border-[#E8E6E1]">
+          <h2 className="font-serif font-medium text-2xl text-[#1A1A1A]">Furniture untuk {room.name}</h2>
+          <span className="text-sm text-[#6B6B6B]">
+            {roomProducts.length} produk ketemu
           </span>
         </div>
 

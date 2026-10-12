@@ -13,7 +13,7 @@ interface SearchModalProps {
   onClose: () => void;
 }
 
-const POPULAR_SEARCHES = ["Sofa", "Nara", "Oak Table", "Lounge Chair", "Bed", "Lighting"];
+const POPULAR_SEARCHES = ["Sofa", "Meja makan", "Kursi kerja", "Lemari", "Tempat tidur", "Rak"];
 
 export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
   const [query, setQuery] = useState("");

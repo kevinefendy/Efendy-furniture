@@ -1,81 +1,56 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
-interface ScrollRevealProps {
-  children: React.ReactNode;
-  className?: string;
-  delayMs?: number;
-  direction?: "up" | "down" | "left" | "right" | "fade";
-  durationMs?: number;
-}
-
+// Scroll reveal: fade + 16px slide up, 600ms. Hormat prefers-reduced-motion via CSS.
+// Alasan: animasi halus ala retail (Informa/Dekoruma), tanpa parallax/WebGL.
 export default function ScrollReveal({
   children,
   className = "",
-  delayMs = 0,
-  direction = "up",
-  durationMs = 700,
-}: ScrollRevealProps) {
-  const [isVisible, setIsVisible] = useState(false);
-  const elementRef = useRef<HTMLDivElement | null>(null);
+  delay = 0,
+  as: Tag = "div",
+  // Props lama (kompatibilitas): direction diabaikan — reveal selalu fade + 16px slide up.
+  // delayMs adalah alias delay.
+  direction,
+  delayMs,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+  as?: "div" | "section" | "li" | "article";
+  direction?: string;
+  delayMs?: number;
+}) {
+  const ref = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.unobserve(entry.target);
-        }
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            el.classList.add("is-visible");
+            io.disconnect();
+          }
+        });
       },
-      {
-        threshold: 0.12,
-        rootMargin: "0px 0px -40px 0px",
-      }
+      { threshold: 0.12 }
     );
-
-    const currentEl = elementRef.current;
-    if (currentEl) {
-      observer.observe(currentEl);
-    }
-
-    return () => {
-      if (currentEl) observer.unobserve(currentEl);
-    };
+    io.observe(el);
+    return () => io.disconnect();
   }, []);
 
-  const getTransform = () => {
-    if (isVisible) return "translate3d(0, 0, 0)";
-    switch (direction) {
-      case "up":
-        return "translate3d(0, 32px, 0)";
-      case "down":
-        return "translate3d(0, -32px, 0)";
-      case "left":
-        return "translate3d(32px, 0, 0)";
-      case "right":
-        return "translate3d(-32px, 0, 0)";
-      case "fade":
-      default:
-        return "translate3d(0, 0, 0)";
-    }
-  };
+  const Merged = Tag as "div";
+  const effectiveDelay = delayMs ?? delay;
 
   return (
-    <div
-      ref={elementRef}
-      className={className}
-      style={{
-        opacity: isVisible ? 1 : 0,
-        transform: getTransform(),
-        transitionProperty: "opacity, transform",
-        transitionDuration: `${durationMs}ms`,
-        transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
-        transitionDelay: `${delayMs}ms`,
-        willChange: "opacity, transform",
-      }}
+    <Merged
+      ref={ref}
+      className={`reveal ${className}`}
+      style={effectiveDelay ? { animationDelay: `${effectiveDelay}ms` } : undefined}
     >
       {children}
-    </div>
+    </Merged>
   );
 }

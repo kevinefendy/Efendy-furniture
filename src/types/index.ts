@@ -1,24 +1,28 @@
+// Kategori retail Indonesia ala Informa: bukan workshop, bukan fake Scandinavian.
 export type ProductCategory =
   | "Sofa"
-  | "Chair"
-  | "Table"
-  | "Bed"
-  | "Storage"
-  | "Lighting"
-  | "Decor";
+  | "Meja"
+  | "Kursi"
+  | "Lemari"
+  | "Tempat Tidur"
+  | "Rak"
+  | "Outdoor"
+  | "Dekorasi";
 
 export type RoomCategory =
-  | "living-room"
-  | "bedroom"
-  | "dining-room"
-  | "workspace";
+  | "ruang-tamu"
+  | "kamar-tidur"
+  | "ruang-makan"
+  | "dapur"
+  | "kantor"
+  | "outdoor"
+  | "dekorasi";
 
 export type ProductStyle =
-  | "Modern"
-  | "Scandinavian"
+  | "Minimalis"
+  | "Scandinavian Warm"
   | "Japandi"
-  | "Mid-Century"
-  | "Minimal";
+  | "Industrial";
 
 export interface ProductVariant {
   name: string;
@@ -55,6 +59,7 @@ export interface Product {
   images: string[];
   featured?: boolean;
   isNewArrival?: boolean;
+  bestSeller?: boolean;
 }
 
 export interface CartItem {

@@ -361,14 +361,14 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
                 <button
                   onClick={handleAddToCart}
                   disabled={outOfStock}
-                  className="flex-1 min-w-0 h-12 bg-[#20201E] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#6B6B6B] transition-all flex items-center justify-center gap-2 shadow-md disabled:bg-stone-400 disabled:cursor-not-allowed px-2"
+                  className="flex-1 min-w-0 h-12 bg-[#C2410C] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#A8370A] transition-all flex items-center justify-center gap-2 disabled:bg-stone-400 disabled:cursor-not-allowed px-2"
                 >
                   <ShoppingBag size={16} className="shrink-0" aria-hidden />
                   {outOfStock ? (
-                    "Out of Stock"
+                    "Stok Habis"
                   ) : (
                     <span className="truncate">
-                      Add To Cart
+                      Tambah ke Keranjang
                       <span className="hidden min-[420px]:inline">
                         {" "}• {formatIDR(product.price * quantity)}
                       </span>

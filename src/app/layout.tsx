@@ -1,30 +1,30 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Jost } from "next/font/google";
+import { Fraunces, Inter_Tight } from "next/font/google";
 import "./globals.css";
-import AnnouncementBar from "@/components/layout/AnnouncementBar";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CartDrawerHost from "@/components/cart/CartDrawerHost";
-import ChairAI from "@/components/chat/ChairAI";
+import FloatingActions from "@/components/common/FloatingActions";
 
-const cormorant = Cormorant_Garamond({
+// Heading: Fraunces (serif modern) 400-600. Body: Inter Tight 400-500.
+const fraunces = Fraunces({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-serif",
+  weight: ["400", "500", "600"],
+  variable: "--font-heading",
   display: "swap",
 });
 
-const jost = Jost({
+const interTight = Inter_Tight({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  variable: "--font-logo",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-body",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Efendy Furniture — Modern Furniture & Interior Inspiration",
+  title: "Efendy Furniture — Rumah Kamu, Gaya Kamu",
   description:
-    "Modern furniture designed for the way you live. Discover curated furniture, room designs, and modern essentials.",
+    "Toko furniture lengkap untuk rumah modern Indonesia. Sofa, meja, kursi, lemari, tempat tidur, rak, outdoor, dekorasi. Ready stock atau custom sesuai ukuran. 3 showroom di Jakarta, Surabaya, Bandung.",
 };
 
 export default function RootLayout({
@@ -33,14 +33,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${jost.variable}`}>
-      <body className="min-h-screen flex flex-col bg-[#F7F5F0] text-[#20201E] antialiased selection:bg-[#6B6B6B] selection:text-white">
-        <AnnouncementBar />
+    <html lang="id" className={`${fraunces.variable} ${interTight.variable}`}>
+      <body className="min-h-screen flex flex-col bg-white text-[#1A1A1A] antialiased selection:bg-[#C2410C] selection:text-white">
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
         <CartDrawerHost />
-        <ChairAI />
+        <FloatingActions />
       </body>
     </html>
   );

@@ -2,35 +2,39 @@
 
 import { useState } from "react";
 import Hero from "@/components/home/Hero";
-import ShopByRoom from "@/components/home/ShopByRoom";
-import NewArrivals from "@/components/home/NewArrivals";
-import CollectionSpotlight from "@/components/home/CollectionSpotlight";
+import KategoriCepat from "@/components/home/KategoriCepat";
+import ProdukUnggulan from "@/components/home/ProdukUnggulan";
+import KenapaEfendy from "@/components/home/KenapaEfendy";
 import ShopTheRoom from "@/components/home/ShopTheRoom";
-import InspirationSection from "@/components/home/InspirationSection";
-import HomeCta from "@/components/home/HomeCta";
+import KoleksiKurasi from "@/components/home/KoleksiKurasi";
+import Testimoni from "@/components/home/Testimoni";
+import Showroom from "@/components/home/Showroom";
+import Artikel from "@/components/home/Artikel";
 import QuickViewModal from "@/components/product/QuickViewModal";
-import { PRODUCTS } from "@/data/products";
 import { addToCart as addToCartStore, useWishlistIds, openCartDrawer } from "@/lib/store";
 import type { Product } from "@/types";
 
+// Homepage retail: Hero → Kategori → Unggulan → Kenapa → Shop the Room →
+// Koleksi → Testimoni → Showroom → Artikel. Putih/#F7F7F5 bergantian.
 export default function HomePage() {
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
   const { ids: wishlistIds, toggle: toggleWishlist } = useWishlistIds();
 
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex flex-col w-full bg-white">
       <Hero />
-      <ShopByRoom />
-      <NewArrivals
-        products={PRODUCTS}
+      <KategoriCepat />
+      <ProdukUnggulan
         onQuickView={setQuickViewProduct}
         wishlistIds={wishlistIds}
         onToggleWishlist={(p) => toggleWishlist(p.id)}
       />
-      <CollectionSpotlight />
+      <KenapaEfendy />
       <ShopTheRoom />
-      <InspirationSection />
-      <HomeCta />
+      <KoleksiKurasi />
+      <Testimoni />
+      <Showroom />
+      <Artikel />
       <QuickViewModal
         product={quickViewProduct}
         onClose={() => setQuickViewProduct(null)}
