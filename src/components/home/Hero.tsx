@@ -1,11 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { ArrowRight, MapPin, Star, Search, Tag, Sparkles, MessagesSquare } from "lucide-react";
+import { ArrowRight, MapPin, Star, Search, Tag, Sparkles, MessagesSquare, X, TrendingUp } from "lucide-react";
 import ScrollReveal from "@/components/common/ScrollReveal";
+import { PRODUCTS, ROOMS_DATA } from "@/data/products";
+import { formatIDR } from "@/lib/utils";
 
 // Hero: full background foto ruang tamu hangat + overlay putih gradasi (teks tetap terbaca,
 // dominan putih terjaga). Kiri: copy + search + 2 CTA + trust bar.
@@ -35,6 +37,24 @@ const PAKET_PRODUK = [
   },
 ];
 
+const REKOMENDASI_POPULER = ["Sofa", "Meja makan", "Lemari", "Tempat tidur", "Kursi kerja", "Rak"];
+
+function cariRekomendasi(q: string, limit: number) {
+  const query = q.trim().toLowerCase();
+  if (!query) return [];
+  return PRODUCTS.filter((p) => {
+    const ruang = ROOMS_DATA.find((r) => r.id === p.room)?.name.toLowerCase() ?? "";
+    return (
+      p.name.toLowerCase().includes(query) ||
+      p.category.toLowerCase().includes(query) ||
+      (p.collectionName && p.collectionName.toLowerCase().includes(query)) ||
+      p.style.toLowerCase().includes(query) ||
+      p.material.toLowerCase().includes(query) ||
+      ruang.includes(query)
+    );
+  }).slice(0, limit);
+}
+
 const PROMO = [
   {
     Icon: Tag,
@@ -61,12 +81,52 @@ const PROMO = [
 
 export default function Hero() {
   const [kataKunci, setKataKunci] = useState("");
+  const [fokus, setFokus] = useState(false);
+  const [highlight, setHighlight] = useState(-1);
   const router = useRouter();
+  const boxRef = useRef<HTMLDivElement>(null);
 
-  const cari = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!kataKunci.trim()) return;
-    router.push(`/search?q=${encodeURIComponent(kataKunci.trim())}`);
+  const rekomendasi = useMemo(() => cariRekomendasi(kataKunci, 5), [kataKunci]);
+  const tampilDropdown = fokus && (kataKunci.trim() ? true : true);
+
+  useEffect(() => {
+    const tutup = (e: MouseEvent) => {
+      if (boxRef.current && !boxRef.current.contains(e.target as Node)) setFokus(false);
+    };
+    const esc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setFokus(false);
+    };
+    document.addEventListener("mousedown", tutup);
+    document.addEventListener("keydown", esc);
+    return () => {
+      document.removeEventListener("mousedown", tutup);
+      document.removeEventListener("keydown", esc);
+    };
+  }, []);
+
+  useEffect(() => setHighlight(-1), [kataKunci]);
+
+  const cari = (e?: React.FormEvent, kata?: string) => {
+    e?.preventDefault();
+    const q = (kata ?? kataKunci).trim();
+    if (!q) return;
+    setFokus(false);
+    router.push(`/search?q=${encodeURIComponent(q)}`);
+  };
+
+  const tekanTombol = (e: React.KeyboardEvent) => {
+    if (!rekomendasi.length) return;
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setHighlight((h) => (h + 1) % rekomendasi.length);
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setHighlight((h) => (h <= 0 ? rekomendasi.length - 1 : h - 1));
+    } else if (e.key === "Enter" && highlight >= 0 && rekomendasi[highlight]) {
+      e.preventDefault();
+      router.push(`/product/${rekomendasi[highlight].slug}`);
+      setFokus(false);
+    }
   };
 
   return (
@@ -104,29 +164,138 @@ export default function Hero() {
               Ready stock atau pesan sesuai ukuran — tinggal pilih yang cocok buat rumahmu.
             </p>
 
-            {/* Search ala retail */}
-            <form onSubmit={cari} role="search" className="mt-6 max-w-xl">
-              <label htmlFor="hero-search" className="sr-only">
-                Cari furniture
-              </label>
-              <div className="flex items-center gap-2 bg-white border border-[#E8E6E1] rounded-[8px] p-1.5 pl-4 focus-within:border-[#C2410C] transition-colors">
-                <Search size={19} className="shrink-0 text-[#6B6B6B]" />
-                <input
-                  id="hero-search"
-                  type="search"
-                  value={kataKunci}
-                  onChange={(e) => setKataKunci(e.target.value)}
-                  placeholder="Cari sofa, meja makan, lemari…"
-                  className="flex-1 min-w-0 bg-transparent text-[16px] placeholder:text-[#6B6B6B] focus:outline-none"
-                />
-                <button
-                  type="submit"
-                  className="shrink-0 px-6 py-2.5 rounded-[8px] bg-[#1A1A1A] hover:bg-black text-white text-sm font-medium transition-colors"
+            {/* Search ala retail + rekomendasi live */}
+            <div ref={boxRef} className="relative mt-6 max-w-xl">
+              <form onSubmit={cari} role="search">
+                <label htmlFor="hero-search" className="sr-only">
+                  Cari furniture
+                </label>
+                <div
+                  className={`flex items-center gap-2 bg-white border rounded-[8px] p-1.5 pl-4 transition-colors ${
+                    fokus ? "border-[#C2410C] shadow-[0_8px_30px_rgba(0,0,0,0.08)]" : "border-[#E8E6E1]"
+                  }`}
                 >
-                  Cari
-                </button>
-              </div>
-            </form>
+                  <Search size={19} className="shrink-0 text-[#6B6B6B]" />
+                  <input
+                    id="hero-search"
+                    type="search"
+                    value={kataKunci}
+                    onChange={(e) => setKataKunci(e.target.value)}
+                    onFocus={() => setFokus(true)}
+                    onKeyDown={tekanTombol}
+                    placeholder="Cari sofa, meja makan, lemari…"
+                    autoComplete="off"
+                    className="flex-1 min-w-0 bg-transparent text-[16px] placeholder:text-[#6B6B6B] focus:outline-none [&::-webkit-search-cancel-button]:hidden"
+                  />
+                  {kataKunci && (
+                    <button
+                      type="button"
+                      onClick={() => setKataKunci("")}
+                      aria-label="Hapus kata kunci"
+                      className="shrink-0 p-1.5 text-[#6B6B6B] hover:text-[#1A1A1A] transition-colors"
+                    >
+                      <X size={16} />
+                    </button>
+                  )}
+                  <button
+                    type="submit"
+                    className="shrink-0 px-6 py-2.5 rounded-[8px] bg-[#1A1A1A] hover:bg-black text-white text-sm font-medium transition-colors"
+                  >
+                    Cari
+                  </button>
+                </div>
+              </form>
+
+              {/* Dropdown rekomendasi */}
+              {tampilDropdown && (
+                <div className="absolute left-0 right-0 top-full z-30 mt-2 overflow-hidden rounded-[12px] border border-[#E8E6E1] bg-white shadow-[0_20px_60px_rgba(0,0,0,0.14)]">
+                  {!kataKunci.trim() ? (
+                    <div className="p-4">
+                      <p className="flex items-center gap-1.5 text-[12px] font-semibold uppercase tracking-[0.12em] text-[#6B6B6B]">
+                        <TrendingUp size={14} /> Sering dicari
+                      </p>
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        {REKOMENDASI_POPULER.map((item) => (
+                          <button
+                            key={item}
+                            type="button"
+                            onMouseDown={(e) => e.preventDefault()}
+                            onClick={() => cari(undefined, item)}
+                            className="rounded-full border border-[#E8E6E1] px-4 py-1.5 text-sm text-[#1A1A1A] transition-colors hover:border-[#C2410C] hover:text-[#C2410C]"
+                          >
+                            {item}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  ) : rekomendasi.length === 0 ? (
+                    <div className="p-5 text-center">
+                      <p className="text-[14px] text-[#6B6B6B]">
+                        Nggak ketemu yang cocok dengan “{kataKunci.trim()}”.
+                      </p>
+                      <button
+                        type="button"
+                        onMouseDown={(e) => e.preventDefault()}
+                        onClick={(e) => cari(e)}
+                        className="mt-2 text-sm font-medium text-[#C2410C] underline underline-offset-4"
+                      >
+                        Tetap cari “{kataKunci.trim()}”
+                      </button>
+                    </div>
+                  ) : (
+                    <div>
+                      <p className="px-4 pt-3 text-[12px] font-semibold uppercase tracking-[0.12em] text-[#6B6B6B]">
+                        Rekomendasi
+                      </p>
+                      <ul className="p-2">
+                        {rekomendasi.map((p, i) => (
+                          <li key={p.id}>
+                            <Link
+                              href={`/product/${p.slug}`}
+                              onClick={() => setFokus(false)}
+                              onMouseEnter={() => setHighlight(i)}
+                              className={`flex items-center gap-3 rounded-[8px] p-2 transition-colors ${
+                                highlight === i ? "bg-[#F7F7F5]" : "hover:bg-[#F7F7F5]"
+                              }`}
+                            >
+                              <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-[8px] bg-[#F7F7F5]">
+                                <Image
+                                  src={p.images[0]}
+                                  alt={p.name}
+                                  fill
+                                  sizes="44px"
+                                  className="object-cover"
+                                />
+                              </span>
+                              <span className="min-w-0 flex-1">
+                                <span className="block truncate text-[14px] font-medium text-[#1A1A1A]">
+                                  {p.name}
+                                </span>
+                                <span className="block text-[12px] text-[#6B6B6B]">
+                                  {p.category} ·{" "}
+                                  <span className="price font-semibold text-[#1A1A1A]">
+                                    {formatIDR(p.price)}
+                                  </span>
+                                </span>
+                              </span>
+                              <ArrowRight size={16} className="shrink-0 text-[#C2410C]" />
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                      <button
+                        type="button"
+                        onMouseDown={(e) => e.preventDefault()}
+                        onClick={(e) => cari(e)}
+                        className="flex w-full items-center justify-center gap-1.5 border-t border-[#E8E6E1] bg-[#F7F7F5] py-2.5 text-sm font-medium text-[#1A1A1A] transition-colors hover:text-[#C2410C]"
+                      >
+                        Lihat semua hasil untuk “{kataKunci.trim()}” <ArrowRight size={15} />
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
 
             <div className="mt-4 flex flex-col sm:flex-row gap-3 max-w-xl">
               <Link
