@@ -13,18 +13,12 @@ import Link from "next/link";
 const KATEGORI_SUGGEST = ["Sofa", "Meja", "Kursi", "Lemari", "Tempat Tidur", "Rak", "Outdoor", "Dekorasi"];
 
 function cocok(p: Product, q: string): boolean {
-  const query = q.trim().toLowerCase();
-  if (!query) return true;
+  const tokens = q.trim().toLowerCase().split(/[\s,]+/).filter((t) => t.length >= 2);
+  if (!tokens.length) return true;
   const ruang = ROOMS_DATA.find((r) => r.id === p.room)?.name.toLowerCase() ?? "";
-  return (
-    p.name.toLowerCase().includes(query) ||
-    p.category.toLowerCase().includes(query) ||
-    (p.collectionName?.toLowerCase().includes(query) ?? false) ||
-    p.style.toLowerCase().includes(query) ||
-    p.material.toLowerCase().includes(query) ||
-    p.description.toLowerCase().includes(query) ||
-    ruang.includes(query)
-  );
+  const gabung =
+    `${p.name} ${p.category} ${p.collectionName ?? ""} ${p.style} ${p.material} ${p.description} ${ruang}`.toLowerCase();
+  return tokens.every((t) => gabung.includes(t));
 }
 
 function SearchPageContent() {

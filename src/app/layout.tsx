@@ -5,6 +5,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CartDrawerHost from "@/components/cart/CartDrawerHost";
 import FloatingActions from "@/components/common/FloatingActions";
+import ChairAI from "@/components/chat/ChairAI";
 
 // Heading: Fraunces (serif modern) 400-600. Body: Inter Tight 400-500.
 const fraunces = Fraunces({
@@ -40,6 +41,7 @@ export default function RootLayout({
         <Footer />
         <CartDrawerHost />
         <FloatingActions />
+        <ChairAI />
       </body>
     </html>
   );

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -14,25 +15,36 @@ interface SearchModalProps {
 }
 
 const POPULAR_SEARCHES = ["Sofa", "Meja makan", "Kursi kerja", "Lemari", "Tempat tidur", "Rak"];
-const TRENDING_SEARCHES = ["Sofa scandinavian", "Meja makan jati", "Lemari minimalis", "Kursi kerja", "Lampu rotan"];
+const TRENDING_SEARCHES = ["Sofa scandinavian", "Meja makan jati", "Lemari minimalis", "Kursi kerja", "Lampu gantung"];
 const RECENT_KEY = "efendy-recent-search";
 
 // Cari nama produk, kategori, koleksi, gaya, material, dan ruangan.
+// Token-based: tiap kata wajib ada di salah satu field (tidak harus berurutan).
 function cariProduk(q: string, limit: number) {
-  const query = q.trim().toLowerCase();
-  if (!query) return [];
-  return PRODUCTS.filter((p) => {
+  const tokens = q.trim().toLowerCase().split(/[\s,]+/).filter((t) => t.length >= 2);
+  if (!tokens.length) return [];
+  const scored = PRODUCTS.map((p) => {
     const ruang = ROOMS_DATA.find((r) => r.id === p.room)?.name.toLowerCase() ?? "";
-    return (
-      p.name.toLowerCase().includes(query) ||
-      p.category.toLowerCase().includes(query) ||
-      (p.collectionName && p.collectionName.toLowerCase().includes(query)) ||
-      p.style.toLowerCase().includes(query) ||
-      p.material.toLowerCase().includes(query) ||
-      p.description.toLowerCase().includes(query) ||
-      ruang.includes(query)
-    );
-  }).slice(0, limit);
+    const nama = p.name.toLowerCase();
+    const kategori = p.category.toLowerCase();
+    const koleksi = (p.collectionName ?? "").toLowerCase();
+    const gaya = p.style.toLowerCase();
+    const bahan = p.material.toLowerCase();
+    const deskripsi = p.description.toLowerCase();
+    const gabung = `${nama} ${kategori} ${koleksi} ${gaya} ${bahan} ${deskripsi} ${ruang}`;
+    if (!tokens.every((t) => gabung.includes(t))) return { p, score: -1 };
+    let score = 0;
+    for (const t of tokens) {
+      if (nama.includes(t)) score += 5;
+      else if (kategori.includes(t)) score += 4;
+      else if (gaya.includes(t) || koleksi.includes(t)) score += 3;
+      else score += 1;
+    }
+    return { p, score };
+  })
+    .filter((s) => s.score >= 0)
+    .sort((a, b) => b.score - a.score);
+  return scored.slice(0, limit).map((s) => s.p);
 }
 
 export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
@@ -111,9 +123,13 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
 
   if (!isOpen) return null;
 
-  return (
+  // Portal ke body: <header> navbar punya backdrop-blur yang jadi
+  // containing-block untuk `fixed`, jadi tanpa portal overlay `inset-0`
+  // kepotong dan cuma navbar yang ke-blur. Lewat portal, overlay
+  // benar-benar full-viewport dan blur kena navbar + konten bawah.
+  const overlay = (
     <div
-      className="fixed inset-0 z-[100] flex items-start justify-center bg-[#1A1214]/70 px-4 pt-[6vh] backdrop-blur-sm sm:pt-[10vh]"
+      className="fixed inset-0 z-[100] flex items-start justify-center bg-[#1A1214]/60 px-4 pt-[6vh] backdrop-blur-md sm:pt-[10vh]"
       onMouseDown={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
@@ -311,4 +327,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
       </div>
     </div>
   );
+
+  if (typeof document === "undefined") return overlay;
+  return createPortal(overlay, document.body);
 }

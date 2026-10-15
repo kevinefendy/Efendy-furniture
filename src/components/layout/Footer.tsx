@@ -29,6 +29,7 @@ const TENTANG = [
   { nama: "Koleksi Baru", href: "/shop?sort=newest" },
   { nama: "Sale", href: "/shop?deal=sale" },
   { nama: "Showroom Kami", href: "/#showroom" },
+  { nama: "Hubungi Kami", href: "/contact" },
   { nama: "Tips Dekorasi", href: "/#artikel" },
   { nama: "Wishlist", href: "/wishlist" },
 ];

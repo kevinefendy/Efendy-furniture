@@ -124,6 +124,9 @@ export default function Navbar() {
             <Link href="/#showroom" className="text-[#1A1A1A] hover:text-[#C2410C] transition-colors">
               Showroom
             </Link>
+            <Link href="/contact" className="text-[#1A1A1A] hover:text-[#C2410C] transition-colors">
+              Kontak
+            </Link>
             <Link href="/#bantuan" className="text-[#1A1A1A] hover:text-[#C2410C] transition-colors">
               Bantuan
             </Link>
@@ -209,6 +212,9 @@ export default function Navbar() {
             </Link>
             <Link href="/#showroom" className="block py-2 text-[17px]">
               Showroom
+            </Link>
+            <Link href="/contact" className="block py-2 text-[17px]">
+              Kontak
             </Link>
             <Link href="/#bantuan" className="block py-2 text-[17px]">
               Bantuan

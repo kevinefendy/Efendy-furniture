@@ -19,39 +19,34 @@ const PAKET_PRODUK = [
     hargaCoret: "Rp 6.999.000",
     slug: "sofa-3-seat-oslo-fabric-abu",
     gambar:
-      "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=200&q=80",
+      "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&w=200&q=80",
   },
   {
-    nama: "Meja Kopi Bulat Marmer Putih",
+    nama: "Meja Kopi Bulat Kayu Natural",
     harga: "Rp 1.899.000",
     slug: "meja-kopi-bulat-marmer-putih",
     gambar:
-      "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&w=200&q=80",
+      "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&w=200&q=80",
   },
   {
-    nama: "Lampu Gantung Rotan Anyam 40cm",
+    nama: "Lampu Gantung Kap Metal 40cm",
     harga: "Rp 549.000",
     slug: "lampu-gantung-rotan-anyam-40cm",
     gambar:
-      "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=200&q=80",
+      "https://images.unsplash.com/photo-1565814329452-e1efa11c5b89?auto=format&fit=crop&w=200&q=80",
   },
 ];
 
 const REKOMENDASI_POPULER = ["Sofa", "Meja makan", "Lemari", "Tempat tidur", "Kursi kerja", "Rak"];
 
 function cariRekomendasi(q: string, limit: number) {
-  const query = q.trim().toLowerCase();
-  if (!query) return [];
+  const tokens = q.trim().toLowerCase().split(/[\s,]+/).filter((t) => t.length >= 2);
+  if (!tokens.length) return [];
   return PRODUCTS.filter((p) => {
     const ruang = ROOMS_DATA.find((r) => r.id === p.room)?.name.toLowerCase() ?? "";
-    return (
-      p.name.toLowerCase().includes(query) ||
-      p.category.toLowerCase().includes(query) ||
-      (p.collectionName && p.collectionName.toLowerCase().includes(query)) ||
-      p.style.toLowerCase().includes(query) ||
-      p.material.toLowerCase().includes(query) ||
-      ruang.includes(query)
-    );
+    const gabung =
+      `${p.name} ${p.category} ${p.collectionName ?? ""} ${p.style} ${p.material} ${ruang}`.toLowerCase();
+    return tokens.every((t) => gabung.includes(t));
   }).slice(0, limit);
 }
 

@@ -2,11 +2,12 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { MapPin, MessageCircle, Clock, Check } from "lucide-react";
+import { MapPin, MessageCircle, Clock, Check, Navigation } from "lucide-react";
 import { SHOWROOMS } from "@/data/products";
 import ScrollReveal from "@/components/common/ScrollReveal";
+import ShowroomMap from "@/components/common/ShowroomMap";
 
-// Showroom: split foto + info 3 lokasi + tombol Maps/WA + form booking konsultasi gratis.
+// Showroom: split foto + info 3 lokasi + tombol Maps/WA + form booking konsultasi gratis + Google Maps interaktif.
 export default function Showroom() {
   const [nama, setNama] = useState("");
   const [wa, setWa] = useState("");
@@ -65,35 +66,52 @@ export default function Showroom() {
             </p>
 
             <ul className="mt-6 space-y-4">
-              {SHOWROOMS.map((s) => (
-                <li key={s.kota} className="bg-white border border-[#E8E6E1] rounded-[8px] p-5">
-                  <p className="font-semibold text-[16px] flex items-center gap-2">
-                    <MapPin size={17} className="text-[#C2410C]" /> Efendy {s.kota}
-                  </p>
-                  <p className="mt-1 text-[15px] text-[#6B6B6B]">{s.alamat}</p>
-                  <p className="mt-1 text-sm text-[#6B6B6B] flex items-center gap-1.5">
-                    <Clock size={15} /> {s.jam}
-                  </p>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    <a
-                      href={`https://maps.google.com/?q=${encodeURIComponent(`Efendy Furniture ${s.kota}`)}`}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="px-4 py-2 rounded-[8px] border border-[#E8E6E1] text-sm font-medium hover:border-[#1A1A1A] transition-colors"
-                    >
-                      Buka di Maps
-                    </a>
-                    <a
-                      href={`https://wa.me/62${s.telepon.replace(/\D/g, "").slice(1)}`}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-[8px] bg-[#C2410C] hover:bg-[#A8370A] text-white text-sm font-medium transition-colors"
-                    >
-                      <MessageCircle size={15} /> Chat WA
-                    </a>
-                  </div>
-                </li>
-              ))}
+              {SHOWROOMS.map((s) => {
+                const isSelected = s.kota.toLowerCase() === kota.toLowerCase();
+                return (
+                  <li
+                    key={s.kota}
+                    className={`bg-white border rounded-[8px] p-5 transition-colors ${
+                      isSelected ? "border-[#C2410C] shadow-sm" : "border-[#E8E6E1]"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between">
+                      <p className="font-semibold text-[16px] flex items-center gap-2">
+                        <MapPin size={17} className="text-[#C2410C]" /> Efendy {s.kota}
+                      </p>
+                      {isSelected && (
+                        <span className="text-[11px] font-semibold text-[#C2410C] bg-[#C2410C]/10 px-2 py-0.5 rounded">
+                          Dipilih
+                        </span>
+                      )}
+                    </div>
+                    <p className="mt-1 text-[15px] text-[#6B6B6B]">{s.alamat}</p>
+                    <p className="mt-1 text-sm text-[#6B6B6B] flex items-center gap-1.5">
+                      <Clock size={15} /> {s.jam}
+                    </p>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setKota(s.kota);
+                          document.getElementById("showroom-live-map")?.scrollIntoView({ behavior: "smooth" });
+                        }}
+                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-[8px] border border-[#E8E6E1] text-sm font-medium hover:border-[#1A1A1A] transition-colors bg-white text-[#1A1A1A]"
+                      >
+                        <Navigation size={14} /> Lihat di Peta
+                      </button>
+                      <a
+                        href={`https://wa.me/62${s.telepon.replace(/\D/g, "").slice(1)}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-[8px] bg-[#C2410C] hover:bg-[#A8370A] text-white text-sm font-medium transition-colors"
+                      >
+                        <MessageCircle size={15} /> Chat WA
+                      </a>
+                    </div>
+                  </li>
+                );
+              })}
             </ul>
 
             {/* Form booking */}
@@ -164,6 +182,13 @@ export default function Showroom() {
                 </form>
               )}
             </div>
+          </ScrollReveal>
+        </div>
+
+        {/* ── Section Peta Google Maps interaktif ala ZorrexTour ── */}
+        <div id="showroom-live-map" className="mt-16 sm:mt-20 pt-12 sm:pt-16 border-t border-[#E8E6E1]">
+          <ScrollReveal>
+            <ShowroomMap activeCity={kota} onCityChange={setKota} />
           </ScrollReveal>
         </div>
       </div>

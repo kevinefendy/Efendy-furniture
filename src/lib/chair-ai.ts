@@ -258,7 +258,7 @@ export function getChairAIResponse(rawInput: string): ChairAIResponse {
   if (q.includes("ruang tamu") || q.includes("living")) {
     const hits = PRODUCTS.filter((p) => p.room === "ruang-tamu").slice(0, 3);
     return {
-      text: `Untuk ruang tamu yang calm & cozy, ini favorit customer:\n${hits.map((p) => `�?� ${p.name} �?" ${formatIDR(p.price)}`).join("\n")}`,
+      text: `Untuk ruang tamu yang calm & cozy, ini favorit customer:\n${hits.map((p) => `• ${p.name} — ${formatIDR(p.price)}`).join("\n")}`,
       products: hits.map(toHit),
       links: [{ label: "Shop Living Room", href: "/rooms/ruang-tamu" }],
       suggestions: ["Rekomendasi sofa di bawah 10 juta?", "Lampu ruang tamu yang bagus?"],
@@ -267,7 +267,7 @@ export function getChairAIResponse(rawInput: string): ChairAIResponse {
   if (q.includes("kamar") || q.includes("bedroom") || q.includes("tidur")) {
     const hits = PRODUCTS.filter((p) => p.room === "kamar-tidur").slice(0, 3);
     return {
-      text: `Buat kamar yang tenang, coba ini:\n${hits.map((p) => `�?� ${p.name} �?" ${formatIDR(p.price)}`).join("\n")}`,
+      text: `Buat kamar yang tenang, coba ini:\n${hits.map((p) => `• ${p.name} — ${formatIDR(p.price)}`).join("\n")}`,
       products: hits.map(toHit),
       links: [{ label: "Shop Bedroom", href: "/rooms/kamar-tidur" }],
       suggestions: ["Kasur yang nyaman?", "Lemari pakaian yang bagus?"],
@@ -276,7 +276,7 @@ export function getChairAIResponse(rawInput: string): ChairAIResponse {
   if (q.includes("makan") || q.includes("dining") || q.includes("dapur")) {
     const hits = PRODUCTS.filter((p) => p.room === "ruang-makan").slice(0, 3);
     return {
-      text: `Untuk ruang makan hangat, rekomendasi saya:\n${hits.map((p) => `�?� ${p.name} �?" ${formatIDR(p.price)}`).join("\n")}`,
+      text: `Untuk ruang makan hangat, rekomendasi saya:\n${hits.map((p) => `• ${p.name} — ${formatIDR(p.price)}`).join("\n")}`,
       products: hits.map(toHit),
       links: [{ label: "Shop Dining Room", href: "/rooms/ruang-makan" }],
       suggestions: ["Meja makan yang bagus?", "Kursi makan yang nyaman?"],
@@ -285,7 +285,7 @@ export function getChairAIResponse(rawInput: string): ChairAIResponse {
   if (q.includes("kerja") || q.includes("kantor") || q.includes("workspace") || q.includes("wfh") || q.includes("belajar")) {
     const hits = PRODUCTS.filter((p) => p.room === "kantor").slice(0, 3);
     return {
-      text: `Buat setup kerja fokus & nyaman:\n${hits.map((p) => `�?� ${p.name} �?" ${formatIDR(p.price)}`).join("\n")}`,
+      text: `Buat setup kerja fokus & nyaman:\n${hits.map((p) => `• ${p.name} — ${formatIDR(p.price)}`).join("\n")}`,
       products: hits.map(toHit),
       links: [{ label: "Shop Workspace", href: "/rooms/kantor" }],
       suggestions: ["Kursi ergonomis?", "Meja kerja minimalis?"],
